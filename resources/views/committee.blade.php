@@ -5,12 +5,16 @@
 @include('sections.topbar')
 @include('sections.navbar')
 
-<!-- Banner Section -->
-<section class="plenary-banner">
-    <div class="container">
-        <h1>COMMITTEE</h1>
+    @php
+        $bannerTitle = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_committee_title')->value('value') ?? 'COMMITTEE';
+        $bannerImage = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_committee_image')->value('value');
+    @endphp
+    <!-- Page Banner -->
+    <div class="page-banner" style="{{ $bannerImage ? "background-image: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.8)), url('" . asset($bannerImage) . "');" : '' }}">
+        <div class="page-banner-content">
+            <h1>{{ $bannerTitle }}</h1>
+        </div>
     </div>
-</section>
 
 <!-- Content Section -->
 <!-- Content Section -->
@@ -199,116 +203,104 @@
 <div class="committee-page-wrap">
     
     <!-- Core Leadership -->
+    @if(isset($leadership['chief_patron']) || isset($leadership['patrons']))
     <div class="cm-section-title">
         <h2>Leadership</h2>
         <div class="cm-line"></div>
     </div>
     
     <div class="cm-grid-main">
+        @if(isset($leadership['chief_patron']))
         <div class="cm-card" style="border-top: 4px solid var(--green-accent);">
             <div><span class="cm-role-badge green">Chief - Patron</span></div>
-            <h4 class="cm-name">Dr. P. Wilson</h4>
-            <p class="cm-desc">Principal & Secretary, MCC</p>
+            @foreach($leadership['chief_patron'] as $member)
+                <h4 class="cm-name">{{ $member->name }}</h4>
+                <p class="cm-desc">{!! nl2br(e($member->designation)) !!}</p>
+            @endforeach
         </div>
+        @endif
         
+        @if(isset($leadership['patrons']))
         <div class="cm-card" style="border-top: 4px solid var(--teal-accent);">
             <div><span class="cm-role-badge teal">Patrons</span></div>
             <div class="cm-multi-person">
+                @foreach($leadership['patrons'] as $member)
                 <div class="cm-person">
-                    <h4 class="cm-name" style="font-size: 1.2rem;">Mr. R. Sridhar</h4>
-                    <p class="cm-desc" style="font-size: 0.95rem;">Vice Principal (Administration), MCC</p>
+                    <h4 class="cm-name" style="font-size: 1.2rem;">{{ $member->name }}</h4>
+                    <p class="cm-desc" style="font-size: 0.95rem;">{!! nl2br(e($member->designation)) !!}</p>
                 </div>
-                <div class="cm-person">
-                    <h4 class="cm-name" style="font-size: 1.2rem;">Dr. J. Jannet Vennila</h4>
-                    <p class="cm-desc" style="font-size: 0.95rem;">Vice Principal (SFS), MCC</p>
-                </div>
+                @endforeach
             </div>
         </div>
+        @endif
     </div>
+    @endif
 
     <!-- Organizing Leadership -->
+    @if(isset($leadership['convenor']) || isset($leadership['organizing_secretaries']))
     <div class="cm-grid-main">
+        @if(isset($leadership['convenor']))
         <div class="cm-card" style="border-top: 4px solid var(--navy-dark);">
             <div><span class="cm-role-badge">Convenor</span></div>
-            <h4 class="cm-name">Dr. V. Mahalakshmi</h4>
-            <p class="cm-desc">Associate Professor & Head,<br>Department of Microbiology</p>
+            @foreach($leadership['convenor'] as $member)
+            <h4 class="cm-name">{{ $member->name }}</h4>
+            <p class="cm-desc">{!! nl2br(e($member->designation)) !!}</p>
+            @endforeach
         </div>
+        @endif
         
+        @if(isset($leadership['organizing_secretaries']))
         <div class="cm-card" style="border-top: 4px solid var(--navy-dark);">
             <div><span class="cm-role-badge">Organizing Secretaries</span></div>
             <div class="cm-multi-person">
+                @foreach($leadership['organizing_secretaries'] as $member)
                 <div class="cm-person">
-                    <h4 class="cm-name" style="font-size: 1.2rem;">Dr. S. Niren Andrew</h4>
-                    <p class="cm-desc" style="font-size: 0.95rem;">Assistant Professor, Dept of Microbiology</p>
+                    <h4 class="cm-name" style="font-size: 1.2rem;">{{ $member->name }}</h4>
+                    <p class="cm-desc" style="font-size: 0.95rem;">{!! nl2br(e($member->designation)) !!}</p>
                 </div>
-                <div class="cm-person">
-                    <h4 class="cm-name" style="font-size: 1.2rem;">Dr. K. Kavitha</h4>
-                    <p class="cm-desc" style="font-size: 0.95rem;">Associate Professor, Dept of Microbiology</p>
-                </div>
+                @endforeach
             </div>
         </div>
+        @endif
     </div>
+    @endif
 
     <!-- Organizing Committee -->
+    @if(count($organizing) > 0)
     <div class="cm-section-title">
         <h2>Organizing Committee</h2>
         <div class="cm-line"></div>
     </div>
     
     <div class="cm-grid-4">
+        @foreach($organizing as $member)
         <div class="cm-card">
-            <h4 class="cm-name" style="font-size: 1.2rem;">Dr. S. Premina</h4>
-            <p class="cm-desc" style="font-size: 0.9rem;">Assistant Professor</p>
+            <h4 class="cm-name" style="font-size: 1.2rem;">{{ $member->name }}</h4>
+            <p class="cm-desc" style="font-size: 0.9rem;">{!! nl2br(e($member->designation)) !!}</p>
         </div>
-        <div class="cm-card">
-            <h4 class="cm-name" style="font-size: 1.2rem;">Dr. S. Abirami</h4>
-            <p class="cm-desc" style="font-size: 0.9rem;">Assistant Professor</p>
-        </div>
-        <div class="cm-card">
-            <h4 class="cm-name" style="font-size: 1.2rem;">Dr. P. Hanumantha Rao</h4>
-            <p class="cm-desc" style="font-size: 0.9rem;">Associate Professor</p>
-        </div>
-        <div class="cm-card">
-            <h4 class="cm-name" style="font-size: 1.2rem;">Dr. T. Sathish Kumar</h4>
-            <p class="cm-desc" style="font-size: 0.9rem;">Associate Professor</p>
-        </div>
-        <div class="cm-card">
-            <h4 class="cm-name" style="font-size: 1.2rem;">Dr. V. Vedha</h4>
-            <p class="cm-desc" style="font-size: 0.9rem;">Assistant Professor</p>
-        </div>
-        <div class="cm-card">
-            <h4 class="cm-name" style="font-size: 1.2rem;">Dr. K. Balakumar</h4>
-            <p class="cm-desc" style="font-size: 0.9rem;">Assistant Professor</p>
-        </div>
-        <div class="cm-card">
-            <h4 class="cm-name" style="font-size: 1.2rem;">Dr. Neginah Vijayasingh</h4>
-            <p class="cm-desc" style="font-size: 0.9rem;">Assistant Professor</p>
-        </div>
+        @endforeach
     </div>
+    @endif
 
     <!-- Advisory Committee -->
+    @if(count($advisory) > 0)
     <div class="cm-section-title">
         <h2>Advisory Committee</h2>
         <div class="cm-line"></div>
     </div>
     
     <div class="cm-grid-3">
+        @foreach($advisory as $member)
         <div class="cm-card">
-            <div class="cm-icon"><i class="fa-solid fa-user-shield"></i></div>
-            <h4 class="cm-name">Dr. S. Vincent</h4>
-            <p class="cm-desc">Member Secretary, Tamil Nadu State Council for Science and Technology.</p>
+            @if($member->icon)
+            <div class="cm-icon"><i class="{{ $member->icon }}"></i></div>
+            @endif
+            <h4 class="cm-name">{{ $member->name }}</h4>
+            <p class="cm-desc">{!! nl2br(e($member->designation)) !!}</p>
         </div>
-        <div class="cm-card">
-            <div class="cm-icon"><i class="fa-solid fa-user-shield"></i></div>
-            <h4 class="cm-name">Dr. D. Alex Anand</h4>
-            <p class="cm-desc">Associate Professor, Department of Bioinformatics & The Centre for Molecular Data Science</p>
-        </div>
-        <div class="cm-card">
-            <div class="cm-icon"><i class="fa-solid fa-user-shield"></i></div>
-            <h4 class="cm-name">Dr. Joyce Sudandara Priya</h4>
-            <p class="cm-desc">Head, Department of Botany, MCC.</p>
-        </div>
+        @endforeach
     </div>
+    @endif
 
     <!-- Venue / College Info -->
     <div class="college-banner mt-60">

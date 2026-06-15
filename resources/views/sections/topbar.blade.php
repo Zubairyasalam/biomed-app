@@ -1,5 +1,5 @@
-<!-- Topbar -->
-<div class="topbar">
+<!-- Topbar (Desktop Only) -->
+<div class="topbar topbar-desktop">
     <div class="topbar-left">
         <span><i class="fa-solid fa-headset"></i> {{ $settings['contact_phone'] ?? '+91 9876543210' }}</span>
         <span><i class="fa-solid fa-video"></i> {{ $settings['topbar_format'] ?? 'Online | In-person' }}</span>

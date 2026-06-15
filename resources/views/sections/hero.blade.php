@@ -2,7 +2,7 @@
 <section class="hero">
     <div class="hero-content">
         <div class="hero-subtitle">{{ $settings['hero_subtitle'] ?? 'International Conference' }}</div>
-        <h1 class="hero-title" style="font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.15;">
+        <h1 class="hero-title">
             {!! nl2br(e($settings['hero_title'] ?? 'Next-Generation Diagnostics\nFor Emerging Infectious Diseases')) !!}
         </h1>
         <p class="hero-desc">
@@ -11,8 +11,8 @@
             <strong>{{ $settings['hero_dates'] ?? 'September 15-17, 2027' }}</strong>
         </p>
         <div class="hero-actions">
-            <a href="{{ route('registration') }}" class="btn btn-navy">REGISTER NOW</a>
-            <a href="{{ route('submit-paper') }}" class="btn btn-outline">SUBMIT ABSTRACT <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="{{ url($settings['hero_btn1_link'] ?? route('registration')) }}" class="btn btn-navy">{{ $settings['hero_btn1_text'] ?? 'REGISTER NOW' }}</a>
+            <a href="{{ url($settings['hero_btn2_link'] ?? route('submit-paper')) }}" class="btn btn-outline">{{ $settings['hero_btn2_text'] ?? 'SUBMIT ABSTRACT' }} <i class="fa-solid fa-arrow-right"></i></a>
         </div>
     </div>
 </section>

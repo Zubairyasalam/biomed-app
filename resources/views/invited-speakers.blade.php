@@ -5,12 +5,16 @@
 @include('sections.topbar')
 @include('sections.navbar')
 
-<!-- Banner Section -->
-<section class="plenary-banner">
-    <div class="container">
-        <h1>INVITED SPEAKERS</h1>
+    @php
+        $bannerTitle = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_invited_speakers_title')->value('value') ?? 'INVITED SPEAKERS';
+        $bannerImage = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_invited_speakers_image')->value('value');
+    @endphp
+    <!-- Page Banner -->
+    <div class="page-banner" style="{{ $bannerImage ? "background-image: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.8)), url('" . asset($bannerImage) . "');" : '' }}">
+        <div class="page-banner-content">
+            <h1>{{ $bannerTitle }}</h1>
+        </div>
     </div>
-</section>
 
 <!-- Speakers Grid -->
 <section class="plenary-section" style="padding: 60px 0; background: #fafafa;">
@@ -28,39 +32,36 @@
         
         <div class="plenary-grid">
 
+            @forelse($speakers as $speaker)
             <div class="speaker-card-extended">
                 <div class="speaker-photo-wrap">
-                    <img src="{{ asset('images/speakers/speaker8.png') }}" alt="Tarek Mohamed Kamal Motawi">
+                    <img src="{{ asset('images/speakers/' . $speaker->image) }}" alt="{{ $speaker->name }}">
                 </div>
                 <div class="speaker-body-extended">
-                    <h4>Tarek Mohamed Kamal Motawi</h4>
-                    <p class="speaker-uni">Cairo University</p>
-                    <p class="speaker-country-text">Egypt</p>
-                    <p class="speaker-title-text" style="color: var(--teal-accent); font-style: italic; margin-bottom: 15px;">Title: TBA</p>
+                    <h4>{{ $speaker->name }}</h4>
+                    @if($speaker->h_index)<p class="speaker-hindex">H-Index: {{ $speaker->h_index }}</p>@endif
+                    <p class="speaker-uni">{{ $speaker->university }}</p>
+                    <p class="speaker-country-text">{{ $speaker->country }}</p>
                     
-                    <p class="speaker-bio">Will be update soon...</p>
-                    <div class="full-bio" style="display:none;">Will be updated soon. Tarek Mohamed Kamal Motawi's extensive biography and scientific background will be available closer to the summit date.</div>
+                    @if($speaker->presentation_title)
+                    <div class="speaker-title-block">
+                        <span class="speaker-title-label">Presentation Title</span>
+                        <p class="speaker-title-content">{{ $speaker->presentation_title }}</p>
+                    </div>
+                    @endif
                     
-                    <a href="javascript:void(0)" onclick="openBioModal(this)" class="btn-show-more">VIEW MORE</a>
+                    <p class="speaker-bio">{{ Str::limit($speaker->biography, 150) }}</p>
+                    <div class="full-bio" style="display:none;">{{ $speaker->biography }}</div>
+                    
+                    <a href="javascript:void(0)" onclick="openBioModal(this)" class="btn-show-more">SHOW MORE</a>
                 </div>
             </div>
-
-            <div class="speaker-card-extended">
-                <div class="speaker-photo-wrap">
-                    <img src="{{ asset('images/speakers/speaker9.png') }}" alt="Cesar Siqueira">
-                </div>
-                <div class="speaker-body-extended">
-                    <h4>Cesar Siqueira</h4>
-                    <p class="speaker-uni">Federal University of the State of Rio de Janeiro</p>
-                    <p class="speaker-country-text">Brazil</p>
-                    <p class="speaker-title-text" style="color: var(--teal-accent); font-style: italic; margin-bottom: 15px;">Title: Plant Protein Biotechnology: Frontiers of Cytotoxicity and the Future of the Pharmaceutical and Food Industries</p>
-                    
-                    <p class="speaker-bio">Will be update soon...</p>
-                    <div class="full-bio" style="display:none;">Will be updated soon. Cesar Siqueira's extensive biography and scientific background will be available closer to the summit date.</div>
-                    
-                    <a href="javascript:void(0)" onclick="openBioModal(this)" class="btn-show-more">VIEW MORE</a>
-                </div>
+            @empty
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #555; background: #fff; border-radius: 8px; font-size: 1.1rem;">
+                <i class="fa-solid fa-microphone-lines" style="font-size: 2rem; color: #ccc; margin-bottom: 15px; display: block;"></i>
+                Speaker announcements coming soon.
             </div>
+            @endforelse
 
         </div>
         

@@ -26,7 +26,7 @@
                 </div>
                 <div class="fc-text">
                     <strong>Website</strong>
-                    <p><a href="https://mcc.edu.in/" target="_blank" style="color: inherit; text-decoration: none;">https://mcc.edu.in/</a></p>
+                    <p><a href="{{ $settings['footer_website'] ?? 'https://mcc.edu.in/' }}" target="_blank" style="color: inherit; text-decoration: none;">{{ $settings['footer_website'] ?? 'https://mcc.edu.in/' }}</a></p>
                 </div>
             </div>
         </div>
@@ -34,31 +34,44 @@
     <div class="footer-main">
         <div class="footer-col brand-col">
             <a href="/" class="footer-logo" style="text-decoration: none;">
-                <img src="{{ asset('images/logo.png') }}" alt="BioMed Summit Logo" style="max-width: 220px; height: auto; filter: invert(1) hue-rotate(180deg) brightness(1.2); mix-blend-mode: screen;">
+                @php $logo = $settings['footer_logo'] ?? 'images/logo.png'; @endphp
+                <img src="{{ str_starts_with($logo, 'http') ? $logo : asset($logo) }}" alt="BioMed Summit Logo" style="max-width: 220px; height: auto; filter: invert(1) hue-rotate(180deg) brightness(1.2); mix-blend-mode: screen;">
             </a>
-            <p>We bring together brilliant minds from around the world to create transformative platforms for knowledge exchange, collaboration, and innovation.</p>
+            <p>{{ $settings['footer_bio'] ?? 'We bring together brilliant minds from around the world to create transformative platforms for knowledge exchange, collaboration, and innovation.' }}</p>
         </div>
         <div class="footer-col">
             <h3>Useful <span>Links</span></h3>
             <ul>
-                <li><a href="#"><i class="fa-solid fa-circle-arrow-right"></i> Home</a></li>
-                <li><a href="#"><i class="fa-solid fa-circle-arrow-right"></i> Abstract Submission</a></li>
-                <li><a href="#"><i class="fa-solid fa-circle-arrow-right"></i> Speakers</a></li>
-                <li><a href="#"><i class="fa-solid fa-circle-arrow-right"></i> Committee</a></li>
+                @php
+                    $usefulLinksStr = $settings['footer_useful_links'] ?? "Home | /\nAbstract Submission | #\nSpeakers | #\nCommittee | #";
+                    $usefulLinks = explode("\n", str_replace("\r", "", $usefulLinksStr));
+                @endphp
+                @foreach($usefulLinks as $link)
+                    @php $parts = explode('|', $link); @endphp
+                    @if(count($parts) >= 1 && trim($parts[0]) !== '')
+                        <li><a href="{{ count($parts) > 1 ? trim($parts[1]) : '#' }}"><i class="fa-solid fa-circle-arrow-right"></i> {{ trim($parts[0]) }}</a></li>
+                    @endif
+                @endforeach
             </ul>
         </div>
         <div class="footer-col">
             <h3>Quick <span>Links</span></h3>
             <ul>
-                <li><a href="#"><i class="fa-solid fa-circle-arrow-right"></i> Terms & Conditions</a></li>
-                <li><a href="#"><i class="fa-solid fa-circle-arrow-right"></i> Privacy Policy</a></li>
-                <li><a href="#"><i class="fa-solid fa-circle-arrow-right"></i> Cancellation Policy</a></li>
-                <li><a href="#"><i class="fa-solid fa-circle-arrow-right"></i> Contact</a></li>
+                @php
+                    $quickLinksStr = $settings['footer_quick_links'] ?? "Terms & Conditions | #\nPrivacy Policy | #\nCancellation Policy | #\nContact | #";
+                    $quickLinks = explode("\n", str_replace("\r", "", $quickLinksStr));
+                @endphp
+                @foreach($quickLinks as $link)
+                    @php $parts = explode('|', $link); @endphp
+                    @if(count($parts) >= 1 && trim($parts[0]) !== '')
+                        <li><a href="{{ count($parts) > 1 ? trim($parts[1]) : '#' }}"><i class="fa-solid fa-circle-arrow-right"></i> {{ trim($parts[0]) }}</a></li>
+                    @endif
+                @endforeach
             </ul>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy;2026 <span>Biomed Summit</span> all rights reserved</p>
+        <p>{{ $settings['footer_copyright'] ?? '©2026 Biomed Summit all rights reserved' }}</p>
         <a href="#" class="back-to-top"><i class="fa-solid fa-angles-up"></i></a>
     </div>
 </footer>

@@ -5,12 +5,21 @@
 @include('sections.topbar')
 @include('sections.navbar')
 
-<!-- Banner Section -->
-<section class="plenary-banner">
-    <div class="container">
-        <h1 style="text-transform: uppercase;">BECOME A SPONSOR</h1>
+    @php
+        $bannerTitle = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_sponsors_title')->value('value') ?? 'BECOME A SPONSOR';
+        $bannerImage = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_sponsors_image')->value('value');
+        $sponsorsIntro = \App\Models\SiteSetting::where('group', 'sponsors')->where('key', 'sponsors_intro')->value('value');
+        $sponsorsBenefitsRaw = \App\Models\SiteSetting::where('group', 'sponsors')->where('key', 'sponsors_benefits')->value('value');
+        $sponsorsBenefits = $sponsorsBenefitsRaw ? array_filter(array_map('trim', explode("\n", $sponsorsBenefitsRaw))) : [];
+        $tiers = \App\Models\SponsorPackage::where('type', 'tier')->orderBy('sort_order')->get();
+        $additional = \App\Models\SponsorPackage::where('type', 'additional')->orderBy('sort_order')->get();
+    @endphp
+    <!-- Page Banner -->
+    <div class="page-banner" style="{{ $bannerImage ? "background-image: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.8)), url('" . asset($bannerImage) . "');" : '' }}">
+        <div class="page-banner-content">
+            <h1 style="text-transform: uppercase;">{{ $bannerTitle }}</h1>
+        </div>
     </div>
-</section>
 
 <style>
     .sponsors-container {
@@ -87,6 +96,35 @@
         grid-template-columns: 1fr 1fr;
         gap: 15px;
         margin-bottom: 15px;
+    }
+
+    @media (max-width: 768px) {
+        .s-form-grid {
+            grid-template-columns: 1fr;
+        }
+        .pricing-tier {
+            flex-direction: column;
+            align-items: flex-start !important;
+            gap: 10px;
+            padding: 20px 0;
+            position: relative;
+        }
+        .tier-ribbon-container {
+            margin-bottom: 10px;
+        }
+        .tier-price {
+            align-self: flex-start;
+            padding-right: 0;
+            margin-top: 5px;
+        }
+        .additional-grid {
+            grid-template-columns: 1fr;
+            gap: 5px;
+        }
+        .additional-grid span:nth-child(even) {
+            text-align: left;
+            margin-bottom: 15px;
+        }
     }
 
     .s-form-input {
@@ -253,19 +291,14 @@
         <!-- Left Column: Content & Form -->
         <div class="sponsors-left">
             <p>
-                Partnering with us as a sponsor or exhibitor gives your organization a unique opportunity to stand at the forefront of global innovation. Our international summits connect you directly with leading researchers, decision-makers, and industry pioneers — offering high-value visibility, strategic networking, and brand credibility. From showcasing your latest innovations to forging meaningful collaborations, this is your chance to amplify your impact, generate quality leads, and position your brand where the future is being shaped.
+                {!! nl2br(e($sponsorsIntro)) !!}
             </p>
 
             <h3 class="benefits-title">Key Benefits Of Sponsoring Or Exhibiting:</h3>
             <ul class="benefits-list">
-                <li><span class="check">&#10003;</span> Enhance your brand visibility among international audiences</li>
-                <li><span class="check">&#10003;</span> Showcase your technologies, products, or services to leading institutions and professionals</li>
-                <li><span class="check">&#10003;</span> Connect directly with key decision-makers and industry influencers</li>
-                <li><span class="check">&#10003;</span> Build global partnerships and collaborative networks</li>
-                <li><span class="check">&#10003;</span> Participate in high-value networking sessions, panels, and technical discussions</li>
-                <li><span class="check">&#10003;</span> Receive branding across digital, print, and on-site materials</li>
-                <li><span class="check">&#10003;</span> Generate qualified leads and accelerate business development</li>
-                <li><span class="check">&#10003;</span> Establish your brand as a thought leader in your industry</li>
+                @foreach($sponsorsBenefits as $benefit)
+                    <li><span class="check">&#10003;</span> {{ $benefit }}</li>
+                @endforeach
             </ul>
 
             <div class="registration-form-container">
@@ -321,60 +354,21 @@
         <!-- Right Column: Pricing Board -->
         <div class="pricing-board">
             
+            @foreach($tiers as $tier)
             <div class="pricing-tier">
                 <div class="tier-ribbon-container">
-                    <div class="tier-ribbon bg-platinum">PLATINUM</div>
+                    <div class="tier-ribbon {{ $tier->ribbon_color }}">{{ strtoupper($tier->name) }}</div>
                 </div>
                 <div class="tier-details">
-                    <div>Premier logo placement on all conference materials</div>
-                    <div>5 complimentary full conference registrations</div>
-                    <div>Keynote speaking opportunity</div>
-                    <div>Exhibit booth in prime location</div>
+                    @if($tier->features)
+                        @foreach($tier->features as $feature)
+                            <div>{{ $feature }}</div>
+                        @endforeach
+                    @endif
                 </div>
-                <div class="tier-price">$8,500</div>
+                <div class="tier-price">{{ $tier->price }}</div>
             </div>
-
-            <div class="pricing-tier">
-                <div class="tier-ribbon-container">
-                    <div class="tier-ribbon bg-gold">GOLD</div>
-                </div>
-                <div class="tier-details">
-                    <div>Logo placement on all conference materials</div>
-                    <div>3 complimentary full conference registrations</div>
-                    <div>Speaking opportunity in a session</div>
-                    <div>Exhibit booth</div>
-                </div>
-                <div class="tier-price">$7,500</div>
-            </div>
-
-            <div class="pricing-tier">
-                <div class="tier-ribbon-container">
-                    <div class="tier-ribbon bg-silver">SILVER</div>
-                </div>
-                <div class="tier-details">
-                    <div>Logo placement on all conference materials</div>
-                    <div>2 complimentary full conference registrations</div>
-                    <div>Exhibit booth</div>
-                    <div>Quarterpage ad in conference program</div>
-                    <div>Logo on conference website with link to sponsor's site</div>
-                    <div>Social media shoutouts</div>
-                </div>
-                <div class="tier-price">$6,500</div>
-            </div>
-
-            <div class="pricing-tier">
-                <div class="tier-ribbon-container">
-                    <div class="tier-ribbon bg-bronze">BRONZE</div>
-                </div>
-                <div class="tier-details">
-                    <div>Logo placement on all conference materials</div>
-                    <div>1 complimentary full conference registration</div>
-                    <div>Exhibit booth</div>
-                    <div>Logo on conference website with link to sponsor's site</div>
-                    <div>Social media shoutouts</div>
-                </div>
-                <div class="tier-price">$5,000</div>
-            </div>
+            @endforeach
 
             <div class="pricing-tier" style="border-bottom: none;">
                 <div class="tier-ribbon-container">
@@ -382,10 +376,9 @@
                 </div>
                 <div class="tier-details" style="flex-grow: 1;">
                     <div class="additional-grid">
-                        <span>Conference bag sponsorship</span><span>$2,500</span>
-                        <span>Lanyard sponsorship</span><span>$1,000</span>
-                        <span>Coffee break sponsorship</span><span>$1,500</span>
-                        <span>Networking reception sponsorship</span><span>$2,000</span>
+                        @foreach($additional as $opp)
+                            <span>{{ $opp->name }}</span><span>{{ $opp->price }}</span>
+                        @endforeach
                     </div>
                 </div>
             </div>

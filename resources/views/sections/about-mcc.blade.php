@@ -1,6 +1,6 @@
 <!-- About MCC Section -->
-<section class="about-section" style="background-color: #f8fbfa; padding: 60px 0;">
-    <div class="container" style="max-width: 90%; margin: 0 auto; padding: 0 40px;">
+<section class="about-section about-mcc-section" style="background-color: #f8fbfa; padding: 60px 0 15px 0;">
+    <div class="container" style="max-width: 90%; margin: 0 auto;">
         
         <div style="display: block;">
             
@@ -14,7 +14,7 @@
                 </div>
 
                 <!-- Full Description -->
-                <div style="flex-grow: 1; font-size: 0.95rem; line-height: 1.6; text-align: left; color: #555;">
+                <div class="about-text" style="text-align: justify;">
                     {!! nl2br(e($settings['about_mcc'] ?? 'Madras Christian College (MCC) is one of India’s premier educational institutions, founded by Scottish missionaries in 1837.')) !!}
                 </div>
 

@@ -5,17 +5,21 @@
 @include('sections.topbar')
 @include('sections.navbar')
 
-<!-- Banner Section -->
-<section class="plenary-banner">
-    <div class="container">
-        <h1 style="text-transform: uppercase;">About Organizer</h1>
+    @php
+        $bannerTitle = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_about_organizer_title')->value('value') ?? 'ABOUT ORGANIZER';
+        $bannerImage = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_about_organizer_image')->value('value');
+    @endphp
+    <!-- Page Banner -->
+    <div class="page-banner" style="{{ $bannerImage ? "background-image: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.8)), url('" . asset($bannerImage) . "');" : '' }}">
+        <div class="page-banner-content">
+            <h1 style="text-transform: uppercase;">{{ $bannerTitle }}</h1>
+        </div>
     </div>
-</section>
 
 <!-- Content Section -->
 <section style="padding: 100px 0; text-align: center; background: #fff;">
     <div class="container">
-        <h2 style="font-size: 2rem; font-weight: 400; color: #333;">Will Be Update Soon...</h2>
+        {!! \App\Models\SiteSetting::where('group', 'about_organizer')->where('key', 'about_organizer_content')->value('value') !!}
     </div>
 </section>
 

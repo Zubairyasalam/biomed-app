@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('admin.abstracts_awards.update') }}">
+    <form method="POST" action="{{ route('admin.abstracts_awards.update') }}" enctype="multipart/form-data">
         @csrf
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px;">
             
@@ -29,6 +29,24 @@
                                 
                                 @if($setting->type == 'textarea')
                                     <textarea name="{{ $setting->key }}" style="width: 100%; padding: 12px 15px; border: 1px solid var(--admin-border); border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 0.95rem;" rows="4">{{ old($setting->key, $setting->value) }}</textarea>
+                                @elseif($setting->type == 'image' || str_contains($setting->key, '_icon'))
+                                    @if($setting->value && str_starts_with($setting->value, 'fa-'))
+                                        <div style="display: flex; align-items: center; gap: 15px;">
+                                            <div style="width: 50px; height: 50px; border-radius: 8px; background: rgba(0, 150, 136, 0.1); display: flex; justify-content: center; align-items: center;">
+                                                <i id="preview_{{ $setting->key }}" class="{{ old($setting->key, $setting->value) }}" style="font-size: 1.5rem; color: #009688;"></i>
+                                            </div>
+                                            <input type="text" id="input_{{ $setting->key }}" name="{{ $setting->key }}" value="{{ old($setting->key, $setting->value) }}" style="flex: 1; padding: 12px 15px; border: 1px solid var(--admin-border); border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 0.95rem;" oninput="document.getElementById('preview_{{ $setting->key }}').className = this.value;">
+                                        </div>
+                                        <small style="color: #64748b; display: block; margin-top: 5px;">Enter a FontAwesome class (e.g. fa-solid fa-trophy) or upload an image below to replace it.</small>
+                                        <div id="preview_{{ $setting->key }}_container" style="display: none; margin-bottom: 10px; margin-top: 10px;">
+                                            <img id="img_preview_{{ $setting->key }}" src="" style="max-width: 100%; max-height: 150px; border-radius: 8px; border: 1px solid var(--admin-border);">
+                                        </div>
+                                    @else
+                                        <div id="preview_{{ $setting->key }}_container" style="margin-bottom: 10px; {{ $setting->value ? '' : 'display: none;' }}">
+                                            <img id="img_preview_{{ $setting->key }}" src="{{ $setting->value ? (str_starts_with($setting->value, 'http') ? $setting->value : asset($setting->value)) : '' }}" style="max-width: 100%; max-height: 150px; border-radius: 8px; border: 1px solid var(--admin-border);">
+                                        </div>
+                                    @endif
+                                    <input type="file" name="{{ $setting->key }}_file" accept="image/*" style="width: 100%; padding: 12px 15px; border: 1px solid var(--admin-border); border-radius: 8px; font-size: 0.95rem; margin-top: 10px;" onchange="previewImage(this, 'preview_{{ $setting->key }}_container', 'img_preview_{{ $setting->key }}')">
                                 @else
                                     <input type="text" name="{{ $setting->key }}" value="{{ old($setting->key, $setting->value) }}" style="width: 100%; padding: 12px 15px; border: 1px solid var(--admin-border); border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 0.95rem;">
                                 @endif

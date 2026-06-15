@@ -5,34 +5,52 @@
 @include('sections.topbar')
 @include('sections.navbar')
 
-<!-- Banner Section -->
-<section class="plenary-banner">
-    <div class="container">
-        <h1>KEYNOTE SPEAKERS</h1>
+    @php
+        $bannerTitle = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_keynote_speakers_title')->value('value') ?? 'KEYNOTE SPEAKERS';
+        $bannerImage = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_keynote_speakers_image')->value('value');
+    @endphp
+    <!-- Page Banner -->
+    <div class="page-banner" style="{{ $bannerImage ? "background-image: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.8)), url('" . asset($bannerImage) . "');" : '' }}">
+        <div class="page-banner-content">
+            <h1>{{ $bannerTitle }}</h1>
+        </div>
     </div>
-</section>
 
 <!-- Speakers Grid -->
 <section class="plenary-section" style="padding: 60px 0; background: #fafafa;">
     <div class="container">
         <div class="plenary-grid">
 
+            @forelse($speakers as $speaker)
             <div class="speaker-card-extended">
                 <div class="speaker-photo-wrap">
-                    <img src="{{ asset('images/speakers/speaker7.png') }}" alt="Hans-Uwe Dahms">
+                    <img src="{{ asset('images/speakers/' . $speaker->image) }}" alt="{{ $speaker->name }}">
                 </div>
                 <div class="speaker-body-extended">
-                    <h4>Hans-Uwe Dahms</h4>
-                    <p class="speaker-uni">Kaohsiung Medical University</p>
-                    <p class="speaker-country-text">Taiwan</p>
-                    <p class="speaker-title-text" style="color: var(--teal-accent); font-style: italic; margin-bottom: 15px;">Title: Fluorescent nano-sensors for selective and ultra-sensitive detection of trace metals</p>
+                    <h4>{{ $speaker->name }}</h4>
+                    @if($speaker->h_index)<p class="speaker-hindex">H-Index: {{ $speaker->h_index }}</p>@endif
+                    <p class="speaker-uni">{{ $speaker->university }}</p>
+                    <p class="speaker-country-text">{{ $speaker->country }}</p>
                     
-                    <p class="speaker-bio">Professor Hans-Uwe Dahms is a distinguished faculty member within the Department of Biomedical Science and Environmental Biology at Kaohsiung Medical ...</p>
-                    <div class="full-bio" style="display:none;">Professor Hans-Uwe Dahms is a distinguished faculty member within the Department of Biomedical Science and Environmental Biology at Kaohsiung Medical University, Taiwan. His prolific career focuses on ecotoxicology and environmental health, with extensive publications detailing the environmental impacts of trace metals.</div>
+                    @if($speaker->presentation_title)
+                    <div class="speaker-title-block">
+                        <span class="speaker-title-label">Presentation Title</span>
+                        <p class="speaker-title-content">{{ $speaker->presentation_title }}</p>
+                    </div>
+                    @endif
+                    
+                    <p class="speaker-bio">{{ Str::limit($speaker->biography, 150) }}</p>
+                    <div class="full-bio" style="display:none;">{{ $speaker->biography }}</div>
                     
                     <a href="javascript:void(0)" onclick="openBioModal(this)" class="btn-show-more">SHOW MORE</a>
                 </div>
             </div>
+            @empty
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #555; background: #fff; border-radius: 8px; font-size: 1.1rem;">
+                <i class="fa-solid fa-microphone-lines" style="font-size: 2rem; color: #ccc; margin-bottom: 15px; display: block;"></i>
+                Speaker announcements coming soon.
+            </div>
+            @endforelse
 
         </div>
     </div>

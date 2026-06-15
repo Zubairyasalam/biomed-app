@@ -5,12 +5,16 @@
 @include('sections.topbar')
 @include('sections.navbar')
 
-<!-- Banner Section -->
-<section class="plenary-banner">
-    <div class="container">
-        <h1 style="text-transform: uppercase;">IMPORTANT DEADLINES</h1>
+    @php
+        $bannerTitle = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_key_dates_title')->value('value') ?? 'KEY DATES';
+        $bannerImage = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_key_dates_image')->value('value');
+    @endphp
+    <!-- Page Banner -->
+    <div class="page-banner" style="{{ $bannerImage ? "background-image: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.8)), url('" . asset($bannerImage) . "');" : '' }}">
+        <div class="page-banner-content">
+            <h1 style="text-transform: uppercase;">{{ $bannerTitle }}</h1>
+        </div>
     </div>
-</section>
 
 <style>
     .key-dates-container {
@@ -145,38 +149,27 @@
 
         <!-- Right: Cards -->
         <div class="kd-cards">
-            
+            @php
+                $icons = ['fa-users', 'fa-file-signature', 'fa-dove', 'fa-bullhorn', 'fa-calendar-check'];
+                $colors = ['', '', 'yellow-bg', '', 'yellow-bg'];
+            @endphp
+            @forelse($deadlines as $index => $deadline)
             <div class="kd-card">
-                <div class="kd-icon-circle">
-                    <i class="fa-solid fa-users"></i>
+                <div class="kd-icon-circle {{ $colors[$index % count($colors)] }}">
+                    <i class="fa-solid {{ $icons[$index % count($icons)] }}"></i>
                 </div>
                 <div class="kd-text">
-                    <div class="kd-date">Sep 23–25, 2027</div>
-                    <div class="kd-label">Conference Dates Start</div>
+                    <div class="kd-date">{{ $deadline->deadline_date ? \Carbon\Carbon::parse($deadline->deadline_date)->format('M d, Y') : 'TBA' }}</div>
+                    <div class="kd-label">{{ $deadline->title }}</div>
                 </div>
             </div>
-
-            <div class="kd-card">
-                <div class="kd-icon-circle">
-                    <i class="fa-solid fa-file-signature"></i>
-                </div>
-                <div class="kd-text">
-                    <div class="kd-date">Dec 28, 2026</div>
-                    <div class="kd-label">Abstract Submission Open</div>
+            @empty
+            <div class="kd-card" style="justify-content: center; background: #eee; box-shadow: none;">
+                <div class="kd-text" style="color: #666;">
+                    <div class="kd-label">Deadlines to be announced soon.</div>
                 </div>
             </div>
-
-            <div class="kd-card">
-                <div class="kd-icon-circle yellow-bg">
-                    <i class="fa-solid fa-dove"></i>
-                </div>
-                <div class="kd-text">
-                    <div class="kd-date">Sep 30, 2026</div>
-                    <div class="kd-label">Super Early-Bird Registration</div>
-                </div>
-            </div>
-
-        </div>
+            @endforelse        </div>
     </div>
 </section>
 

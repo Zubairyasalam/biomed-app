@@ -5,124 +5,52 @@
 @include('sections.topbar')
 @include('sections.navbar')
 
-<!-- Banner Section -->
-<section class="plenary-banner">
-    <div class="container">
-        <h1>PLENARY SPEAKERS</h1>
+    @php
+        $bannerTitle = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_plenary_speakers_title')->value('value') ?? 'PLENARY SPEAKERS';
+        $bannerImage = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_plenary_speakers_image')->value('value');
+    @endphp
+    <!-- Page Banner -->
+    <div class="page-banner" style="{{ $bannerImage ? "background-image: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.8)), url('" . asset($bannerImage) . "');" : '' }}">
+        <div class="page-banner-content">
+            <h1>{{ $bannerTitle }}</h1>
+        </div>
     </div>
-</section>
 
 <!-- Plenary Speakers Extended Grid -->
 <section class="plenary-section" style="padding: 60px 0; background: #fafafa;">
     <div class="container">
         <div class="plenary-grid">
 
+            @forelse($speakers as $speaker)
             <div class="speaker-card-extended">
                 <div class="speaker-photo-wrap">
-                    <img src="{{ asset('images/speakers/speaker1.png') }}" alt="Boris N. Chichkov">
+                    <img src="{{ asset('images/speakers/' . $speaker->image) }}" alt="{{ $speaker->name }}">
                 </div>
                 <div class="speaker-body-extended">
-                    <h4>Boris N. Chichkov</h4>
-                    <p class="speaker-hindex">H-Index: 103</p>
-                    <p class="speaker-uni">Leibniz University Hannover</p>
-                    <p class="speaker-country-text">Germany</p>
-                    <p class="speaker-title-text" style="color: var(--teal-accent); font-style: italic; margin-bottom: 15px;">Title: Laser printing of cells</p>
+                    <h4>{{ $speaker->name }}</h4>
+                    @if($speaker->h_index)<p class="speaker-hindex">H-Index: {{ $speaker->h_index }}</p>@endif
+                    <p class="speaker-uni">{{ $speaker->university }}</p>
+                    <p class="speaker-country-text">{{ $speaker->country }}</p>
                     
-                    <p class="speaker-bio">He graduated with honors and received PhD in Physics from Moscow Institute of Physics and Technology in 1981. He started his scientific carrier at P.N...</p>
-                    <div class="full-bio" style="display:none;">He graduated with honors and received PhD in Physics from Moscow Institute of Physics and Technology in 1981. He started his scientific carrier at P.N. Lebedev Institute of Physics, Russian Academy of Sciences in Moscow and later worked in many research centers worldwide. At present, he is Professor of Physics at Leibniz University Hannover, Institute of Quantum Optics and Chair of Nanoengineering. In 2024 he received the Julius Springer Prize for Applied Physics.</div>
+                    @if($speaker->presentation_title)
+                    <div class="speaker-title-block">
+                        <span class="speaker-title-label">Presentation Title</span>
+                        <p class="speaker-title-content">{{ $speaker->presentation_title }}</p>
+                    </div>
+                    @endif
+                    
+                    <p class="speaker-bio">{{ Str::limit($speaker->biography, 150) }}</p>
+                    <div class="full-bio" style="display:none;">{{ $speaker->biography }}</div>
                     
                     <a href="javascript:void(0)" onclick="openBioModal(this)" class="btn-show-more">SHOW MORE</a>
                 </div>
             </div>
-
-            <div class="speaker-card-extended">
-                <div class="speaker-photo-wrap">
-                    <img src="{{ asset('images/speakers/speaker2.png') }}" alt="Iwao Ojima">
-                </div>
-                <div class="speaker-body-extended">
-                    <h4>Iwao Ojima</h4>
-                    <p class="speaker-hindex">H-Index: 93</p>
-                    <p class="speaker-uni">Stony Brook University</p>
-                    <p class="speaker-country-text">United States</p>
-                    <p class="speaker-title-text" style="color: var(--teal-accent); font-style: italic; margin-bottom: 15px;">Title: TBA</p>
-                    
-                    <p class="speaker-bio">Iwao Ojima received his B.S. (1968), M.S. (1970), and Ph.D. (1973) degrees from the University of Tokyo, Japan. He joined the Sagami Institute of Che...</p>
-                    <div class="full-bio" style="display:none;">Iwao Ojima received his B.S. (1968), M.S. (1970), and Ph.D. (1973) degrees from the University of Tokyo, Japan. He joined the Sagami Institute of Chemical Research. His full extended biography detailing his numerous awards and contributions to organic synthesis and medicinal chemistry will be updated shortly.</div>
-                    
-                    <a href="javascript:void(0)" onclick="openBioModal(this)" class="btn-show-more">SHOW MORE</a>
-                </div>
+            @empty
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #555; background: #fff; border-radius: 8px; font-size: 1.1rem;">
+                <i class="fa-solid fa-microphone-lines" style="font-size: 2rem; color: #ccc; margin-bottom: 15px; display: block;"></i>
+                Speaker announcements coming soon.
             </div>
-
-            <div class="speaker-card-extended">
-                <div class="speaker-photo-wrap">
-                    <img src="{{ asset('images/speakers/speaker3.png') }}" alt="Shahnaz Mansouri">
-                </div>
-                <div class="speaker-body-extended">
-                    <h4>Shahnaz Mansouri</h4>
-                    <p class="speaker-uni">Monash University</p>
-                    <p class="speaker-country-text">Australia</p>
-                    <p class="speaker-title-text" style="color: var(--teal-accent); font-style: italic; margin-bottom: 15px;">Title: Emerging Food Cultivation and Printing Technologies for Food Security and Personalization</p>
-                    
-                    <p class="speaker-bio">Dr Shahnaz Mansouri is a Senior Lecturer in the School of Chemistry, Faculty of Science, Monash University, with a background in Chemical and Process ...</p>
-                    <div class="full-bio" style="display:none;">Dr Shahnaz Mansouri is a Senior Lecturer in the School of Chemistry, Faculty of Science, Monash University, with a background in Chemical and Process Engineering. Her research focuses on innovative technologies such as emerging food cultivation and 3D printing technologies aimed at enhancing food security and enabling personalized nutrition.</div>
-                    
-                    <a href="javascript:void(0)" onclick="openBioModal(this)" class="btn-show-more">SHOW MORE</a>
-                </div>
-            </div>
-
-            <div class="speaker-card-extended">
-                <div class="speaker-photo-wrap">
-                    <img src="{{ asset('images/speakers/speaker4.png') }}" alt="Jingwei Xie">
-                </div>
-                <div class="speaker-body-extended">
-                    <h4>Jingwei Xie</h4>
-                    <p class="speaker-hindex">H-Index: 68</p>
-                    <p class="speaker-uni">University of Nebraska Medical Center</p>
-                    <p class="speaker-country-text">United States</p>
-                    <p class="speaker-title-text" style="color: var(--teal-accent); font-style: italic; margin-bottom: 15px;">Title: Emerging Nanofiber Materials for Biomedical Applications</p>
-                    
-                    <p class="speaker-bio">Jingwei Xie received his B.S. (1999) and M.S. (2002) from Nanjing University of Technology, China, and his Ph.D. from the National University of Singa...</p>
-                    <div class="full-bio" style="display:none;">Jingwei Xie received his B.S. (1999) and M.S. (2002) from Nanjing University of Technology, China, and his Ph.D. from the National University of Singapore. His laboratory specializes in the development of emerging nanofiber materials with profound applications in the biomedical field, including tissue engineering and regenerative medicine.</div>
-                    
-                    <a href="javascript:void(0)" onclick="openBioModal(this)" class="btn-show-more">SHOW MORE</a>
-                </div>
-            </div>
-
-            <div class="speaker-card-extended">
-                <div class="speaker-photo-wrap">
-                    <img src="{{ asset('images/speakers/speaker5.png') }}" alt="Thomas J. Webster">
-                </div>
-                <div class="speaker-body-extended">
-                    <h4>Thomas J. Webster</h4>
-                    <p class="speaker-hindex">H-Index: 137</p>
-                    <p class="speaker-uni">Hebei University of Technology</p>
-                    <p class="speaker-country-text">China</p>
-                    <p class="speaker-title-text" style="color: var(--teal-accent); font-style: italic; margin-bottom: 15px;">Title: Ensuring Implant Success in Humans Using Nanomedicine: Over 45,000 Patients and Still Counting</p>
-                    
-                    <p class="speaker-bio">Thomas J. Webster's (H index: 137) degrees are in chemical engineering from the University of Pittsburgh (B.S., 1995; USA) and in biomedical enginee...</p>
-                    <div class="full-bio" style="display:none;">Thomas J. Webster's (H index: 137) degrees are in chemical engineering from the University of Pittsburgh (B.S., 1995; USA) and in biomedical engineering from RPI (Ph.D., 2000; USA). He has pioneered the use of nanomedicine for ensuring implant success, directing research that has translated to over 45,000 successful patient implantations to date.</div>
-                    
-                    <a href="javascript:void(0)" onclick="openBioModal(this)" class="btn-show-more">SHOW MORE</a>
-                </div>
-            </div>
-
-            <div class="speaker-card-extended">
-                <div class="speaker-photo-wrap">
-                    <img src="{{ asset('images/speakers/speaker6.png') }}" alt="Richard Spontak">
-                </div>
-                <div class="speaker-body-extended">
-                    <h4>Richard Spontak</h4>
-                    <p class="speaker-hindex">H-Index: 68</p>
-                    <p class="speaker-uni">North Carolina State University</p>
-                    <p class="speaker-country-text">United States</p>
-                    <p class="speaker-title-text" style="color: var(--teal-accent); font-style: italic; margin-bottom: 15px;">Title: TBA</p>
-                    
-                    <p class="speaker-bio">Will be update soon...</p>
-                    <div class="full-bio" style="display:none;">Will be updated soon. Richard Spontak's extensive biography and scientific background will be available closer to the summit date.</div>
-                    
-                    <a href="javascript:void(0)" onclick="openBioModal(this)" class="btn-show-more">SHOW MORE</a>
-                </div>
-            </div>
+            @endforelse
 
         </div>
     </div>

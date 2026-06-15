@@ -5,10 +5,14 @@
     @include('sections.topbar')
     @include('sections.navbar')
 
+    @php
+        $bannerTitle = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_registration_title')->value('value') ?? 'REGISTRATION';
+        $bannerImage = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_registration_image')->value('value');
+    @endphp
     <!-- Page Banner -->
-    <div class="page-banner">
+    <div class="page-banner" style="{{ $bannerImage ? "background-image: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.8)), url('" . asset($bannerImage) . "');" : '' }}">
         <div class="page-banner-content">
-            <h1>REGISTRATION</h1>
+            <h1>{{ $bannerTitle }}</h1>
         </div>
     </div>
 
@@ -18,67 +22,51 @@
             
             <!-- Instructions -->
             <div class="reg-instructions" style="margin-bottom: 40px; background: #fff; padding: 25px; border-radius: 12px; border-left: 4px solid var(--teal-accent); box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
-                <p style="margin: 0; color: #475569; line-height: 1.6;">{!! $settings['reg_page_notice'] ?? 'Please complete all fields. Registration fee must be paid online. After payment, you will receive a confirmation email and receipt within 24-48 hours. If not, contact us at <a href="mailto:contact@biomedsummit.org" style="color: var(--teal-accent); font-weight: 600;">contact@biomedsummit.org</a>.<br><strong>Note:</strong> All amounts are in INR. A secure payment gateway will process your transaction on the next step.' !!}</p>
+                <p style="margin: 0; color: #475569; line-height: 1.6;">{!! $settings['reg_page_notice'] ?? '<strong>All fields are required.</strong> Payments (INR) are securely processed online. Confirmations are sent within 48 hours. For support: <a href="mailto:contact@biomedsummit.org" style="color: var(--teal-accent); font-weight: 600;">contact@biomedsummit.org</a>.' !!}</p>
             </div>
 
-            <form id="registration-form" action="#" method="POST">
+            <form id="registration-form" action="{{ url('/api/register') }}" method="POST">
                 @csrf
                 
                 <!-- Personal Info Grid -->
+                <!-- Personal Info Grid -->
                 <div class="reg-form-grid">
-                    <div class="form-group" style="grid-column: span 3;">
-                        <select name="title" class="form-control" required>
-                            <option value="">Select</option>
-                            <option value="Mr">Mr.</option>
-                            <option value="Ms">Ms.</option>
-                            <option value="Dr">Dr.</option>
-                            <option value="Prof">Prof.</option>
-                        </select>
-                    </div>
-                    <div class="form-group" style="grid-column: span 9;">
-                        <input type="text" name="name" class="form-control" placeholder="{{ $settings['reg_ph_name'] ?? 'Enter your name' }}" required>
-                    </div>
-                    
-                    <div class="form-group" style="grid-column: 1 / -1;">
-                        <input type="text" name="organization" class="form-control" placeholder="{{ $settings['reg_ph_org'] ?? 'Organization/Institution' }}" required>
-                    </div>
-
-                    <div class="form-group" style="grid-column: span 6;">
-                        <input type="email" name="email" class="form-control" placeholder="{{ $settings['reg_ph_email'] ?? 'Enter your email' }}" required>
-                    </div>
-                    <div class="form-group" style="grid-column: span 6;">
-                        <input type="text" name="phone" class="form-control" placeholder="{{ $settings['reg_ph_phone'] ?? 'Enter your phone number' }}" required>
-                    </div>
-
-                    <div class="form-group" style="grid-column: span 4;">
-                        <input type="text" name="city" class="form-control" placeholder="{{ $settings['reg_ph_city'] ?? 'Enter your city name' }}" required>
-                    </div>
-                    <div class="form-group" style="grid-column: span 4;">
-                        <input type="text" name="country" class="form-control" placeholder="{{ $settings['reg_ph_country'] ?? 'Enter your Country' }}" required>
-                    </div>
-                    <div class="form-group" style="grid-column: span 4;">
-                        <input type="text" name="postal_code" class="form-control" placeholder="{{ $settings['reg_ph_postal'] ?? 'Enter your Postal Code' }}" required>
-                    </div>
-
-                    <div class="form-group" style="grid-column: 1 / -1;">
-                        <select name="interested_in" class="form-control" required>
-                            <option value="">Select Interested In</option>
-                            @php
-                                $interestOptions = \App\Models\InterestOption::orderBy('sort_order')->get();
-                            @endphp
-                            @foreach($interestOptions as $option)
-                                <option value="{{ $option->name }}">{{ $option->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    @php
+                        $formFields = \App\Models\RegistrationField::orderBy('sort_order')->get();
+                    @endphp
+                    @foreach($formFields as $field)
+                        <div class="form-group" style="grid-column: {{ $field->grid_column === 'span 12' ? '1 / -1' : $field->grid_column }};">
+                            @if($field->type === 'select' || $field->type === 'dynamic_select')
+                                <select name="fields[{{ $field->name }}]" class="form-control" {{ $field->is_required ? 'required' : '' }}>
+                                    <option value="">{{ $field->placeholder ?? 'Select' }}</option>
+                                    @if($field->type === 'dynamic_select' && $field->name === 'interested_in')
+                                        @php
+                                            $interestOptions = \App\Models\InterestOption::orderBy('sort_order')->get();
+                                        @endphp
+                                        @foreach($interestOptions as $option)
+                                            <option value="{{ $option->name }}">{{ $option->name }}</option>
+                                        @endforeach
+                                    @elseif($field->options)
+                                        @foreach($field->options as $option)
+                                            <option value="{{ $option }}">{{ $option }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            @elseif($field->type === 'textarea')
+                                <textarea name="fields[{{ $field->name }}]" class="form-control" placeholder="{{ $field->placeholder }}" {{ $field->is_required ? 'required' : '' }} rows="3"></textarea>
+                            @else
+                                <input type="{{ $field->type }}" name="fields[{{ $field->name }}]" class="form-control" placeholder="{{ $field->placeholder }}" {{ $field->is_required ? 'required' : '' }}>
+                            @endif
+                        </div>
+                    @endforeach
                 </div>
 
                 <div class="section-divider" style="margin: 40px 0;"></div>
 
                 <!-- Registration Category -->
                 <div class="reg-section-title" style="margin-bottom: 25px;">
-                    <h2 style="font-size: 2rem; color: var(--navy-dark);">Select Category</h2>
-                    <p style="color: #64748b; font-size: 1.05rem;">{{ $settings['reg_category_subtitle'] ?? 'Registration includes conference kit, certificate, lunch and refreshment.' }}</p>
+                    <h2 style="font-size: clamp(1.5rem, 6vw, 2rem); color: var(--navy-dark);">{{ $settings['reg_category_title'] ?? 'Select Category' }}</h2>
+                    <p style="color: #64748b; font-size: clamp(0.95rem, 3vw, 1.05rem);">{{ $settings['reg_category_subtitle'] ?? 'Registration includes conference kit, certificate, lunch and refreshment.' }}</p>
                 </div>
 
                 <div class="category-selection" style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 40px;">
@@ -95,7 +83,7 @@
 
                 <!-- Add-On -->
                 <div class="reg-section-title" style="margin-bottom: 20px;">
-                    <h2 style="font-size: 1.8rem; color: var(--navy-dark);">{{ $settings['reg_addon_title'] ?? 'Add-Ons' }}</h2>
+                    <h2 style="font-size: clamp(1.4rem, 5vw, 1.8rem); color: var(--navy-dark);">{{ $settings['reg_addon_title'] ?? 'Add-Ons' }}</h2>
                 </div>
                 
                 <div class="addon-selection" style="margin-bottom: 40px;">
@@ -117,7 +105,7 @@
 
                 <!-- Summary Box -->
                 <div class="reg-summary" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 35px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); margin-bottom: 35px;">
-                    <h3 style="margin-top: 0; margin-bottom: 25px; color: var(--navy-dark); border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; font-size: 1.5rem;">Order Summary</h3>
+                    <h3 style="margin-top: 0; margin-bottom: 25px; color: var(--navy-dark); border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; font-size: clamp(1.2rem, 4vw, 1.5rem);">{{ $settings['reg_summary_title'] ?? 'Order Summary' }}</h3>
                     
                     <div class="summary-line" style="display: flex; justify-content: space-between; margin-bottom: 15px; color: #475569; font-size: 1.1rem;">
                         <span id="sum-cat-name">Select a Category</span>
@@ -126,14 +114,14 @@
                     <div id="dynamic-addons-summary"></div>
                     
                     <div class="summary-line summary-total" style="display: flex; justify-content: space-between; margin-top: 10px; padding-top: 15px; border-top: 2px dashed #cbd5e1; font-weight: 800; font-size: 1.5rem; color: var(--navy-dark);">
-                        <span>Total Amount:</span>
+                        <span>{{ $settings['reg_total_text'] ?? 'Total Amount:' }}</span>
                         <span id="sum-total-price" style="color: var(--teal-accent);">0 INR</span>
                     </div>
                 </div>
 
                 <!-- Payment Method -->
                 <div class="reg-section-title" style="margin-bottom: 20px;">
-                    <h2 style="font-size: 1.8rem; color: var(--navy-dark);">Payment Method</h2>
+                    <h2 style="font-size: clamp(1.4rem, 5vw, 1.8rem); color: var(--navy-dark);">{{ $settings['reg_payment_title'] ?? 'Payment Method' }}</h2>
                 </div>
 
                 <div class="payment-method-selection" style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 35px;">
@@ -184,12 +172,12 @@
                 <div class="reg-consent" style="margin-bottom: 35px; background: #f8fafc; padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0;">
                     <label style="display: flex; gap: 12px; align-items: flex-start; cursor: pointer; margin: 0;">
                         <input type="checkbox" name="consent" required style="margin-top: 4px; width: 18px; height: 18px; accent-color: var(--teal-accent);"> 
-                        <span style="color: #475569; line-height: 1.6; font-size: 0.95rem;">By clicking "Proceed to Pay", I agree to the <a href="#" style="color: var(--teal-accent); font-weight: 600;">Privacy Policy</a>, <a href="#" style="color: var(--teal-accent); font-weight: 600;">Terms & Conditions</a> and <a href="#" style="color: var(--teal-accent); font-weight: 600;">Cancellation Policy</a>.</span>
+                        <span style="color: #475569; line-height: 1.6; font-size: 0.95rem;">{!! $settings['reg_consent_text'] ?? 'By clicking "Proceed to Pay", I agree to the <a href="#" style="color: var(--teal-accent); font-weight: 600;">Privacy Policy</a>, <a href="#" style="color: var(--teal-accent); font-weight: 600;">Terms & Conditions</a> and <a href="#" style="color: var(--teal-accent); font-weight: 600;">Cancellation Policy</a>.' !!}</span>
                     </label>
                 </div>
 
                 <div class="reg-actions" style="display: flex; justify-content: flex-end;">
-                    <button type="submit" class="btn btn-teal" style="padding: 16px 40px; font-size: 1.2rem; border-radius: 10px; width: 100%; box-shadow: 0 10px 20px rgba(0, 168, 150, 0.2); display: flex; justify-content: center; align-items: center; gap: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Proceed to Pay <i class="fa-solid fa-arrow-right"></i></button>
+                    <button type="submit" class="btn btn-teal" style="padding: 16px 40px; font-size: 1.2rem; border-radius: 10px; width: 100%; box-shadow: 0 10px 20px rgba(0, 168, 150, 0.2); display: flex; justify-content: center; align-items: center; gap: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">{{ $settings['reg_button_text'] ?? 'Proceed to Pay' }} <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </form>
 

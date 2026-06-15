@@ -11,14 +11,14 @@
     
     <style>
         :root {
-            --admin-bg: #F7F9FC;
-            --admin-sidebar: #112340;
-            --admin-sidebar-hover: #1A365D;
+            --admin-bg: #f4f7fb;
+            --admin-sidebar: #0f172a;
+            --admin-sidebar-hover: rgba(255, 255, 255, 0.05);
             --admin-primary: #00A896;
-            --admin-text: #555555;
+            --admin-text: #475569;
             --admin-white: #ffffff;
-            --admin-border: #E2E8F0;
-            --admin-green: #A4C639;
+            --admin-border: #e2e8f0;
+            --admin-green: #10b981;
         }
 
         * {
@@ -38,24 +38,31 @@
         /* Sidebar */
         .sidebar {
             width: 260px;
-            background-color: var(--admin-sidebar);
+            background: linear-gradient(180deg, var(--admin-sidebar) 0%, #1e293b 100%);
             color: #94a3b8;
             display: flex;
             flex-direction: column;
             position: fixed;
+            top: 0;
+            left: 0;
             height: 100vh;
             z-index: 10;
+            transition: transform 0.3s ease;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.05);
         }
 
         .sidebar-header {
-            padding: 20px;
-            background-color: #0d1b33;
+            height: 70px;
+            padding: 0 20px;
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--admin-border);
             display: flex;
             align-items: center;
             gap: 15px;
             color: #fff;
             font-weight: 700;
             font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
         .sidebar-header i {
@@ -70,6 +77,27 @@
             flex-direction: column;
             gap: 5px;
             overflow-y: auto;
+            flex: 1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(148, 163, 184, 0.3);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(148, 163, 184, 0.5);
+        }
+        
+        .content-area::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.2);
         }
 
         .nav-links li a {
@@ -89,6 +117,9 @@
             color: #fff;
             border-left: 4px solid var(--admin-primary);
         }
+        .nav-links li a:hover {
+            padding-left: 30px;
+        }
 
         .nav-links li a i {
             font-size: 1.2rem;
@@ -99,6 +130,7 @@
         /* Main Content */
         .main-content {
             flex: 1;
+            min-width: 0;
             margin-left: 260px;
             display: flex;
             flex-direction: column;
@@ -106,14 +138,19 @@
         }
 
         .topbar {
-            background-color: var(--admin-white);
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 5;
             height: 70px;
             padding: 0 30px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             border-bottom: 1px solid var(--admin-border);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
         }
 
         .topbar .title {
@@ -125,17 +162,24 @@
         .content-area {
             padding: 30px;
             flex: 1;
+            min-width: 0;
             overflow-y: auto;
+            overflow-x: hidden;
         }
 
         /* Card Styles */
         .card {
             background-color: var(--admin-white);
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            border: 1px solid var(--admin-border);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.03);
             padding: 25px;
             margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
         }
 
         .btn {
@@ -154,15 +198,85 @@
         .btn:hover {
             background-color: #008a7a;
         }
+
+        .hamburger-menu {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--admin-sidebar);
+            cursor: pointer;
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(17, 35, 64, 0.5);
+            z-index: 9;
+            backdrop-filter: blur(2px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-overlay.show {
+            display: block;
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .topbar {
+                padding: 0 15px;
+            }
+            .content-area {
+                padding: 15px;
+            }
+            .hamburger-menu {
+                display: block;
+            }
+
+            /* Smart Grid Overrides for inline styles */
+            .main-content div[style*="grid-template-columns: 1fr 350px"],
+            .main-content div[style*="grid-template-columns: 1fr 350px;"],
+            .main-content div[style*="grid-template-columns: 2fr 1fr"],
+            .main-content div[style*="grid-template-columns: 2fr 1fr;"],
+            .main-content div[style*="grid-template-columns: 1fr 1fr"],
+            .main-content div[style*="grid-template-columns: 1fr 1fr;"],
+            .main-content div[style*="grid-template-columns: 3fr 1fr"],
+            .main-content div[style*="grid-template-columns: 3fr 1fr;"],
+            .main-content div[style*="grid-template-columns: 1fr 1fr 1fr"],
+            .main-content div[style*="grid-template-columns: 1fr 1fr 1fr;"],
+            .main-content div[style*="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr))"],
+            .main-content div[style*="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));"],
+            .main-content div[style*="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))"],
+            .main-content div[style*="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));"],
+            .crm-detail-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
     </style>
 </head>
 <body>
 
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
     <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <i class="fa-solid fa-dna"></i>
-            <span>BioMed Admin</span>
+    <aside class="sidebar" id="adminSidebar">
+        <div class="sidebar-header" style="justify-content: center;">
+            <img src="{{ asset('images/logo.png') }}" alt="BioMed Summit Logo" style="max-height: 65px; width: auto;">
         </div>
         <ul class="nav-links">
             <li>
@@ -172,7 +286,7 @@
             </li>
             
             <li style="padding: 15px 25px 5px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; color: #64748b; margin-top: 10px;">
-                CRM Records
+                Records
             </li>
             <li>
                 <a href="{{ route('admin.registrations') }}" class="{{ request()->routeIs('admin.registrations') ? 'active' : '' }}">
@@ -186,31 +300,36 @@
             </li>
 
             <li style="padding: 15px 25px 5px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; color: #64748b; margin-top: 10px;">
-                CMS Modules
+                Modules
             </li>
             <li>
-                <a href="{{ route('admin.settings') }}" class="{{ request()->routeIs('admin.settings') ? 'active' : '' }}">
-                    <i class="fa-solid fa-globe"></i> Global Settings
+                <a href="{{ route('admin.page_banners') }}" class="{{ request()->routeIs('admin.page_banners') ? 'active' : '' }}">
+                    <i class="fa-solid fa-images"></i> Page Banners
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.settings.registration') }}" class="{{ request()->routeIs('admin.settings.registration') ? 'active' : '' }}">
-                    <i class="fa-solid fa-address-card"></i> Registration Form
+                <a href="{{ route('admin.hero') }}" class="{{ request()->routeIs('admin.hero') ? 'active' : '' }}">
+                    <i class="fa-solid fa-image"></i> Hero Section
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.homepage_sections') }}" class="{{ request()->routeIs('admin.homepage_sections') ? 'active' : '' }}">
-                    <i class="fa-solid fa-layer-group"></i> Homepage Sections
+                <a href="{{ route('admin.about') }}" class="{{ request()->routeIs('admin.about') ? 'active' : '' }}">
+                    <i class="fa-solid fa-address-card"></i> About Section
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.abstracts_awards') }}" class="{{ request()->routeIs('admin.abstracts_awards') ? 'active' : '' }}">
-                    <i class="fa-solid fa-award"></i> Abstracts & Awards
+                <a href="{{ route('admin.conference') }}" class="{{ request()->routeIs('admin.conference') ? 'active' : '' }}">
+                    <i class="fa-solid fa-calendar-check"></i> Conference Details
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.venue_settings') }}" class="{{ request()->routeIs('admin.venue_settings') ? 'active' : '' }}">
-                    <i class="fa-solid fa-map-location-dot"></i> Venue Settings
+                <a href="{{ route('admin.programs') }}" class="{{ request()->routeIs('admin.programs') ? 'active' : '' }}">
+                    <i class="fa-solid fa-layer-group"></i> Programs & Themes
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.highlights') }}" class="{{ request()->routeIs('admin.highlights') ? 'active' : '' }}">
+                    <i class="fa-solid fa-star"></i> Key Highlights
                 </a>
             </li>
             <li>
@@ -219,18 +338,87 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('admin.venue_highlights') }}" class="{{ request()->routeIs('admin.venue_highlights') ? 'active' : '' }}">
+                    <i class="fa-solid fa-map-pin"></i> Venue & Highlights
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.abstracts_awards') }}" class="{{ request()->routeIs('admin.abstracts_awards') ? 'active' : '' }}">
+                    <i class="fa-solid fa-file-pdf"></i> Abstracts Settings
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.settings.registration') }}" class="{{ request()->routeIs('admin.settings.registration') ? 'active' : '' }}">
+                    <i class="fa-solid fa-address-card"></i> Registration Page
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('admin.fees') }}" class="{{ request()->routeIs('admin.fees') ? 'active' : '' }}">
                     <i class="fa-solid fa-tags"></i> Registration Fees
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.addons') }}" class="{{ request()->routeIs('admin.addons') ? 'active' : '' }}">
-                    <i class="fa-solid fa-puzzle-piece"></i> Form Add-Ons
+                <a href="{{ route('admin.policies') }}" class="{{ request()->routeIs('admin.policies') ? 'active' : '' }}">
+                    <i class="fa-solid fa-file-contract"></i> Policies / Accordions
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.policies') }}" class="{{ request()->routeIs('admin.policies') ? 'active' : '' }}">
-                    <i class="fa-solid fa-file-contract"></i> Policies / Accordions
+                <a href="{{ route('admin.settings') }}" class="{{ request()->routeIs('admin.settings') ? 'active' : '' }}">
+                    <i class="fa-solid fa-globe"></i> Footer
+                </a>
+            </li>
+
+            <li style="padding: 15px 25px 5px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; color: #64748b; margin-top: 10px;">
+                Sub Modules
+            </li>
+            <li>
+                <a href="{{ route('admin.committee') }}" class="{{ request()->routeIs('admin.committee') ? 'active' : '' }}">
+                    <i class="fa-solid fa-users-viewfinder"></i> Committee
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.about_organizer') }}" class="{{ request()->routeIs('admin.about_organizer') ? 'active' : '' }}">
+                    <i class="fa-solid fa-building-user"></i> About Organizer
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.speakers') }}" class="{{ request()->routeIs('admin.speakers') ? 'active' : '' }}">
+                    <i class="fa-solid fa-microphone-lines"></i> Speakers
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.topics') }}" class="{{ request()->routeIs('admin.topics') ? 'active' : '' }}">
+                    <i class="fa-solid fa-list-check"></i> Topics of Discussion
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.sponsors') }}" class="{{ request()->routeIs('admin.sponsors') ? 'active' : '' }}">
+                    <i class="fa-solid fa-hand-holding-dollar"></i> Sponsors
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.awards') }}" class="{{ request()->routeIs('admin.awards') ? 'active' : '' }}">
+                    <i class="fa-solid fa-award"></i> Awards
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.venue_settings') }}" class="{{ request()->routeIs('admin.venue_settings') ? 'active' : '' }}">
+                    <i class="fa-solid fa-map-location-dot"></i> Venue Settings
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.submit_paper_settings') }}" class="{{ request()->routeIs('admin.submit_paper_settings') ? 'active' : '' }}">
+                    <i class="fa-solid fa-file-arrow-up"></i> Submit Paper Settings
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.submit_paper_fields') }}" class="{{ request()->routeIs('admin.submit_paper_fields') ? 'active' : '' }}">
+                    <i class="fa-solid fa-list-check"></i> Submit Paper Form
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.guidelines') }}" class="{{ request()->routeIs('admin.guidelines') ? 'active' : '' }}">
+                    <i class="fa-solid fa-list-ol"></i> Guidelines
                 </a>
             </li>
 
@@ -242,20 +430,54 @@
         </ul>
     </aside>
 
+    <style>
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .topbar .title {
+                font-size: 1.1rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .topbar-right {
+                gap: 12px;
+            }
+            .topbar-user-name {
+                display: none;
+            }
+            .topbar-logout-text {
+                display: none;
+            }
+            /* Globally fix flex containers that squish on mobile */
+            div[style*="display: flex;"][style*="justify-content: space-between"] {
+                flex-wrap: wrap !important;
+                gap: 15px !important;
+            }
+        }
+    </style>
     <!-- Main Content -->
     <main class="main-content">
         <header class="topbar">
-            <div class="title">@yield('header_title', 'Dashboard')</div>
-            <div style="display: flex; align-items: center; gap: 20px;">
-                <span style="font-weight: 600; color: var(--admin-text);">
-                    <i class="fa-solid fa-circle-user" style="font-size: 1.5rem; vertical-align: middle; margin-right: 8px; color: var(--admin-sidebar);"></i> 
-                    {{ auth()->user()->name ?? 'Administrator' }}
+            <div style="display: flex; align-items: center; gap: 15px; min-width: 0;">
+                <button class="hamburger-menu" onclick="toggleSidebar()">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@yield('header_title', 'Dashboard')</div>
+            </div>
+            <div class="topbar-right">
+                <span style="font-weight: 600; color: var(--admin-text); display: flex; align-items: center;">
+                    <i class="fa-solid fa-circle-user" style="font-size: 1.5rem; color: var(--admin-sidebar); margin-right: 8px;"></i> 
+                    <span class="topbar-user-name" style="white-space: nowrap;">{{ auth()->user()->name ?? 'Administrator' }}</span>
                 </span>
                 
-                <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                <form method="POST" action="{{ route('logout') }}" style="display: flex; margin: 0;">
                     @csrf
-                    <button type="submit" style="background: none; border: none; color: #ef4444; font-weight: 600; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 5px;">
-                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                    <button type="submit" style="background: none; border: none; color: #ef4444; font-weight: 600; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 5px; padding: 0;">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> <span class="topbar-logout-text">Logout</span>
                     </button>
                 </form>
             </div>
@@ -266,5 +488,19 @@
         </div>
     </main>
 
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('adminSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            sidebar.classList.toggle('open');
+            
+            if (sidebar.classList.contains('open')) {
+                overlay.classList.add('show');
+            } else {
+                overlay.classList.remove('show');
+            }
+        }
+    </script>
 </body>
 </html>

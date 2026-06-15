@@ -7,29 +7,31 @@
     </div>
 
     <div class="invited-grid">
+        @php
+            $invitedSpeakers = \App\Models\Speaker::where('type', 'invited')->orderBy('sort_order')->get();
+        @endphp
 
-        <div class="speaker-card-new">
-            <div class="speaker-photo-wrap">
-                <img src="{{ asset('images/speakers/speaker8.png') }}" alt="Tarek Mohamed Kamal Motawi">
+        @foreach($invitedSpeakers as $speaker)
+            <div class="speaker-card-new">
+                <div class="speaker-photo-wrap">
+                    <img src="{{ asset($speaker->image_path) }}" alt="{{ $speaker->name }}">
+                </div>
+                <div class="speaker-body">
+                    <h4>{{ $speaker->name }}</h4>
+                    @if($speaker->h_index)
+                        <p class="speaker-hindex">H-Index: {{ $speaker->h_index }}</p>
+                    @endif
+                    <p class="speaker-uni">{{ $speaker->university }}</p>
+                    <p class="speaker-country-text">{{ $speaker->country }}</p>
+                    @if($speaker->title)
+                        <div class="speaker-title-block">
+                            <span class="speaker-title-label">Presentation Title</span>
+                            <p class="speaker-title-content">{{ $speaker->title }}</p>
+                        </div>
+                    @endif
+                </div>
             </div>
-            <div class="speaker-body">
-                <h4>Tarek Mohamed Kamal Motawi</h4>
-                <p class="speaker-uni">Cairo University</p>
-                <p class="speaker-country-text">Egypt</p>
-            </div>
-        </div>
-
-        <div class="speaker-card-new">
-            <div class="speaker-photo-wrap">
-                <img src="{{ asset('images/speakers/speaker9.png') }}" alt="Cesar Siqueira">
-            </div>
-            <div class="speaker-body">
-                <h4>Cesar Siqueira</h4>
-                <p class="speaker-uni">Federal University of the State of Rio de Janeiro</p>
-                <p class="speaker-country-text">Brazil</p>
-            </div>
-        </div>
-
+        @endforeach
     </div>
 
     <div class="text-center mt-30">

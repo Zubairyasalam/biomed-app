@@ -2,9 +2,9 @@
 <section class="deadlines-section">
     <div class="deadlines-bg-wrapper">
         <div class="section-header-center">
-            <h2 class="section-title">Important <span>Deadlines</span></h2>
+            <h2 class="section-title">{!! $settings['deadlines_title'] ?? 'Important <span>Deadlines</span>' !!}</h2>
             <div class="header-line"></div>
-            <p class="highlights-subtitle">Key Dates To Mark In Your Calendar</p>
+            <p class="highlights-subtitle">{{ $settings['deadlines_subtitle'] ?? 'Key Dates To Mark In Your Calendar' }}</p>
         </div>
 
         <div class="deadlines-container">
@@ -12,21 +12,22 @@
             <!-- Left: Illustration + stats -->
             <div class="deadlines-left">
                 <div class="dl-illustration">
-                    <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=600&h=500&fit=crop&crop=center"
+                    @php $img = $settings['deadlines_image'] ?? 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=600&h=500&fit=crop&crop=center'; @endphp
+                    <img src="{{ str_starts_with($img, 'http') ? $img : asset($img) }}"
                          alt="Calendar Schedule">
                 </div>
                 <div class="dl-stats-row">
                     <div class="dl-stat">
-                        <span class="dl-stat-num">3</span>
-                        <span class="dl-stat-label">Key Dates</span>
+                        <span class="dl-stat-num">{{ count($deadlines) }}</span>
+                        <span class="dl-stat-label">{{ $settings['deadlines_stat1_label'] ?? 'Key Dates' }}</span>
                     </div>
                     <div class="dl-stat">
-                        <span class="dl-stat-num">3</span>
-                        <span class="dl-stat-label">Days Conference</span>
+                        <span class="dl-stat-num">{{ $settings['deadlines_stat2_num'] ?? '3' }}</span>
+                        <span class="dl-stat-label">{{ $settings['deadlines_stat2_label'] ?? 'Days Conference' }}</span>
                     </div>
                     <div class="dl-stat">
-                        <span class="dl-stat-num">2027</span>
-                        <span class="dl-stat-label">Event Year</span>
+                        <span class="dl-stat-num">{{ $settings['deadlines_stat3_num'] ?? '2027' }}</span>
+                        <span class="dl-stat-label">{{ $settings['deadlines_stat3_label'] ?? 'Event Year' }}</span>
                     </div>
                 </div>
             </div>

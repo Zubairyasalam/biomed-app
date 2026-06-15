@@ -4,11 +4,26 @@
 
 @section('content')
 
+    <style>
+        .hover-row {
+            transition: background 0.2s ease;
+        }
+        .hover-row:hover {
+            background-color: #f8fafc;
+        }
+        .kpi-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+        }
+        .kpi-card-1 { border-bottom: 4px solid var(--admin-primary); }
+        .kpi-card-2 { border-bottom: 4px solid var(--admin-green); }
+        .kpi-card-3 { border-bottom: 4px solid #f59e0b; }
+    </style>
+
     <!-- Top KPI Cards -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 30px;">
         
         <!-- Registrations -->
-        <div class="card" style="margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;">
+        <div class="card kpi-card kpi-card-1" style="margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;">
             <div style="position: absolute; top: -15px; right: -15px; width: 80px; height: 80px; background: rgba(0, 168, 150, 0.05); border-radius: 50%;"></div>
             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
                 <div style="color: #64748b; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px;">Total Registrations</div>
@@ -21,7 +36,7 @@
         </div>
 
         <!-- Submissions -->
-        <div class="card" style="margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;">
+        <div class="card kpi-card kpi-card-2" style="margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;">
             <div style="position: absolute; top: -15px; right: -15px; width: 80px; height: 80px; background: rgba(164, 198, 57, 0.05); border-radius: 50%;"></div>
             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
                 <div style="color: #64748b; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px;">Paper Submissions</div>
@@ -34,7 +49,7 @@
         </div>
 
         <!-- Revenue -->
-        <div class="card" style="margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;">
+        <div class="card kpi-card kpi-card-3" style="margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;">
             <div style="position: absolute; top: -15px; right: -15px; width: 80px; height: 80px; background: rgba(245, 158, 11, 0.05); border-radius: 50%;"></div>
             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
                 <div style="color: #64748b; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px;">Est. Revenue (INR)</div>
@@ -55,7 +70,7 @@
         <div class="card" style="margin-bottom: 0;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <h3 style="font-size: 1.1rem; color: var(--admin-sidebar);">Registration Breakdown</h3>
-                <span style="font-size: 0.8rem; color: #64748b; background: #f1f5f9; padding: 4px 10px; border-radius: 12px; font-weight: 600;">By Category</span>
+                <span style="font-size: 0.8rem; color: #64748b; background: #f1f5f9; padding: 4px 10px; border-radius: 12px; font-weight: 600; white-space: nowrap;">By Category</span>
             </div>
             <div style="position: relative; height: 300px; width: 100%;">
                 <canvas id="registrationChart"></canvas>
@@ -63,7 +78,7 @@
         </div>
 
         <!-- Quick Links / Status -->
-        <div class="card" style="margin-bottom: 0; background: linear-gradient(135deg, var(--admin-sidebar) 0%, #1A365D 100%); color: #fff;">
+        <div class="card" style="margin-bottom: 0; background: linear-gradient(135deg, var(--admin-primary) 0%, #0369a1 100%); color: #fff; border: none; box-shadow: 0 15px 35px rgba(0, 168, 150, 0.2);">
             <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
                 <i class="fa-solid fa-bolt" style="color: var(--admin-primary);"></i> Quick Actions
             </h3>
@@ -108,7 +123,7 @@
                     <table style="width: 100%; border-collapse: collapse; text-align: left;">
                         <tbody>
                             @foreach($recentRegistrations as $reg)
-                                <tr style="border-bottom: 1px solid var(--admin-border);">
+                                <tr class="hover-row" style="border-bottom: 1px solid var(--admin-border);">
                                     <td style="padding: 12px 5px;">
                                         <div style="font-weight: 600; color: var(--admin-sidebar); font-size: 0.95rem;">{{ $reg->name }}</div>
                                         <div style="font-size: 0.8rem; color: #64748b;">{{ $reg->organization }}</div>
@@ -138,7 +153,7 @@
                     <table style="width: 100%; border-collapse: collapse; text-align: left;">
                         <tbody>
                             @foreach($recentSubmissions as $sub)
-                                <tr style="border-bottom: 1px solid var(--admin-border);">
+                                <tr class="hover-row" style="border-bottom: 1px solid var(--admin-border);">
                                     <td style="padding: 12px 5px;">
                                         <div style="font-weight: 600; color: var(--admin-sidebar); font-size: 0.95rem;">{{ $sub->name }}</div>
                                         <div style="font-size: 0.8rem; color: #64748b;"><i class="fa-solid fa-microscope" style="color: var(--admin-primary); margin-right: 4px;"></i> {{ $sub->track }}</div>

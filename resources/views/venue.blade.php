@@ -5,12 +5,16 @@
 @include('sections.topbar')
 @include('sections.navbar')
 
-<!-- Banner Section -->
-<section class="plenary-banner">
-    <div class="container">
-        <h1 style="text-transform: uppercase;">VENUE</h1>
+    @php
+        $bannerTitle = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_venue_title')->value('value') ?? 'VENUE';
+        $bannerImage = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_venue_image')->value('value');
+    @endphp
+    <!-- Page Banner -->
+    <div class="page-banner" style="{{ $bannerImage ? "background-image: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.8)), url('" . asset($bannerImage) . "');" : '' }}">
+        <div class="page-banner-content">
+            <h1 style="text-transform: uppercase;">{{ $bannerTitle }}</h1>
+        </div>
     </div>
-</section>
 
 <style>
     .venue-page-container {
@@ -73,17 +77,17 @@
     <!-- Venue Images & Map -->
     <div class="venue-grid">
         <!-- Tall Column (Left) -->
-        <img src="{{ asset('images/mcc_main.jpg') }}" alt="Madras Christian College Main View">
+        <img src="{{ asset($settings['venue_image_main'] ?? 'images/mcc_main.jpg') }}" alt="Madras Christian College Main View">
         
         <!-- Stacked Column (Middle) -->
         <div class="venue-stack">
-            <img src="{{ asset('images/mcc4.jpg') }}" alt="Madras Christian College Building">
-            <img src="{{ asset('images/mcc_images.jpg') }}" alt="Madras Christian College Environment">
+            <img src="{{ asset($settings['venue_image_sec1'] ?? 'images/mcc4.jpg') }}" alt="Madras Christian College Building">
+            <img src="{{ asset($settings['venue_image_sec2'] ?? 'images/mcc_images.jpg') }}" alt="Madras Christian College Environment">
         </div>
         
         <!-- Map Column (Right) -->
         <div class="venue-map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.756314815256!2d80.12157431482143!3d12.92336669088665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525f1719b49b39%3A0xcb1b5907406a0a03!2sMadras%20Christian%20College!5e0!3m2!1sen!2sin!4v1717409254320!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="{{ $settings['venue_map_src'] ?? 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.756314815256!2d80.12157431482143!3d12.92336669088665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525f1719b49b39%3A0xcb1b5907406a0a03!2sMadras%20Christian%20College!5e0!3m2!1sen!2sin!4v1717409254320!5m2!1sen!2sin' }}" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
 

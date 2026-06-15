@@ -28,7 +28,7 @@
         <div style="background: var(--admin-white); padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(17,35,64,0.08); border: 1px solid var(--admin-border);">
             
             <div style="text-align: center; margin-bottom: 30px;">
-                <i class="fa-solid fa-dna" style="font-size: 3rem; color: var(--admin-primary); margin-bottom: 15px;"></i>
+                <img src="{{ asset('images/logo.png') }}" alt="BioMed Summit Logo" style="max-height: 90px; margin-bottom: 15px;">
                 <h3 style="font-size: 1.8rem; color: var(--admin-sidebar);">Admin Portal</h3>
                 <p style="color: var(--admin-text); margin-top: 5px;">Secure access for BioMed Summit</p>
             </div>

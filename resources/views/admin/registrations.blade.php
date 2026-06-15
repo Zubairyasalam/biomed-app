@@ -11,7 +11,7 @@
 
         @if(count($registrations) > 0)
             <div style="overflow-x: auto;">
-                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left; white-space: nowrap;">
                     <thead>
                         <tr>
                             <th style="padding: 15px; border-bottom: 2px solid var(--admin-border); color: #64748b; font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">ID</th>

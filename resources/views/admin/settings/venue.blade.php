@@ -13,9 +13,50 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('admin.venue_settings.update') }}">
+    <form method="POST" action="{{ route('admin.venue_settings.update') }}" enctype="multipart/form-data">
         @csrf
         
+        <div class="card">
+            <h3 style="margin-bottom: 20px; color: var(--admin-sidebar); border-bottom: 2px solid var(--admin-border); padding-bottom: 10px;">
+                Media & Location
+            </h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                <!-- Main Image -->
+                <div>
+                    <label style="display: block; font-weight: 600; color: var(--admin-text); margin-bottom: 8px;">Main Venue Image</label>
+                    <div style="margin-bottom: 10px;">
+                        <img id="preview_venue_image_main" src="{{ asset($settings['venue']->where('key', 'venue_image_main')->first()->value ?? 'images/mcc_main.jpg') }}" style="max-width: 100%; height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid var(--admin-border);">
+                    </div>
+                    <input type="file" name="venue_image_main_file" accept="image/*" style="width: 100%; padding: 10px; border: 1px solid var(--admin-border); border-radius: 8px;" onchange="document.getElementById('preview_venue_image_main').src = window.URL.createObjectURL(this.files[0])">
+                </div>
+
+                <!-- Secondary Image 1 -->
+                <div>
+                    <label style="display: block; font-weight: 600; color: var(--admin-text); margin-bottom: 8px;">Secondary Image 1</label>
+                    <div style="margin-bottom: 10px;">
+                        <img id="preview_venue_image_sec1" src="{{ asset($settings['venue']->where('key', 'venue_image_sec1')->first()->value ?? 'images/mcc4.jpg') }}" style="max-width: 100%; height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid var(--admin-border);">
+                    </div>
+                    <input type="file" name="venue_image_sec1_file" accept="image/*" style="width: 100%; padding: 10px; border: 1px solid var(--admin-border); border-radius: 8px;" onchange="document.getElementById('preview_venue_image_sec1').src = window.URL.createObjectURL(this.files[0])">
+                </div>
+
+                <!-- Secondary Image 2 -->
+                <div>
+                    <label style="display: block; font-weight: 600; color: var(--admin-text); margin-bottom: 8px;">Secondary Image 2</label>
+                    <div style="margin-bottom: 10px;">
+                        <img id="preview_venue_image_sec2" src="{{ asset($settings['venue']->where('key', 'venue_image_sec2')->first()->value ?? 'images/mcc_images.jpg') }}" style="max-width: 100%; height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid var(--admin-border);">
+                    </div>
+                    <input type="file" name="venue_image_sec2_file" accept="image/*" style="width: 100%; padding: 10px; border: 1px solid var(--admin-border); border-radius: 8px;" onchange="document.getElementById('preview_venue_image_sec2').src = window.URL.createObjectURL(this.files[0])">
+                </div>
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <label style="display: block; font-weight: 600; color: var(--admin-text); margin-bottom: 8px;">Google Maps Embed Link (src only)</label>
+                <textarea name="venue_map_src" style="width: 100%; padding: 12px 15px; border: 1px solid var(--admin-border); border-radius: 8px; font-family: monospace; font-size: 0.85rem;" rows="3" placeholder="https://www.google.com/maps/embed?pb=...">{{ $settings['venue']->where('key', 'venue_map_src')->first()->value ?? 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.756314815256!2d80.12157431482143!3d12.92336669088665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525f1719b49b39%3A0xcb1b5907406a0a03!2sMadras%20Christian%20College!5e0!3m2!1sen!2sin!4v1717409254320!5m2!1sen!2sin' }}</textarea>
+                <small style="color: #64748b;">Extract the URL inside the src="..." attribute from the Google Maps iframe code.</small>
+            </div>
+        </div>
+
         <div class="card">
             <h3 style="margin-bottom: 20px; color: var(--admin-sidebar); border-bottom: 2px solid var(--admin-border); padding-bottom: 10px;">
                 Discover MCC Section

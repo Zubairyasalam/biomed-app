@@ -15,6 +15,11 @@
 </head>
 <body>
     @yield('content')
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank" rel="noopener noreferrer" title="Chat with us on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
     @yield('scripts')
 </body>
 </html>

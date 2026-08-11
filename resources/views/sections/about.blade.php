@@ -51,12 +51,8 @@
                 
                 {{-- Header Block (Centered) --}}
                 <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
-                    <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0,150,136,0.08); border: 1.5px solid rgba(0,150,136,0.25); border-radius: 50px; padding: 6px 18px; margin-bottom: 16px;">
-                        <i class="fa-solid fa-bullseye" style="color: #009688; font-size: 0.8rem;"></i>
-                        <span style="font-size: 0.75rem; font-weight: 800; color: #009688; text-transform: uppercase; letter-spacing: 2px;">CONFERENCE OBJECTIVES</span>
-                    </div>
-                    
                     <h2 style="font-size: clamp(2.2rem, 4.5vw, 3rem); font-weight: 900; color: #112340; line-height: 1.15; letter-spacing: -0.6px; margin: 0 0 12px 0;">
+
                         Conference <span style="color: #009688;">Objectives</span>
                     </h2>
                     

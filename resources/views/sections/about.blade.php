@@ -157,18 +157,19 @@
 
 
 <!-- Strategic Pillars Full-Width Dark Section -->
-<section style="background: #0b1a2e; padding: 10px 0 30px; position: relative; overflow: hidden;">
+<section style="background: #0b1a2e; padding: 20px 0 10px; position: relative; overflow: hidden;">
 
     <!-- Background ambient glows — on-theme teal only -->
     <div style="position: absolute; top: 40%; left: 50%; transform: translate(-50%,-50%); width: 800px; height: 500px; background: radial-gradient(ellipse, rgba(0,150,136,0.10) 0%, transparent 65%); pointer-events: none; border-radius: 50%;"></div>
     <div style="position: absolute; top: -80px; right: -80px; width: 350px; height: 350px; background: radial-gradient(circle, rgba(0,150,136,0.08) 0%, transparent 70%); pointer-events: none; border-radius: 50%;"></div>
 
     <!-- Section Header -->
-    <div style="text-align: center; padding: 50px 20px 36px; position: relative; z-index: 2;">
+    <div style="text-align: center; padding: 20px 20px 10px; position: relative; z-index: 2;">
 
         <!-- Badge -->
         <!-- Heading -->
-        <h3 style="font-size: clamp(2.4rem, 5vw, 3.2rem); font-weight: 900; color: #ffffff; margin: 0 0 20px 0; letter-spacing: -1px; line-height: 1.08;">
+        <h3 style="font-size: clamp(2.4rem, 5vw, 3.2rem); font-weight: 900; color: #ffffff; margin: 0 0 10px 0; letter-spacing: -1px; line-height: 1.08;">
+
 
             Five Pillars of the <span style="color: #009688; font-style: italic;">Confluence</span>
         </h3>
@@ -187,7 +188,8 @@
     </div>
 
     <!-- 3D Carousel -->
-    <div id="pillars-carousel-wrapper" style="position: relative; z-index: 2; overflow: hidden; padding: 20px 0 35px;">
+    <div id="pillars-carousel-wrapper" style="position: relative; z-index: 2; overflow: hidden; padding: 5px 0 15px;">
+
         <div id="pillars-carousel" style="display: flex; align-items: center; justify-content: center; perspective: 1400px; height: 410px; position: relative;">
 
 

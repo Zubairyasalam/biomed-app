@@ -167,13 +167,9 @@
     <div style="text-align: center; padding: 50px 20px 36px; position: relative; z-index: 2;">
 
         <!-- Badge -->
-        <div style="display: inline-flex; align-items: center; gap: 10px; background: rgba(0,150,136,0.10); border: 1px solid rgba(0,150,136,0.30); border-radius: 50px; padding: 7px 20px; margin-bottom: 22px;">
-            <div style="width: 6px; height: 6px; border-radius: 50%; background: #009688; box-shadow: 0 0 8px #009688;"></div>
-            <span style="font-size: 0.72rem; font-weight: 700; color: #009688; text-transform: uppercase; letter-spacing: 3.5px;">Strategic Pillars</span>
-        </div>
-
         <!-- Heading -->
         <h3 style="font-size: clamp(2.4rem, 5vw, 3.2rem); font-weight: 900; color: #ffffff; margin: 0 0 20px 0; letter-spacing: -1px; line-height: 1.08;">
+
             Five Pillars of the <span style="color: #009688; font-style: italic;">Confluence</span>
         </h3>
 

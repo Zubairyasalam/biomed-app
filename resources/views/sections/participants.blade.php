@@ -72,11 +72,8 @@
         <div style="margin-bottom: 80px;">
             {{-- Section Header --}}
             <div style="text-align: center; max-width: 750px; margin: 0 auto 50px;">
-                <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0,150,136,0.08); border: 1.5px solid rgba(0,150,136,0.25); border-radius: 50px; padding: 6px 18px; margin-bottom: 16px;">
-                    <i class="fa-solid fa-shapes" style="color: #009688; font-size: 0.8rem;"></i>
-                    <span style="font-size: 0.75rem; font-weight: 800; color: #009688; text-transform: uppercase; letter-spacing: 2px;">STRATEGIC FRAMEWORK</span>
-                </div>
                 <h3 style="font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 900; color: #112340; margin: 0 0 14px 0; letter-spacing: -0.5px;">
+
                     Five Pillars Driving <span style="color: #009688;">Our Mission</span>
                 </h3>
                 <div style="width: 50px; height: 4px; background: #009688; margin: 0 auto 16px; border-radius: 2px;"></div>
@@ -101,15 +98,13 @@
                 <div class="pillar-card-box"
                      style="flex: 1 1 300px; max-width: calc(33.333% - 16px); background: #ffffff; border: 1.5px solid #e8edf3; border-top: 4px solid #009688; border-radius: 20px; padding: 34px 28px; display: flex; flex-direction: column; position: relative; transition: all 0.35s ease; box-shadow: 0 6px 25px rgba(0,0,0,0.03);">
                     
-                    {{-- Header Row: Icon & Pillar Badge --}}
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px;">
+                    {{-- Header Row: Icon --}}
+                    <div style="margin-bottom: 22px;">
                         <div class="pillar-icon-wrap" style="width: 56px; height: 56px; border-radius: 16px; background: rgba(0,150,136,0.10); display: flex; align-items: center; justify-content: center; transition: all 0.35s ease;">
                             <i class="{{ $p['icon'] }}" style="font-size: 1.4rem; color: #009688; transition: all 0.35s ease;"></i>
                         </div>
-                        <span style="font-size: 0.72rem; font-weight: 800; color: #009688; background: rgba(0,150,136,0.08); border: 1px solid rgba(0,150,136,0.25); padding: 4px 12px; border-radius: 20px; letter-spacing: 1px;">
-                            {{ $p['num'] }}
-                        </span>
                     </div>
+
 
                     {{-- Title --}}
                     <h4 style="font-size: 1.18rem; font-weight: 800; color: #112340; margin: 0 0 12px 0; line-height: 1.35;">
@@ -160,10 +155,8 @@
         <div>
             {{-- Centered Header --}}
             <div style="text-align: center; max-width: 750px; margin: 0 auto 48px;">
-                <div style="font-size: 0.82rem; font-weight: 800; color: #009688; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 8px; display: inline-flex; align-items: center; gap: 8px;">
-                    <i class="fa-solid fa-chart-line" style="font-size: 0.9rem;"></i> EXPECTED OUTCOMES
-                </div>
                 <h3 style="font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 900; color: #112340; margin: 0 0 12px; letter-spacing: -0.5px;">
+
                     Key Expected <span style="color: #009688;">Outcomes</span>
                 </h3>
                 <div style="width: 50px; height: 4px; background: #009688; margin: 0 auto 16px; border-radius: 2px;"></div>
@@ -222,10 +215,8 @@
         <div>
             {{-- Centered Header --}}
             <div style="text-align: center; max-width: 750px; margin: 0 auto 55px;">
-                <div style="font-size: 0.82rem; font-weight: 800; color: #009688; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 8px; display: inline-flex; align-items: center; gap: 8px;">
-                    <i class="fa-solid fa-seedling" style="font-size: 0.9rem;"></i> OUR JOURNEY TO IMPACT
-                </div>
                 <h3 style="font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 900; color: #112340; margin: 0 0 12px; letter-spacing: -0.5px;">
+
                     Our Journey to <span style="color: #009688;">Impact</span>
                 </h3>
                 <div style="width: 50px; height: 4px; background: #009688; margin: 0 auto 16px; border-radius: 2px;"></div>

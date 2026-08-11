@@ -20,6 +20,13 @@ Route::get('/registration', function () {
     return view('registration', compact('registrationFees', 'addons', 'policies'));
 })->name('registration');
 
+Route::get('/speakers', function () {
+    $plenary = \App\Models\Speaker::where('category', 'plenary')->orderBy('sort_order')->get();
+    $keynote = \App\Models\Speaker::where('category', 'keynote')->orderBy('sort_order')->get();
+    $invited = \App\Models\Speaker::where('category', 'invited')->orderBy('sort_order')->get();
+    return view('speakers', compact('plenary', 'keynote', 'invited'));
+})->name('speakers');
+
 Route::get('/plenary-speakers', function () {
     $speakers = \App\Models\Speaker::where('category', 'plenary')->orderBy('sort_order')->get();
     return view('plenary-speakers', compact('speakers'));

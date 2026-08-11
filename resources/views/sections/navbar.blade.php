@@ -17,7 +17,7 @@
                 <a href="{{ route('about-organizer') }}">About Organizer</a>
             </div>
         </div>
-        <a href="#speakers">Speakers</a>
+        <a href="{{ route('speakers') }}">Speakers</a>
         <div class="nav-dropdown">
             <a href="#">Experts</a>
 

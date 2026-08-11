@@ -15,10 +15,8 @@
     @include('sections.awards')
     @include('sections.registration-details')
     @include('sections.highlights')
-    @include('sections.speakers')
-    @include('sections.keynote')
-    @include('sections.invited')
     @include('sections.topics')
+
     @include('sections.deadlines')
     @include('sections.cta')
     @include('sections.venue')

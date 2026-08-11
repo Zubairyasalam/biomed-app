@@ -187,8 +187,9 @@
     </div>
 
     <!-- 3D Carousel -->
-    <div id="pillars-carousel-wrapper" style="position: relative; z-index: 2; overflow: hidden; padding: 50px 0 60px;">
-        <div id="pillars-carousel" style="display: flex; align-items: center; justify-content: center; perspective: 1400px; height: 500px; position: relative;">
+    <div id="pillars-carousel-wrapper" style="position: relative; z-index: 2; overflow: hidden; padding: 20px 0 35px;">
+        <div id="pillars-carousel" style="display: flex; align-items: center; justify-content: center; perspective: 1400px; height: 410px; position: relative;">
+
 
             @php
             $pillars = [
@@ -248,10 +249,10 @@
                  style="
                     position: absolute;
                     width: 360px;
-                    min-height: 460px;
+                    min-height: 340px;
                     background: linear-gradient(160deg, #112340 0%, #0d1c33 60%, #091628 100%);
                     border-radius: 24px;
-                    padding: 44px 38px;
+                    padding: 30px 28px;
                     display: flex;
                     flex-direction: column;
                     cursor: pointer;
@@ -262,7 +263,8 @@
                  ">
 
                 <!-- Top row: tag + number -->
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+
                     <span style="
                         font-size: 0.7rem; font-weight: 700; letter-spacing: 2.5px;
                         color: {{ $pillar['color'] }}; text-transform: uppercase;

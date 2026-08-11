@@ -23,7 +23,7 @@
                 @foreach($registrationFees as $fee)
                     @if($fee->is_highlighted)
                         <!-- Highlighted Card -->
-                        <div class="pricing-card featured-card" style="background-color: #1e293b; border: 2px solid #4fd1c5; border-radius: 20px; padding: 40px 30px 30px 30px; display: flex; flex-direction: column; position: relative; box-shadow: 0 0 30px rgba(79, 209, 197, 0.15); z-index: 2; text-align: center;">
+                        <div class="pricing-card featured-card" style="background-color: #1e293b; border: 2px solid #4fd1c5; border-radius: 20px; padding: 40px 30px 30px 30px; display: flex; flex-direction: column; position: relative; box-shadow: 0 0 30px rgba(79, 209, 197, 0.15); z-index: 2; text-align: center; overflow: visible;">
                             <div class="pricing-badge" style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: linear-gradient(90deg, #009688, #4fd1c5); color: #fff; padding: 6px 20px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">Most Popular</div>
                             
                             <h3 class="pricing-title" style="margin: 0 0 10px 0; color: #4fd1c5; font-size: 1.25rem; font-weight: 700;">{{ $fee->category_name }}</h3>
@@ -47,7 +47,7 @@
                         </div>
                     @else
                         <!-- Standard Card -->
-                        <div class="pricing-card" style="background-color: #1e293b; border: 1px solid #334155; border-radius: 20px; padding: 40px 30px 30px 30px; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 15px 30px rgba(0,0,0,0.2); text-align: center;" onmouseover="this.style.borderColor='#4fd1c5'; this.style.boxShadow='0 0 20px rgba(79, 209, 197, 0.15)';" onmouseout="this.style.borderColor='#334155'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)';">
+                        <div class="pricing-card" style="background-color: #1e293b; border: 1px solid #334155; border-radius: 20px; padding: 40px 30px 30px 30px; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 15px 30px rgba(0,0,0,0.2); text-align: center; overflow: visible;" onmouseover="this.style.borderColor='#4fd1c5'; this.style.boxShadow='0 0 20px rgba(79, 209, 197, 0.15)';" onmouseout="this.style.borderColor='#334155'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)';">
                             <h3 class="pricing-title" style="margin: 0 0 10px 0; color: #f8fafc; font-size: 1.25rem; font-weight: 700;">{{ $fee->category_name }}</h3>
                             <div class="pricing-price" style="margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid #334155; display: flex; justify-content: center; align-items: baseline; gap: 5px;">
                                 <span style="font-size: 2.5rem; font-weight: 800; color: #ffffff;">{{ $fee->price_inr }}</span>

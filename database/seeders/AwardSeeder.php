@@ -21,53 +21,93 @@ class AwardSeeder extends Seeder
         );
 
         // 2. Awards
+        \App\Models\Award::truncate();
         $awards = [
             [
-                'name' => 'Young Scientist Award',
-                'icon' => 'fa-solid fa-trophy',
+                'name' => 'Global One Health Distinguished Researcher Award',
+                'icon' => 'fa-solid fa-award',
                 'icon_color' => '#fbc02d',
-                'short_description' => 'Awarded to outstanding young researchers demonstrating exceptional problem-solving and innovation.',
-                'benefits' => "Two outstanding young researchers will be awarded during the closing ceremony.
-Winners receive a certificate of excellence and trophy.
-Free registration for the next upcoming Summit.
-Publishing opportunity in indexed journals at discounted processing charges.
-Featured on Biomed Summit' official website and Social medias.",
-                'eligibility' => "Open to researchers <strong>35 years or younger</strong> as of the conference date.
-Must submit an <strong>abstract as first author</strong> through the official submission system.
-Must deliver a <strong>live oral presentation</strong> at the conference.
-Research must be <strong>original, unpublished, and align with summit themes.</strong>
-Affiliation with a <strong>recognized institution or research body</strong> is required.",
-                'guidelines' => "Abstract and full presentation must <strong>reflect independent, high-quality research.</strong>
-Presentation must be in <strong>oral format</strong> only (poster submissions are not eligible).
-Submissions should demonstrate <strong>problem-solving, innovation, and impact.</strong>
-Two awardees will be selected by an <strong>expert scientific panel.</strong>
-Judging based on: originality, methodology, research relevance, presentation skills, and scientific impact.",
+                'short_description' => 'Honoring pioneering scientists making outstanding contributions to the One Health paradigm.',
+                'benefits' => "Recipient receives a prestigious trophy, certificate of distinction, and public recognition during the opening ceremony.
+Opportunity to deliver a special guest address.
+Featured spotlight in the conference proceedings and official media.",
+                'eligibility' => "Open to senior researchers, academicians, or practitioners with 10+ years of active contribution in One Health related disciplines.
+Requires nomination or self-nomination with a brief portfolio submission.",
+                'guidelines' => "Portfolio should outline key research impacts, publications, policy contributions, or translational innovations.
+Reviewed and selected by the International Scientific Advisory Board.",
                 'sort_order' => 1
             ],
             [
-                'name' => 'Best Poster Award',
-                'icon' => 'fa-solid fa-medal',
-                'icon_color' => '#fbc02d',
-                'short_description' => 'Awarded for outstanding visual communication, scientific clarity, and overall presentation impact.',
-                'benefits' => "<strong>Top 3 posters</strong> will receive <strong>certificates, medals, and public recognition.</strong>
-Winners get <strong>free registration</strong> for the next upcoming Summit.
-Opportunity to <strong>publish full paper in indexed journals</strong> with <strong>discounted processing charges.</strong>
-Awardees will be <strong>featured on Biomed Summit' website & social medias.</strong>",
-                'eligibility' => "All Live posters are eligible for the Best Poster Award.
-The <strong>first author must present</strong> the poster during the live session.
-Poster must align with the summit's themes in <strong>Technology or Education.</strong>
-Poster should be <strong>original, unpublished,</strong> and research-based.
-Group submissions are allowed; award will be given to the <strong>main presenter.</strong>",
-                'guidelines' => "Submit an <strong>abstract as first author through</strong> the official portal.
-Poster format: <strong>A1 size (portrait)</strong> with clear sections — Title, Abstract, Methods, Results, Conclusion.
-Ensure <strong>visual clarity, readable fonts, and structured content.</strong>
-All accepted posters are <strong>automatically considered</strong> for the award.
-Judging based on: originality, content clarity, educational relevance, visual design, and overall presentation impact.
-Winners will be announced during the <strong>closing ceremony</strong> and listed in the <strong>event proceedings.</strong>",
+                'name' => 'Young Scientist Award',
+                'icon' => 'fa-solid fa-user-astronaut',
+                'icon_color' => '#009688',
+                'short_description' => 'Recognizing early-career researchers demonstrating exceptional creativity and scientific excellence.',
+                'benefits' => "Winners receive a certificate of excellence and a trophy.
+Free registration for the next upcoming confluence.
+Featured showcase on the official website.",
+                'eligibility' => "Open to researchers aged 35 or younger as of the conference date.
+Must be the first author and presenter of the submitted abstract.",
+                'guidelines' => "Must deliver a live presentation during the dedicated Young Researchers Forum.
+Judged on scientific rigor, presentation style, and domain impact.",
                 'sort_order' => 2
+            ],
+            [
+                'name' => 'Emerging Innovator Award',
+                'icon' => 'fa-solid fa-lightbulb',
+                'icon_color' => '#f97316',
+                'short_description' => 'Celebrating breakthrough ideas and technologies addressing global sustainability challenges.',
+                'benefits' => "Certificate of innovation and innovator trophy.
+Mentorship opportunities with industry experts.
+Direct entry to pitch in front of potential startup incubation partners.",
+                'eligibility' => "Open to students, researchers, or startups presenting original innovative models, devices, or methods.",
+                'guidelines' => "Pitch deck or prototype demonstration required during the Innovation & Start-up Showcase.",
+                'sort_order' => 3
+            ],
+            [
+                'name' => 'Best Oral Presentation',
+                'icon' => 'fa-solid fa-chalkboard-user',
+                'icon_color' => '#3B82F6',
+                'short_description' => 'Awarded for the most impactful and articulate oral research delivery.',
+                'benefits' => "Best Oral Presentation certificate and medal.
+Opportunity for publication in partner Scopus-indexed journals.",
+                'eligibility' => "All accepted oral presentations are automatically eligible.",
+                'guidelines' => "Evaluated by session chairs based on methodology, slide quality, presentation clarity, and Q&A handling.",
+                'sort_order' => 4
+            ],
+            [
+                'name' => 'Best Poster Presentation',
+                'icon' => 'fa-solid fa-image',
+                'icon_color' => '#84cc16',
+                'short_description' => 'Recognizing outstanding visual layout, structured data, and scientific clarity.',
+                'benefits' => "Best Poster certificate and medal.
+Feature in the conference digital gallery.",
+                'eligibility' => "All accepted poster presentations are automatically eligible.",
+                'guidelines' => "Poster size: standard A1 portrait. Must be present at the poster station during evaluation hours.",
+                'sort_order' => 5
+            ],
+            [
+                'name' => 'Best Innovation Pitch',
+                'icon' => 'fa-solid fa-bullhorn',
+                'icon_color' => '#ec4899',
+                'short_description' => 'Honoring the most compelling and translation-ready business/research pitch.',
+                'benefits' => "Innovation Pitch winner certificate and cash prize / trophy.
+Incubation support opportunities.",
+                'eligibility' => "Participants of the Hackathon or Innovation Pitch Competition.",
+                'guidelines' => "Judged on market feasibility, technical feasibility, sustainability impact, and pitch quality.",
+                'sort_order' => 6
+            ],
+            [
+                'name' => 'Best Student Research Award',
+                'icon' => 'fa-solid fa-graduation-cap',
+                'icon_color' => '#a855f7',
+                'short_description' => 'Encouraging outstanding academic research and dedication among students.',
+                'benefits' => "Student Research Excellence certificate and cash prize / gift voucher.",
+                'eligibility' => "Open exclusively to undergraduate and postgraduate students presenting their own research work.",
+                'guidelines' => "Work must be certified by the head of the department or research supervisor as student-led.",
+                'sort_order' => 7
             ]
         ];
-
+ 
         foreach ($awards as $award) {
             \App\Models\Award::create($award);
         }

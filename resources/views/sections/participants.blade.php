@@ -66,51 +66,90 @@
 
 
         {{-- Horizontal divider --}}
-        <div style="height: 1px; background: linear-gradient(to right, transparent, #e2e8f0 30%, #e2e8f0 70%, transparent); margin-bottom: 80px;"></div>
-
-        {{-- ── STRATEGIC FRAMEWORK ── --}}
+        <div style="height: 1px; background: linear-gradient(to right, transparent, #e2e8f0 30%, #e2e8f0 70%, transparent); margin-bottom: 80px;        {{-- ── STRATEGIC FRAMEWORK ── --}}
         <div>
             {{-- Section Header --}}
-            <div style="text-align: center; margin-bottom: 48px;">
-                <div style="display: inline-flex; align-items: center; gap: 14px; margin-bottom: 10px;">
-                    <div style="height: 1px; width: 60px; background: linear-gradient(to right, transparent, #009688);"></div>
-                    <span style="font-size: 0.75rem; font-weight: 800; color: #009688; text-transform: uppercase; letter-spacing: 3px;">Strategic Framework</span>
-                    <div style="height: 1px; width: 60px; background: linear-gradient(to left, transparent, #009688);"></div>
+            <div style="text-align: center; max-width: 750px; margin: 0 auto 50px;">
+                <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0,150,136,0.08); border: 1.5px solid rgba(0,150,136,0.25); border-radius: 50px; padding: 6px 18px; margin-bottom: 16px;">
+                    <i class="fa-solid fa-shapes" style="color: #009688; font-size: 0.8rem;"></i>
+                    <span style="font-size: 0.75rem; font-weight: 800; color: #009688; text-transform: uppercase; letter-spacing: 2px;">STRATEGIC FRAMEWORK</span>
                 </div>
-                <h3 style="font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 900; color: #112340; margin: 0; letter-spacing: -0.4px;">
+                <h3 style="font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 900; color: #112340; margin: 0 0 14px 0; letter-spacing: -0.5px;">
                     Five Pillars Driving <span style="color: #009688;">Our Mission</span>
                 </h3>
+                <div style="width: 50px; height: 4px; background: #009688; margin: 0 auto 16px; border-radius: 2px;"></div>
+                <p style="font-size: 1.02rem; color: #64748b; line-height: 1.7; margin: 0;">
+                    A comprehensive framework designed to integrate multi-disciplinary research, innovation, and global policy for maximum real-world impact.
+                </p>
             </div>
 
-            {{-- Pillars Grid --}}
+            {{-- Pillars Grid (3 + 2 Layout) --}}
             @php
             $pillars = [
-                ['icon' => 'fa-solid fa-microscope',     'num' => '01', 'title' => 'Scientific Excellence',                'desc' => 'Facilitating high-quality interdisciplinary scientific discourse spanning microbiology, chemistry, biotechnology, environmental sciences, public health and molecular medicine.'],
-                ['icon' => 'fa-solid fa-flask-vial',     'num' => '02', 'title' => 'Translational Innovation',             'desc' => 'Promoting research translation through biotechnology, diagnostics, biosensors, sustainable chemistry, advanced materials, green technologies and circular bioeconomy.'],
-                ['icon' => 'fa-solid fa-landmark',       'num' => '03', 'title' => 'Policy & Governance',                  'desc' => 'Strengthening dialogue among researchers, policymakers, governmental agencies and international organizations for evidence-informed health governance.'],
-                ['icon' => 'fa-solid fa-leaf',           'num' => '04', 'title' => 'Indigenous Knowledge Integration',     'desc' => 'Exploring Indian Knowledge Systems and traditional healthcare practices in complementing modern One Health approaches.'],
-                ['icon' => 'fa-solid fa-earth-americas', 'num' => '05', 'title' => 'Sustainability & Global Partnerships', 'desc' => 'Building long-term collaborative networks among academia, healthcare, industry, research institutions, and international organizations.'],
+                ['icon' => 'fa-solid fa-microscope',     'num' => 'PILLAR 01', 'title' => 'Scientific Excellence',                'desc' => 'Facilitating high-quality interdisciplinary scientific discourse spanning microbiology, chemistry, biotechnology, environmental sciences, public health and molecular medicine.'],
+                ['icon' => 'fa-solid fa-flask-vial',     'num' => 'PILLAR 02', 'title' => 'Translational Innovation',             'desc' => 'Promoting research translation through biotechnology, diagnostics, biosensors, sustainable chemistry, advanced materials, green technologies and circular bioeconomy.'],
+                ['icon' => 'fa-solid fa-landmark',       'num' => 'PILLAR 03', 'title' => 'Policy & Governance',                  'desc' => 'Strengthening dialogue among researchers, policymakers, governmental agencies and international organizations for evidence-informed health governance.'],
+                ['icon' => 'fa-solid fa-leaf',           'num' => 'PILLAR 04', 'title' => 'Indigenous Knowledge Integration',     'desc' => 'Exploring Indian Knowledge Systems and traditional healthcare practices in complementing modern One Health approaches.'],
+                ['icon' => 'fa-solid fa-earth-americas', 'num' => 'PILLAR 05', 'title' => 'Sustainability & Global Partnerships', 'desc' => 'Building long-term collaborative networks among academia, healthcare, industry, research institutions, and international organizations.'],
             ];
             @endphp
 
-            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+            <div class="pillars-responsive-grid" style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; width: 100%;">
                 @foreach($pillars as $p)
-                <div style="flex: 1; min-width: 220px; background: #ffffff; border: 1px solid #e8edf3; border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; gap: 14px; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.03);"
-                     onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 16px 40px rgba(0,150,136,0.12)'; this.style.borderColor='#009688';"
-                     onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.03)'; this.style.borderColor='#e8edf3';">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                        <div style="width: 52px; height: 52px; border-radius: 14px; background: rgba(0,150,136,0.10); display: flex; align-items: center; justify-content: center;">
-                            <i class="{{ $p['icon'] }}" style="font-size: 1.3rem; color: #009688;"></i>
+                <div class="pillar-card-box"
+                     style="flex: 1 1 300px; max-width: calc(33.333% - 16px); background: #ffffff; border: 1.5px solid #e8edf3; border-top: 4px solid #009688; border-radius: 20px; padding: 34px 28px; display: flex; flex-direction: column; position: relative; transition: all 0.35s ease; box-shadow: 0 6px 25px rgba(0,0,0,0.03);">
+                    
+                    {{-- Header Row: Icon & Pillar Badge --}}
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px;">
+                        <div class="pillar-icon-wrap" style="width: 56px; height: 56px; border-radius: 16px; background: rgba(0,150,136,0.10); display: flex; align-items: center; justify-content: center; transition: all 0.35s ease;">
+                            <i class="{{ $p['icon'] }}" style="font-size: 1.4rem; color: #009688; transition: all 0.35s ease;"></i>
                         </div>
-                        <span style="font-size: 2rem; font-weight: 900; color: rgba(0,150,136,0.10); line-height: 1;">{{ $p['num'] }}</span>
+                        <span style="font-size: 0.72rem; font-weight: 800; color: #009688; background: rgba(0,150,136,0.08); border: 1px solid rgba(0,150,136,0.25); padding: 4px 12px; border-radius: 20px; letter-spacing: 1px;">
+                            {{ $p['num'] }}
+                        </span>
                     </div>
-                    <h4 style="font-size: 1.05rem; font-weight: 800; color: #112340; margin: 0; line-height: 1.3;">{{ $p['title'] }}</h4>
-                    <div style="width: 32px; height: 2px; background: #009688; border-radius: 2px;"></div>
-                    <p style="font-size: 0.875rem; color: #64748b; line-height: 1.7; margin: 0;">{{ $p['desc'] }}</p>
+
+                    {{-- Title --}}
+                    <h4 style="font-size: 1.18rem; font-weight: 800; color: #112340; margin: 0 0 12px 0; line-height: 1.35;">
+                        {{ $p['title'] }}
+                    </h4>
+
+                    {{-- Divider --}}
+                    <div style="width: 36px; height: 3px; background: #009688; border-radius: 2px; margin-bottom: 16px;"></div>
+
+                    {{-- Description --}}
+                    <p style="font-size: 0.93rem; color: #475569; line-height: 1.7; margin: 0; font-weight: 400; flex-grow: 1;">
+                        {{ $p['desc'] }}
+                    </p>
                 </div>
                 @endforeach
             </div>
         </div>
+
+        <style>
+            .pillar-card-box:hover {
+                transform: translateY(-8px) !important;
+                border-color: #009688 !important;
+                box-shadow: 0 20px 45px rgba(0, 150, 136, 0.15) !important;
+            }
+            .pillar-card-box:hover .pillar-icon-wrap {
+                background: #009688 !important;
+            }
+            .pillar-card-box:hover .pillar-icon-wrap i {
+                color: #ffffff !important;
+            }
+            @media (max-width: 992px) {
+                .pillar-card-box {
+                    max-width: calc(50% - 16px) !important;
+                }
+            }
+            @media (max-width: 600px) {
+                .pillar-card-box {
+                    max-width: 100% !important;
+                }
+            }
+        </div>
+
 
         {{-- Horizontal divider --}}
         <div style="height: 1px; background: linear-gradient(to right, transparent, #e2e8f0 30%, #e2e8f0 70%, transparent); margin: 80px 0;"></div>

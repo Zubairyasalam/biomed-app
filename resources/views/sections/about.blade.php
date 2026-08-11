@@ -282,13 +282,8 @@
 
                 <!-- Description -->
                 <p style="font-size: 0.97rem; color: rgba(200,215,230,0.75); line-height: 1.75; margin: 0; flex: 1;">{{ $pillar['desc'] }}</p>
-
-                <!-- Bottom badge row -->
-                <div style="margin-top: 30px; display: flex; align-items: center; gap: 8px;">
-                    <div style="width: 6px; height: 6px; border-radius: 50%; background: {{ $pillar['color'] }};"></div>
-                    <span style="font-size: 0.75rem; color: {{ $pillar['color'] }}; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">One Health 2026</span>
-                </div>
             </div>
+
             @endforeach
 
         </div>

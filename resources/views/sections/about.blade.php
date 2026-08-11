@@ -273,18 +273,8 @@
                     <span style="font-size: 3rem; font-weight: 900; color: rgba(255,255,255,0.05); line-height: 1;">{{ $pillar['num'] }}</span>
                 </div>
 
-                <!-- Icon circle -->
-                <div style="
-                    width: 72px; height: 72px; border-radius: 20px;
-                    background: {{ $pillar['color'] }}18;
-                    border: 1.5px solid {{ $pillar['color'] }}35;
-                    display: flex; align-items: center; justify-content: center;
-                    margin-bottom: 28px;
-                ">
-                    <i class="{{ $pillar['icon'] }}" style="font-size: 1.9rem; color: {{ $pillar['color'] }};"></i>
-                </div>
-
                 <!-- Title -->
+
                 <h4 style="font-size: 1.55rem; font-weight: 800; color: #ffffff; margin: 0 0 16px 0; line-height: 1.25; letter-spacing: -0.4px;">{{ $pillar['title'] }}</h4>
 
                 <!-- Divider -->

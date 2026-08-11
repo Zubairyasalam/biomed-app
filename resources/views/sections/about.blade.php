@@ -32,13 +32,14 @@
                 
                 <div style="display: flex; flex-direction: column; gap: 20px;">
                     <div class="mission-box" style="background: #f8fbfa; padding: 22px; border-radius: 12px; border-left: 4px solid #009688; border-top: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
-                        <h4 style="font-size: 1.15rem; font-weight: 700; color: #112340; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-bullseye" style="color: #009688;"></i> Our Mission</h4>
-                        <p style="margin: 0; font-size: 0.95rem; color: #475569; line-height: 1.6;">{!! nl2br(e($settings['about_mission'] ?? 'To connect researchers, thought leaders, and institutions through impactful events...')) !!}</p>
+                        <h4 style="font-size: 1.15rem; font-weight: 700; color: #112340; margin-bottom: 8px;">Our Mission</h4>
+                        <p style="margin: 0; font-size: 0.95rem; color: #475569; line-height: 1.6;">{!! nl2br(e($settings['about_mission'] ?? 'To connect researchers, thought leaders, and institutions through impactful events that inspire knowledge-sharing and real-world solutions.')) !!}</p>
                     </div>
                     <div class="mission-box" style="background: #f8fbfa; padding: 22px; border-radius: 12px; border-left: 4px solid #84cc16; border-top: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
-                        <h4 style="font-size: 1.15rem; font-weight: 700; color: #112340; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-eye" style="color: #84cc16;"></i> Our Vision</h4>
-                        <p style="margin: 0; font-size: 0.95rem; color: #475569; line-height: 1.6;">{!! nl2br(e($settings['about_vision'] ?? 'To build a global platform that showcases research, fosters collaboration...')) !!}</p>
+                        <h4 style="font-size: 1.15rem; font-weight: 700; color: #112340; margin-bottom: 8px;">Our Vision</h4>
+                        <p style="margin: 0; font-size: 0.95rem; color: #475569; line-height: 1.6;">{!! nl2br(e($settings['about_vision'] ?? 'To build a global platform that showcases research, fosters collaboration, and drives innovation across disciplines.')) !!}</p>
                     </div>
+
                 </div>
             </div>
             

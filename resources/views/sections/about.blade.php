@@ -104,15 +104,8 @@
                             <i class="{{ $obj['icon'] }}" style="font-size: 1.7rem; color: #009688;"></i>
                         </div>
 
-                        {{-- Step Number Pill --}}
-                        <div style="display: inline-flex; flex-direction: column; align-items: center; gap: 6px; margin-bottom: 20px;">
-                            <div style="padding: 3px 14px; border-radius: 50px; border: 1.5px solid rgba(0,150,136,0.3); background: #ffffff; font-size: 0.85rem; font-weight: 800; color: #009688;">
-                                {{ $obj['num'] }}
-                            </div>
-                            <div style="width: 24px; height: 3px; background: #009688; border-radius: 2px;"></div>
-                        </div>
-
                         {{-- Card Title --}}
+
                         <h4 style="font-size: 1.15rem; font-weight: 800; color: #112340; margin: 0 0 14px 0; line-height: 1.35;">
                             {{ $obj['title'] }}
                         </h4>

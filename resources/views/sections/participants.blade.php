@@ -65,8 +65,6 @@
         </style>
 
 
-        {{-- Horizontal divider --}}
-        <div style="height: 1px; background: linear-gradient(to right, transparent, #e2e8f0 30%, #e2e8f0 70%, transparent); margin: 60px 0 80px;"></div>
 
         {{-- ── STRATEGIC FRAMEWORK ── --}}
         <div style="margin-bottom: 80px;">
@@ -148,8 +146,6 @@
         </style>
 
 
-        {{-- Horizontal divider --}}
-        <div style="height: 1px; background: linear-gradient(to right, transparent, #e2e8f0 30%, #e2e8f0 70%, transparent); margin: 80px 0;"></div>
 
         {{-- ── EXPECTED OUTCOMES ── --}}
         <div>
@@ -208,8 +204,6 @@
             }
         </style>
 
-        {{-- Horizontal divider --}}
-        <div style="height: 1px; background: linear-gradient(to right, transparent, #e2e8f0 30%, #e2e8f0 70%, transparent); margin: 80px 0;"></div>
 
         {{-- ── OUR JOURNEY TO IMPACT ── --}}
         <div>

@@ -66,8 +66,10 @@
 
 
         {{-- Horizontal divider --}}
-        <div style="height: 1px; background: linear-gradient(to right, transparent, #e2e8f0 30%, #e2e8f0 70%, transparent); margin-bottom: 80px;        {{-- ── STRATEGIC FRAMEWORK ── --}}
-        <div>
+        <div style="height: 1px; background: linear-gradient(to right, transparent, #e2e8f0 30%, #e2e8f0 70%, transparent); margin: 60px 0 80px;"></div>
+
+        {{-- ── STRATEGIC FRAMEWORK ── --}}
+        <div style="margin-bottom: 80px;">
             {{-- Section Header --}}
             <div style="text-align: center; max-width: 750px; margin: 0 auto 50px;">
                 <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0,150,136,0.08); border: 1.5px solid rgba(0,150,136,0.25); border-radius: 50px; padding: 6px 18px; margin-bottom: 16px;">
@@ -148,7 +150,7 @@
                     max-width: 100% !important;
                 }
             }
-        </div>
+        </style>
 
 
         {{-- Horizontal divider --}}

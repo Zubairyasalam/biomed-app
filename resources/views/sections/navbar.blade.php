@@ -17,8 +17,10 @@
                 <a href="{{ route('about-organizer') }}">About Organizer</a>
             </div>
         </div>
+        <a href="#speakers">Speakers</a>
         <div class="nav-dropdown">
             <a href="#">Experts</a>
+
             <div class="nav-dropdown-content">
                 <a href="{{ route('plenary-speakers') }}">Plenary Speakers</a>
                 <a href="{{ route('keynote-speakers') }}">Keynote Speakers</a>

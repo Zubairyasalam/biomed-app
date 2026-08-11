@@ -1,5 +1,6 @@
 <!-- Speakers Section -->
-<section class="speakers-section">
+<section class="speakers-section" id="speakers">
+
     <div class="section-header-center">
         <h2 class="section-title">Plenary <span>Speakers</span></h2>
         <div class="header-line"></div>

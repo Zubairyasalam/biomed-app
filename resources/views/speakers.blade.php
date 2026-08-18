@@ -19,9 +19,8 @@
 
     <!-- Speakers Content -->
     <div style="padding: 40px 0; background: #ffffff;">
-        @include('sections.speakers')
         @include('sections.keynote')
-        @include('sections.invited')
+        @include('sections.distinguished')
     </div>
 
 @include('sections.footer')

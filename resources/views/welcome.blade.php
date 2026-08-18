@@ -9,16 +9,16 @@
     @include('sections.about-dept')
     @include('sections.about')
     @include('sections.participants')
-    @include('sections.workshop')
-    @include('sections.thrust-areas')
+    {{-- @include('sections.workshop') --}}
     @include('sections.abstract-guidelines')
     @include('sections.awards')
     @include('sections.registration-details')
     @include('sections.highlights')
-    @include('sections.topics')
+    {{-- @include('sections.topics') --}}
+    @include('sections.schedule')
 
     @include('sections.deadlines')
-    @include('sections.cta')
+    {{-- @include('sections.cta') --}}
     @include('sections.venue')
     @include('sections.footer')
 

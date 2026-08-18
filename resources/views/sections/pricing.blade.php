@@ -2,13 +2,25 @@
 <section class="pricing-section" style="background-color: #0f1524; padding: 60px 0;">
     <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
         
-        <div class="section-header-center" style="text-align: center; margin-bottom: 30px;">
+        <div class="section-header-center" style="text-align: center; margin-bottom: 40px;">
             <div class="section-subtitle" style="margin-bottom: 8px; font-weight: bold; color: #009688; text-transform: uppercase; letter-spacing: 2px; font-size: 1rem;">Secure Your Spot</div>
-            <h2 class="section-title" style="margin-top: 0; margin-bottom: 12px; color: #ffffff; font-weight: 800; line-height: 1.2;">Registration <br class="d-md-none"><span>Plans</span></h2>
+            <h2 class="section-title" style="margin-top: 0; margin-bottom: 12px; color: #ffffff; font-weight: 800; line-height: 1.2; white-space: nowrap;">Registration <span style="color: #009688;">Plans</span></h2>
             <div class="header-line" style="width: 60px; height: 4px; background-color: #009688; margin: 0 auto 15px auto;"></div>
             <p class="participants-desc" style="max-width: 800px; margin: 0 auto; color: #94a3b8 !important;">
-                Choose the appropriate registration tier to access the conference. Super early-bird rates are currently active.
+                Choose the appropriate registration tier to access the conference.
             </p>
+        </div>
+
+        {{-- Mode toggle labels --}}
+        <div style="display: flex; justify-content: center; gap: 0; margin-bottom: 32px;">
+            <div style="display: flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 40px; padding: 5px; gap: 4px; border: 1px solid rgba(255,255,255,0.08);">
+                <div style="padding: 8px 22px; background: rgba(0,150,136,0.18); border-radius: 30px; color: #1de9b6; font-weight: 800; font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase;">
+                    <i class="fa-solid fa-wifi-slash" style="margin-right: 6px; font-size: 0.75rem;"></i>Offline
+                </div>
+                <div style="padding: 8px 22px; border-radius: 30px; color: #64748b; font-weight: 700; font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase;">
+                    <i class="fa-solid fa-globe" style="margin-right: 6px; font-size: 0.75rem;"></i>Online
+                </div>
+            </div>
         </div>
 
         <div class="pricing-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: stretch;">
@@ -16,34 +28,74 @@
             @foreach($registrationFees as $fee)
                 @php
                     $features = json_decode($fee->features, true) ?? [];
+                    $highlighted = $fee->is_highlighted;
                 @endphp
-                <div class="pricing-card" style="background-color: #1e293b; padding: 40px 25px; border-radius: 12px; display: flex; flex-direction: column; position: relative; border: {{ $fee->is_highlighted ? '2px solid #009688' : '1px solid rgba(255,255,255,0.05)' }}; transform: {{ $fee->is_highlighted ? 'scale(1.03)' : 'scale(1)' }}; box-shadow: {{ $fee->is_highlighted ? '0 20px 40px rgba(0, 150, 136, 0.15)' : 'none' }}; z-index: {{ $fee->is_highlighted ? '10' : '1' }};">
+                <div class="pricing-card {{ $highlighted ? 'pricing-card-hl' : '' }}"
+                     style="background-color: {{ $highlighted ? '#112240' : '#1a2236' }}; padding: 0; border-radius: 16px; display: flex; flex-direction: column; position: relative; border: {{ $highlighted ? '2px solid #009688' : '1px solid rgba(255,255,255,0.06)' }}; box-shadow: {{ $highlighted ? '0 24px 50px rgba(0,150,136,0.18)' : '0 4px 20px rgba(0,0,0,0.2)' }}; overflow: hidden;">
                     
-                    @if($fee->is_highlighted)
-                        <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background-color: #26a69a; color: #fff; padding: 6px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">
+                    @if($highlighted)
+                        <div style="position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: linear-gradient(90deg,#009688,#1de9b6); color: #fff; padding: 5px 18px; border-radius: 0 0 12px 12px; font-size: 0.72rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; white-space: nowrap;">
                             Most Popular
                         </div>
                     @endif
 
-                    <h3 class="pricing-title" style="margin: 0 0 15px 0; color: #ffffff; font-size: 1.25rem; font-weight: 700;">{{ $fee->category_name }}</h3>
-                    <div class="pricing-price" style="font-size: 2.8rem; font-weight: 800; color: #ffffff; margin-bottom: 25px; display: flex; align-items: baseline; gap: 5px;">
-                        {{ $fee->price_inr }} <span style="font-size: 1rem; color: #94a3b8; font-weight: 400;">INR</span>
+                    {{-- Card header --}}
+                    <div style="padding: {{ $highlighted ? '36px 24px 20px' : '28px 24px 20px' }}; border-bottom: 1px solid rgba(255,255,255,0.06);">
+                        <h3 style="margin: 0 0 20px; color: #ffffff; font-size: 1.1rem; font-weight: 800; letter-spacing: 0.3px;">{{ $fee->category_name }}</h3>
+
+                        {{-- Two price columns --}}
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+
+                            {{-- Offline --}}
+                            <div style="background: rgba(0,150,136,0.1); border: 1px solid rgba(0,150,136,0.2); border-radius: 12px; padding: 14px 12px; text-align: center;">
+                                <div style="font-size: 0.6rem; font-weight: 900; color: #1de9b6; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;">
+                                    <i class="fa-solid fa-building" style="margin-right: 3px;"></i>Offline
+                                </div>
+                                <div style="font-size: 1.55rem; font-weight: 900; color: #ffffff; line-height: 1; letter-spacing: -1px;">
+                                    ₹{{ $fee->price_inr }}
+                                </div>
+                                <div style="font-size: 0.65rem; color: #64748b; margin-top: 4px; font-weight: 600;">INR</div>
+                            </div>
+
+                            {{-- Online --}}
+                            <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 14px 12px; text-align: center;">
+                                <div style="font-size: 0.6rem; font-weight: 900; color: #64748b; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;">
+                                    <i class="fa-solid fa-globe" style="margin-right: 3px;"></i>Online
+                                </div>
+                                @if($fee->price_online)
+                                    <div style="font-size: 1.55rem; font-weight: 900; color: #94a3b8; line-height: 1; letter-spacing: -1px;">
+                                        ₹{{ $fee->price_online }}
+                                    </div>
+                                    <div style="font-size: 0.65rem; color: #64748b; margin-top: 4px; font-weight: 600;">INR</div>
+                                @else
+                                    <div style="font-size: 1.4rem; font-weight: 900; color: #475569; line-height: 1; margin-top: 4px;">—</div>
+                                    <div style="font-size: 0.65rem; color: #475569; margin-top: 4px;">N/A</div>
+                                @endif
+                            </div>
+
+                        </div>
                     </div>
 
-                    <div class="pricing-divider" style="height: 1px; background-color: rgba(255,255,255,0.1); margin-bottom: 25px;"></div>
+                    {{-- Features --}}
+                    <div style="padding: 20px 24px; flex-grow: 1;">
+                        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+                            @foreach($features as $feature)
+                                <li style="display: flex; gap: 10px; font-size: 0.88rem; color: #cbd5e1; line-height: 1.5;">
+                                    <i class="fa-solid fa-circle-check" style="color: #009688; margin-top: 3px; font-size: 0.85rem; flex-shrink: 0;"></i>
+                                    {{ $feature }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
 
-                    <ul class="pricing-list" style="list-style: none; padding: 0; margin: 0; flex-grow: 1; display: flex; flex-direction: column; gap: 15px;">
-                        @foreach($features as $feature)
-                            <li style="display: flex; gap: 10px; font-size: 0.95rem; color: #cbd5e1; line-height: 1.5;">
-                                <i class="fa-solid fa-circle-check" style="color: #009688; margin-top: 4px; font-size: 0.9rem;"></i> 
-                                {{ $feature }}
-                            </li>
-                        @endforeach
-                    </ul>
+                    {{-- CTA --}}
+                    <div style="padding: 0 24px 24px;">
+                        <a href="{{ route('registration') }}"
+                           style="display: block; width: 100%; text-align: center; background: {{ $highlighted ? 'linear-gradient(135deg,#009688,#1de9b6)' : 'rgba(255,255,255,0.06)' }}; color: {{ $highlighted ? '#ffffff' : '#38bdf8' }}; padding: 13px 0; border-radius: 10px; text-decoration: none; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.3px; transition: all 0.3s ease; border: {{ $highlighted ? 'none' : '1px solid rgba(56,189,248,0.2)' }};">
+                            Register Now
+                        </a>
+                    </div>
 
-                    <a class="pricing-btn" href="{{ route('registration') }}" style="display: block; width: 100%; text-align: center; background-color: {{ $fee->is_highlighted ? '#26a69a' : 'rgba(255,255,255,0.05)' }}; color: {{ $fee->is_highlighted ? '#ffffff' : '#38bdf8' }}; padding: 12px 0; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1rem; margin-top: 30px; transition: all 0.3s ease;">
-                        Register Now
-                    </a>
                 </div>
             @endforeach
 

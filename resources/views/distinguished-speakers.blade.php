@@ -6,8 +6,8 @@
 @include('sections.navbar')
 
     @php
-        $bannerTitle = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_keynote_speakers_title')->value('value') ?? 'KEYNOTE SPEAKERS';
-        $bannerImage = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_keynote_speakers_image')->value('value');
+        $bannerTitle = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_distinguished_speakers_title')->value('value') ?? 'DISTINGUISHED SPEAKERS';
+        $bannerImage = \App\Models\SiteSetting::where('group', 'page_banners')->where('key', 'banner_distinguished_speakers_image')->value('value');
     @endphp
     <!-- Page Banner -->
     <div class="page-banner" style="{{ $bannerImage ? "background-image: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.8)), url('" . asset($bannerImage) . "');" : '' }}">
@@ -17,19 +17,19 @@
     </div>
 
 <style>
-    .keynote-page-container {
+    .distinguished-page-container {
         padding: 70px 20px;
         max-width: 1140px;
         margin: 0 auto;
         font-family: 'Inter', system-ui, -apple-system, sans-serif;
     }
 
-    .keynote-header-block {
+    .distinguished-header-block {
         text-align: center;
         margin-bottom: 50px;
     }
 
-    .keynote-header-title {
+    .distinguished-header-title {
         font-size: clamp(2rem, 4vw, 2.7rem);
         font-weight: 800;
         color: #0f172a;
@@ -38,11 +38,11 @@
         letter-spacing: -0.5px;
     }
 
-    .keynote-header-title span {
+    .distinguished-header-title span {
         color: #009688;
     }
 
-    .keynote-header-bar {
+    .distinguished-header-bar {
         width: 70px;
         height: 4px;
         background: #84cc16;
@@ -50,14 +50,14 @@
         border-radius: 2px;
     }
 
-    .keynote-header-subtitle {
+    .distinguished-header-subtitle {
         font-size: 1.1rem;
         color: #64748b;
         margin: 0;
         font-weight: 500;
     }
 
-    .keynote-speaker-grid {
+    .distinguished-speaker-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
         gap: 30px;
@@ -65,7 +65,7 @@
     }
 
     @media (max-width: 650px) {
-        .keynote-speaker-grid {
+        .distinguished-speaker-grid {
             grid-template-columns: 1fr;
         }
     }
@@ -194,25 +194,25 @@
     }
 </style>
 
-<section class="keynote-page-container">
+<section class="distinguished-page-container">
     
     <!-- Title Block matching Image 1 Design -->
-    <div class="keynote-header-block">
-        <h2 class="keynote-header-title">
-            Keynote <span>Speakers</span>
+    <div class="distinguished-header-block">
+        <h2 class="distinguished-header-title">
+            Distinguished <span>Speakers</span>
         </h2>
-        <div class="keynote-header-bar"></div>
-        <p class="keynote-header-subtitle">The Minds Behind the Momentum</p>
+        <div class="distinguished-header-bar"></div>
+        <p class="distinguished-header-subtitle">Global Thought Leaders & Research Pioneers</p>
     </div>
 
     <!-- Speaker Grid matching Image 1 Design -->
-    <div class="keynote-speaker-grid">
+    <div class="distinguished-speaker-grid">
 
         @php
-            $keynoteSpeakers = \App\Models\Speaker::where('type', 'keynote')->orWhere('category', 'keynote')->orderBy('sort_order')->get();
+            $distinguishedSpeakers = \App\Models\Speaker::where('type', 'distinguished')->orWhere('category', 'distinguished')->orderBy('sort_order')->get();
         @endphp
 
-        @forelse($keynoteSpeakers as $speaker)
+        @forelse($distinguishedSpeakers as $speaker)
         <div class="speaker-card-plenary-style">
             
             <!-- Left Portrait Photo -->
@@ -267,7 +267,7 @@
                     <div class="modal-speaker-img">{{ asset($speaker->image_path) }}</div>
                 </div>
 
-                <button type="button" class="btn-view-profile" onclick="openKeynoteModal({{ $speaker->id }})">
+                <button type="button" class="btn-view-profile" onclick="openDistinguishedModal({{ $speaker->id }})">
                     VIEW PROFILE & BIOGRAPHY <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </div>
@@ -275,25 +275,25 @@
         </div>
         @empty
         <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #64748b; background: #ffffff; border-radius: 12px; font-size: 1.1rem; border: 1px solid #e2e8f0;">
-            Keynote speakers will be announced shortly.
+            Distinguished speakers will be announced shortly.
         </div>
         @endforelse
 
     </div>
 </section>
 
-<!-- True 100% Full Screen Keynote Speaker Modal -->
-@if(!defined('KEYNOTE_MODAL_RENDERED'))
-@php define('KEYNOTE_MODAL_RENDERED', true); @endphp
-<div id="keynoteModal" style="display: none; position: fixed; z-index: 999999; top: 0; left: 0; width: 100vw; height: 100vh; background: #ffffff;">
+<!-- True 100% Full Screen Speaker Profile Modal -->
+@if(!defined('DISTINGUISHED_MODAL_RENDERED'))
+@php define('DISTINGUISHED_MODAL_RENDERED', true); @endphp
+<div id="distinguishedModal" style="display: none; position: fixed; z-index: 999999; top: 0; left: 0; width: 100vw; height: 100vh; background: #ffffff;">
     <div style="background: #ffffff; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; display: flex; flex-direction: column; position: relative; overflow: hidden; border: none; margin: 0; padding: 0;">
         
         <!-- Fullscreen Edge-to-Edge Modal Header -->
         <div style="background: #0f172a; color: #ffffff; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; border-bottom: 3px solid #009688;">
             <div style="font-weight: 800; font-size: 1.4rem; letter-spacing: 0.3px;">
-                Keynote Speaker Profile & Biography
+                Speaker Profile & Biography
             </div>
-            <button onclick="closeKeynoteModal()" style="background: #ef4444; border: none; color: #ffffff; padding: 8px 22px; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 8px; transition: background 0.2s;" onmouseover="this.style.background='#dc2626'" onmouseout="this.style.background='#ef4444'">
+            <button onclick="closeDistinguishedModal()" style="background: #ef4444; border: none; color: #ffffff; padding: 8px 22px; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 8px; transition: background 0.2s;" onmouseover="this.style.background='#dc2626'" onmouseout="this.style.background='#ef4444'">
                 <span>Close</span> &times;
             </button>
         </div>
@@ -304,48 +304,48 @@
                 
                 <!-- Top Hero Banner Card -->
                 <div style="display: flex; gap: 35px; margin-bottom: 40px; align-items: center; background: #f8fafc; padding: 35px 40px; border-radius: 16px; border: 1px solid #e2e8f0; flex-wrap: wrap;">
-                    <img id="km-img" src="" alt="" style="width: 180px; height: 180px; border-radius: 16px; object-fit: cover; border: 4px solid #009688; box-shadow: 0 10px 25px rgba(0,0,0,0.1); flex-shrink: 0;">
+                    <img id="dm-img" src="" alt="" style="width: 180px; height: 180px; border-radius: 16px; object-fit: cover; border: 4px solid #009688; box-shadow: 0 10px 25px rgba(0,0,0,0.1); flex-shrink: 0;">
                     <div style="flex-grow: 1;">
-                        <h2 id="km-name" style="margin: 0 0 10px 0; color: #0f172a; font-size: 2.2rem; font-weight: 900; line-height: 1.2;"></h2>
-                        <p id="km-title" style="margin: 0 0 8px 0; color: #009688; font-weight: 700; font-size: 1.15rem; line-height: 1.4;"></p>
-                        <p id="km-role" style="margin: 0; color: #475569; font-size: 1.02rem; line-height: 1.5; font-weight: 500;"></p>
+                        <h2 id="dm-name" style="margin: 0 0 10px 0; color: #0f172a; font-size: 2.2rem; font-weight: 900; line-height: 1.2;"></h2>
+                        <p id="dm-title" style="margin: 0 0 8px 0; color: #009688; font-weight: 700; font-size: 1.15rem; line-height: 1.4;"></p>
+                        <p id="dm-role" style="margin: 0; color: #475569; font-size: 1.02rem; line-height: 1.5; font-weight: 500;"></p>
                     </div>
                 </div>
 
                 <!-- Details Stack -->
                 <div style="display: flex; flex-direction: column; gap: 30px; font-size: 1.05rem; color: #334155; line-height: 1.75;">
                     
-                    <div id="km-field-wrap" style="background: #f0fdf4; padding: 20px 25px; border-radius: 12px; border: 1px solid #bbf7d0;">
+                    <div id="dm-field-wrap" style="background: #f0fdf4; padding: 20px 25px; border-radius: 12px; border: 1px solid #bbf7d0;">
                         <div style="font-weight: 800; color: #166534; margin-bottom: 4px; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.8px;">Field of Specialization</div>
-                        <div id="km-field" style="color: #0f766e; font-weight: 700; font-size: 1.1rem;"></div>
+                        <div id="dm-field" style="color: #0f766e; font-weight: 700; font-size: 1.1rem;"></div>
                     </div>
 
-                    <div id="km-edu-wrap" style="display: none;">
+                    <div id="dm-edu-wrap" style="display: none;">
                         <h3 style="margin: 0 0 12px 0; color: #0f172a; font-weight: 800; font-size: 1.25rem;">
                             Education & Qualifications
                         </h3>
-                        <p id="km-edu" style="margin: 0; background: #f8fafc; border-left: 4px solid #009688; padding: 16px 22px; border-radius: 6px; color: #1e293b; font-weight: 500;"></p>
+                        <p id="dm-edu" style="margin: 0; background: #f8fafc; border-left: 4px solid #009688; padding: 16px 22px; border-radius: 6px; color: #1e293b; font-weight: 500;"></p>
                     </div>
 
-                    <div id="km-bio-wrap" style="display: none;">
+                    <div id="dm-bio-wrap" style="display: none;">
                         <h3 style="margin: 0 0 12px 0; color: #0f172a; font-weight: 800; font-size: 1.25rem;">
                             Biography
                         </h3>
-                        <div id="km-bio" style="color: #475569; text-align: justify; font-size: 1.05rem; background: #ffffff; padding: 5px 0;"></div>
+                        <div id="dm-bio" style="color: #475569; text-align: justify; font-size: 1.05rem; background: #ffffff; padding: 5px 0;"></div>
                     </div>
 
-                    <div id="km-achievements-wrap" style="display: none;">
+                    <div id="dm-achievements-wrap" style="display: none;">
                         <h3 style="margin: 0 0 12px 0; color: #0f172a; font-weight: 800; font-size: 1.25rem;">
                             Key Achievements & Contributions
                         </h3>
-                        <div id="km-achievements" style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 22px 28px; border-radius: 12px; color: #166534; font-size: 1.02rem; line-height: 1.75;"></div>
+                        <div id="dm-achievements" style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 22px 28px; border-radius: 12px; color: #166534; font-size: 1.02rem; line-height: 1.75;"></div>
                     </div>
 
-                    <div id="km-relevance-wrap" style="display: none;">
+                    <div id="dm-relevance-wrap" style="display: none;">
                         <h3 style="margin: 0 0 12px 0; color: #0f172a; font-weight: 800; font-size: 1.25rem;">
-                            Relevance as a Keynote Speaker
+                            Relevance as a Keynote / Distinguished Speaker
                         </h3>
-                        <div id="km-relevance" style="background: #f0f9ff; border: 1px solid #bae6fd; padding: 22px 28px; border-radius: 12px; color: #0369a1; font-size: 1.02rem; line-height: 1.75;"></div>
+                        <div id="dm-relevance" style="background: #f0f9ff; border: 1px solid #bae6fd; padding: 22px 28px; border-radius: 12px; color: #0369a1; font-size: 1.02rem; line-height: 1.75;"></div>
                     </div>
 
                 </div>
@@ -354,7 +354,7 @@
 
         <!-- Fullscreen Modal Footer -->
         <div style="padding: 18px 50px; background: #f8fafc; border-top: 1px solid #e2e8f0; text-align: right; flex-shrink: 0;">
-            <button onclick="closeKeynoteModal()" style="padding: 11px 32px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 1rem; transition: background 0.2s;" onmouseover="this.style.background='#009688'" onmouseout="this.style.background='#0f172a'">
+            <button onclick="closeDistinguishedModal()" style="padding: 11px 32px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 1rem; transition: background 0.2s;" onmouseover="this.style.background='#009688'" onmouseout="this.style.background='#0f172a'">
                 Close Profile
             </button>
         </div>
@@ -363,61 +363,69 @@
 </div>
 
 <script>
-    function openKeynoteModal(id) {
+    function openDistinguishedModal(id) {
         var data = document.getElementById('speaker-data-' + id);
         if (!data) return;
 
-        document.getElementById('km-name').innerText = data.querySelector('.modal-speaker-name').innerText;
-        document.getElementById('km-title').innerText = data.querySelector('.modal-speaker-title').innerText;
-        document.getElementById('km-role').innerText = data.querySelector('.modal-speaker-role').innerText;
-        document.getElementById('km-img').src = data.querySelector('.modal-speaker-img').innerText;
+        document.getElementById('dm-name').innerText = data.querySelector('.modal-speaker-name').innerText;
+        document.getElementById('dm-title').innerText = data.querySelector('.modal-speaker-title').innerText;
+        document.getElementById('dm-role').innerText = data.querySelector('.modal-speaker-role').innerText;
+        document.getElementById('dm-img').src = data.querySelector('.modal-speaker-img').innerText;
 
         var field = data.querySelector('.modal-speaker-field').innerText;
-        document.getElementById('km-field').innerText = field;
+        document.getElementById('dm-field').innerText = field;
 
         var edu = data.querySelector('.modal-speaker-edu').innerText;
-        var eduWrap = document.getElementById('km-edu-wrap');
+        var eduWrap = document.getElementById('dm-edu-wrap');
         if (edu && edu.trim() !== '') {
-            document.getElementById('km-edu').innerText = edu;
+            document.getElementById('dm-edu').innerText = edu;
             eduWrap.style.display = 'block';
         } else {
             eduWrap.style.display = 'none';
         }
 
         var bio = data.querySelector('.modal-speaker-bio').innerHTML;
-        var bioWrap = document.getElementById('km-bio-wrap');
+        var bioWrap = document.getElementById('dm-bio-wrap');
         if (bio && bio.trim() !== '') {
-            document.getElementById('km-bio').innerHTML = bio;
+            document.getElementById('dm-bio').innerHTML = bio;
             bioWrap.style.display = 'block';
         } else {
             bioWrap.style.display = 'none';
         }
 
         var achievements = data.querySelector('.modal-speaker-achievements').innerHTML;
-        var achievementsWrap = document.getElementById('km-achievements-wrap');
+        var achievementsWrap = document.getElementById('dm-achievements-wrap');
         if (achievements && achievements.trim() !== '') {
-            document.getElementById('km-achievements').innerHTML = achievements;
+            document.getElementById('dm-achievements').innerHTML = achievements;
             achievementsWrap.style.display = 'block';
         } else {
             achievementsWrap.style.display = 'none';
         }
 
         var relevance = data.querySelector('.modal-speaker-relevance').innerHTML;
-        var relevanceWrap = document.getElementById('km-relevance-wrap');
+        var relevanceWrap = document.getElementById('dm-relevance-wrap');
         if (relevance && relevance.trim() !== '') {
-            document.getElementById('km-relevance').innerHTML = relevance;
+            document.getElementById('dm-relevance').innerHTML = relevance;
             relevanceWrap.style.display = 'block';
         } else {
             relevanceWrap.style.display = 'none';
         }
 
-        document.getElementById('keynoteModal').style.display = 'block';
+        document.getElementById('distinguishedModal').style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
 
-    function closeKeynoteModal() {
-        document.getElementById('keynoteModal').style.display = 'none';
+    function closeDistinguishedModal() {
+        document.getElementById('distinguishedModal').style.display = 'none';
         document.body.style.overflow = 'auto';
+    }
+
+    window.onclick = function(event) {
+        var modal = document.getElementById('distinguishedModal');
+        if (event.target == modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
     }
 </script>
 @endif

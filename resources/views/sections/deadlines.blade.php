@@ -7,57 +7,35 @@
             <p class="highlights-subtitle">{{ $settings['deadlines_subtitle'] ?? 'Key Dates To Mark In Your Calendar' }}</p>
         </div>
 
-        <div class="deadlines-container">
-
-            <!-- Left: Illustration + stats -->
-            <div class="deadlines-left">
-                <div class="dl-illustration">
-                    @php $img = $settings['deadlines_image'] ?? 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=600&h=500&fit=crop&crop=center'; @endphp
-                    <img src="{{ str_starts_with($img, 'http') ? $img : asset($img) }}"
-                         alt="Calendar Schedule">
-                </div>
-                <div class="dl-stats-row">
-                    <div class="dl-stat">
-                        <span class="dl-stat-num">{{ count($deadlines) }}</span>
-                        <span class="dl-stat-label">{{ $settings['deadlines_stat1_label'] ?? 'Key Dates' }}</span>
-                    </div>
-                    <div class="dl-stat">
-                        <span class="dl-stat-num">{{ $settings['deadlines_stat2_num'] ?? '3' }}</span>
-                        <span class="dl-stat-label">{{ $settings['deadlines_stat2_label'] ?? 'Days Conference' }}</span>
-                    </div>
-                    <div class="dl-stat">
-                        <span class="dl-stat-num">{{ $settings['deadlines_stat3_num'] ?? '2027' }}</span>
-                        <span class="dl-stat-label">{{ $settings['deadlines_stat3_label'] ?? 'Event Year' }}</span>
+        <div style="max-width: 900px; margin: 50px auto 0;">
+            <div class="deadlines-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+                
+                <div class="dl-card dl-card-1" style="flex-direction: column; text-align: center; padding: 40px 20px; margin-bottom: 0;">
+                    <div class="dl-card-num" style="position: absolute; top: -10px; left: -10px; font-size: 6rem; opacity: 0.05;">01</div>
+                    <div class="dl-icon-circle" style="width: 75px; height: 75px; font-size: 2rem; margin-bottom: 15px; position: relative; z-index: 1;"><i class="fa-solid fa-file-arrow-up"></i></div>
+                    <div class="dl-text" style="position: relative; z-index: 1;">
+                        <div class="dl-date" style="font-size: 1.8rem; margin-bottom: 12px;">Oct 07, 2026</div>
+                        <div class="dl-label" style="font-size: 1.05rem; line-height: 1.5;">Submission of Abstract</div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Right: Cards -->
-            <div class="deadlines-list">
+                <div class="dl-card dl-card-2" style="flex-direction: column; text-align: center; padding: 40px 20px; margin-bottom: 0;">
+                    <div class="dl-card-num" style="position: absolute; top: -10px; left: -10px; font-size: 6rem; opacity: 0.05;">02</div>
+                    <div class="dl-icon-circle" style="width: 75px; height: 75px; font-size: 2rem; margin-bottom: 15px; position: relative; z-index: 1;"><i class="fa-solid fa-envelope-open-text"></i></div>
+                    <div class="dl-text" style="position: relative; z-index: 1;">
+                        <div class="dl-date" style="font-size: 1.8rem; margin-bottom: 12px;">Oct 15, 2026</div>
+                        <div class="dl-label" style="font-size: 1.05rem; line-height: 1.5;">Acceptance of Abstract</div>
+                    </div>
+                </div>
 
-                @if(isset($deadlines) && count($deadlines) > 0)
-                    @foreach($deadlines as $index => $dl)
-                        <div class="dl-card dl-card-{{ ($index % 3) + 1 }}">
-                            <div class="dl-card-num">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</div>
-                            <div class="dl-icon-circle">
-                                @if($index % 3 == 0)
-                                    <i class="fa-solid fa-users"></i>
-                                @elseif($index % 3 == 1)
-                                    <i class="fa-solid fa-file-pen"></i>
-                                @else
-                                    <i class="fa-solid fa-bolt"></i>
-                                @endif
-                            </div>
-                            <div class="dl-text">
-                                <div class="dl-date">{{ \Carbon\Carbon::parse($dl->deadline_date)->format('M d, Y') }}</div>
-                                <div class="dl-label">{{ $dl->title }}</div>
-                            </div>
-                            <div class="dl-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                        </div>
-                    @endforeach
-                @else
-                    <p style="text-align: center; color: #64748b; padding: 30px;">More dates will be announced soon.</p>
-                @endif
+                <div class="dl-card dl-card-3" style="flex-direction: column; text-align: center; padding: 40px 20px; margin-bottom: 0;">
+                    <div class="dl-card-num" style="position: absolute; top: -10px; left: -10px; font-size: 6rem; opacity: 0.05;">03</div>
+                    <div class="dl-icon-circle" style="width: 75px; height: 75px; font-size: 2rem; margin-bottom: 15px; position: relative; z-index: 1;"><i class="fa-solid fa-book"></i></div>
+                    <div class="dl-text" style="position: relative; z-index: 1;">
+                        <div class="dl-date" style="font-size: 1.8rem; margin-bottom: 12px;">Nov 15, 2026</div>
+                        <div class="dl-label" style="font-size: 1.05rem; line-height: 1.5;">Full Paper</div>
+                    </div>
+                </div>
 
             </div>
         </div>

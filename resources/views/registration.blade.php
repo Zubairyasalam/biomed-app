@@ -63,25 +63,52 @@
 
                 <div class="section-divider" style="margin: 40px 0;"></div>
 
+                <!-- Participation Mode -->
+                <div class="reg-section-title" style="margin-bottom: 20px;">
+                    <h2 style="font-size: clamp(1.4rem, 5vw, 1.8rem); color: var(--navy-dark);">Mode of Participation</h2>
+                    <p style="color: #64748b; font-size: clamp(0.95rem, 3vw, 1.05rem);">Select whether you will attend in-person (Offline) or virtually (Online).</p>
+                </div>
+
+                <div class="mode-selection" style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 35px;">
+                    <label class="mode-option" style="flex: 1; min-width: 220px; display: flex; align-items: center; gap: 12px; padding: 18px 24px; border: 2px solid var(--teal-accent); border-radius: 12px; cursor: pointer; background: #f0fdfa; transition: all 0.3s;">
+                        <input type="radio" name="participation_mode" value="online" checked style="width: 20px; height: 20px; accent-color: var(--teal-accent);">
+                        <div>
+                            <strong style="font-size: 1.1rem; color: var(--navy-dark); display: block;">Online (Virtual)</strong>
+                            <span style="font-size: 0.85rem; color: #64748b;">Join via virtual platform</span>
+                        </div>
+                    </label>
+                </div>
+
                 <!-- Registration Category -->
                 <div class="reg-section-title" style="margin-bottom: 25px;">
                     <h2 style="font-size: clamp(1.5rem, 6vw, 2rem); color: var(--navy-dark);">{{ $settings['reg_category_title'] ?? 'Select Category' }}</h2>
                     <p style="color: #64748b; font-size: clamp(0.95rem, 3vw, 1.05rem);">{{ $settings['reg_category_subtitle'] ?? 'Registration includes conference kit, certificate, lunch and refreshment.' }}</p>
                 </div>
 
+                <input type="hidden" name="reg_category" id="offline-fallback-category" value="0" disabled>
                 <div class="category-selection" style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 40px;">
                     @foreach($registrationFees as $index => $fee)
-                        <label class="payment-option" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.3s; background: #fff;">
+                        @php
+                            $offlineVal = (int)str_replace(',', '', $fee->price_inr);
+                            $onlineVal = $fee->price_online ? (int)str_replace(',', '', $fee->price_online) : null;
+                        @endphp
+                        <label class="payment-option category-option" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.3s; background: #fff;">
                             <div style="display: flex; align-items: center; gap: 15px;">
-                                <input type="radio" name="reg_category" value="{{ $fee->price_inr }}" data-name="{{ $fee->category_name }}" required style="width: 22px; height: 22px; accent-color: var(--teal-accent);">
+                                <input type="radio" name="reg_category" 
+                                       value="{{ $offlineVal }}" 
+                                       data-offline="{{ $offlineVal }}" 
+                                       data-online="{{ $onlineVal ?? '' }}" 
+                                       data-name="{{ $fee->category_name }}" 
+                                       required style="width: 22px; height: 22px; accent-color: var(--teal-accent);">
                                 <span style="font-weight: 700; font-size: 1.15rem; color: var(--navy-dark);">{{ $fee->category_name }}</span>
                             </div>
-                            <strong style="font-size: 1.3rem; color: var(--teal-accent);">{{ number_format((float)$fee->price_inr) }} INR</strong>
+                            <strong class="cat-price-display" style="font-size: 1.3rem; color: var(--teal-accent);">{{ number_format($offlineVal) }} INR</strong>
                         </label>
                     @endforeach
                 </div>
 
-                <!-- Add-On -->
+                {{-- Add-On section removed --}}
+                {{-- 
                 <div class="reg-section-title" style="margin-bottom: 20px;">
                     <h2 style="font-size: clamp(1.4rem, 5vw, 1.8rem); color: var(--navy-dark);">{{ $settings['reg_addon_title'] ?? 'Add-Ons' }}</h2>
                 </div>
@@ -102,9 +129,10 @@
                         </label>
                     @endforeach
                 </div>
+                --}}
 
                 <!-- Summary Box -->
-                <div class="reg-summary" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 35px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); margin-bottom: 35px;">
+                <div id="order-summary-section" class="reg-summary" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 35px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); margin-bottom: 35px;">
                     <h3 style="margin-top: 0; margin-bottom: 25px; color: var(--navy-dark); border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; font-size: clamp(1.2rem, 4vw, 1.5rem);">{{ $settings['reg_summary_title'] ?? 'Order Summary' }}</h3>
                     
                     <div class="summary-line" style="display: flex; justify-content: space-between; margin-bottom: 15px; color: #475569; font-size: 1.1rem;">
@@ -120,64 +148,66 @@
                 </div>
 
                 <!-- Payment Method -->
-                <div class="reg-section-title" style="margin-bottom: 20px;">
-                    <h2 style="font-size: clamp(1.4rem, 5vw, 1.8rem); color: var(--navy-dark);">{{ $settings['reg_payment_title'] ?? 'Payment Method' }}</h2>
-                </div>
+                <div id="payment-section">
+                    <div class="reg-section-title" style="margin-bottom: 20px;">
+                        <h2 style="font-size: clamp(1.4rem, 5vw, 1.8rem); color: var(--navy-dark);">{{ $settings['reg_payment_title'] ?? 'Payment Method' }}</h2>
+                    </div>
 
-                <div class="payment-method-selection" style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 35px;">
-                    <!-- UPI -->
-                    <label class="pay-method-option" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border: 2px solid var(--teal-accent); border-radius: 12px; cursor: pointer; transition: all 0.3s; background: #f0fdfa;">
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <input type="radio" name="payment_method" value="upi" checked style="width: 22px; height: 22px; accent-color: var(--teal-accent);">
-                            <div style="display: flex; align-items: center; gap: 12px;">
-                                <div style="background: rgba(0, 168, 150, 0.1); width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                                    <i class="fa-solid fa-qrcode" style="font-size: 1.2rem; color: var(--teal-accent);"></i>
+                    <div class="payment-method-selection" style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 35px;">
+                        <!-- UPI -->
+                        <label class="pay-method-option" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border: 2px solid var(--teal-accent); border-radius: 12px; cursor: pointer; transition: all 0.3s; background: #f0fdfa;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <input type="radio" name="payment_method" value="upi" checked style="width: 22px; height: 22px; accent-color: var(--teal-accent);">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <div style="background: rgba(0, 168, 150, 0.1); width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fa-solid fa-qrcode" style="font-size: 1.2rem; color: var(--teal-accent);"></i>
+                                    </div>
+                                    <span style="font-weight: 700; font-size: 1.1rem; color: var(--navy-dark);">UPI (GPay, PhonePe, Paytm)</span>
                                 </div>
-                                <span style="font-weight: 700; font-size: 1.1rem; color: var(--navy-dark);">UPI (GPay, PhonePe, Paytm)</span>
                             </div>
-                        </div>
-                    </label>
+                        </label>
 
-                    <!-- Card -->
-                    <label class="pay-method-option" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.3s; background: #fff;">
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <input type="radio" name="payment_method" value="card" style="width: 22px; height: 22px; accent-color: var(--teal-accent);">
-                            <div style="display: flex; align-items: center; gap: 12px;">
-                                <div style="background: rgba(10, 25, 47, 0.05); width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                                    <i class="fa-regular fa-credit-card" style="font-size: 1.2rem; color: var(--navy-dark);"></i>
+                        <!-- Card -->
+                        <label class="pay-method-option" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.3s; background: #fff;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <input type="radio" name="payment_method" value="card" style="width: 22px; height: 22px; accent-color: var(--teal-accent);">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <div style="background: rgba(10, 25, 47, 0.05); width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fa-regular fa-credit-card" style="font-size: 1.2rem; color: var(--navy-dark);"></i>
+                                    </div>
+                                    <span style="font-weight: 700; font-size: 1.1rem; color: var(--navy-dark);">Credit / Debit Card</span>
                                 </div>
-                                <span style="font-weight: 700; font-size: 1.1rem; color: var(--navy-dark);">Credit / Debit Card</span>
                             </div>
-                        </div>
-                        <div style="display: flex; gap: 8px;">
-                            <i class="fa-brands fa-cc-visa" style="font-size: 1.8rem; color: #1a1f71;"></i>
-                            <i class="fa-brands fa-cc-mastercard" style="font-size: 1.8rem; color: #eb001b;"></i>
-                        </div>
-                    </label>
+                            <div style="display: flex; gap: 8px;">
+                                <i class="fa-brands fa-cc-visa" style="font-size: 1.8rem; color: #1a1f71;"></i>
+                                <i class="fa-brands fa-cc-mastercard" style="font-size: 1.8rem; color: #eb001b;"></i>
+                            </div>
+                        </label>
 
-                    <!-- Net Banking -->
-                    <label class="pay-method-option" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.3s; background: #fff;">
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <input type="radio" name="payment_method" value="netbanking" style="width: 22px; height: 22px; accent-color: var(--teal-accent);">
-                            <div style="display: flex; align-items: center; gap: 12px;">
-                                <div style="background: rgba(10, 25, 47, 0.05); width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                                    <i class="fa-solid fa-building-columns" style="font-size: 1.2rem; color: var(--navy-dark);"></i>
+                        <!-- Net Banking -->
+                        <label class="pay-method-option" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.3s; background: #fff;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <input type="radio" name="payment_method" value="netbanking" style="width: 22px; height: 22px; accent-color: var(--teal-accent);">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <div style="background: rgba(10, 25, 47, 0.05); width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fa-solid fa-building-columns" style="font-size: 1.2rem; color: var(--navy-dark);"></i>
+                                    </div>
+                                    <span style="font-weight: 700; font-size: 1.1rem; color: var(--navy-dark);">Net Banking</span>
                                 </div>
-                                <span style="font-weight: 700; font-size: 1.1rem; color: var(--navy-dark);">Net Banking</span>
                             </div>
-                        </div>
-                    </label>
+                        </label>
+                    </div>
                 </div>
 
                 <div class="reg-consent" style="margin-bottom: 35px; background: #f8fafc; padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0;">
                     <label style="display: flex; gap: 12px; align-items: flex-start; cursor: pointer; margin: 0;">
                         <input type="checkbox" name="consent" required style="margin-top: 4px; width: 18px; height: 18px; accent-color: var(--teal-accent);"> 
-                        <span style="color: #475569; line-height: 1.6; font-size: 0.95rem;">{!! $settings['reg_consent_text'] ?? 'By clicking "Proceed to Pay", I agree to the <a href="#" style="color: var(--teal-accent); font-weight: 600;">Privacy Policy</a>, <a href="#" style="color: var(--teal-accent); font-weight: 600;">Terms & Conditions</a> and <a href="#" style="color: var(--teal-accent); font-weight: 600;">Cancellation Policy</a>.' !!}</span>
+                        <span style="color: #475569; line-height: 1.6; font-size: 0.95rem;">{!! $settings['reg_consent_text'] ?? 'By clicking "Proceed", I agree to the <a href="#" style="color: var(--teal-accent); font-weight: 600;">Privacy Policy</a>, <a href="#" style="color: var(--teal-accent); font-weight: 600;">Terms & Conditions</a> and <a href="#" style="color: var(--teal-accent); font-weight: 600;">Cancellation Policy</a>.' !!}</span>
                     </label>
                 </div>
 
                 <div class="reg-actions" style="display: flex; justify-content: flex-end;">
-                    <button type="submit" class="btn btn-teal" style="padding: 16px 40px; font-size: 1.2rem; border-radius: 10px; width: 100%; box-shadow: 0 10px 20px rgba(0, 168, 150, 0.2); display: flex; justify-content: center; align-items: center; gap: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">{{ $settings['reg_button_text'] ?? 'Proceed to Pay' }} <i class="fa-solid fa-arrow-right"></i></button>
+                    <button type="submit" class="btn btn-teal" style="padding: 16px 40px; font-size: 1.2rem; border-radius: 10px; width: 100%; box-shadow: 0 10px 20px rgba(0, 168, 150, 0.2); display: flex; justify-content: center; align-items: center; gap: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;"><span id="submit-button-text">{{ $settings['reg_button_text'] ?? 'Proceed to Pay' }}</span> <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </form>
 
@@ -204,6 +234,7 @@
     <!-- Registration Logic -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const modeRadios = document.querySelectorAll('input[name="participation_mode"]');
             const categoryRadios = document.querySelectorAll('input[name="reg_category"]');
             const paymentMethodRadios = document.querySelectorAll('input[name="payment_method"]');
             const addonCheckboxes = document.querySelectorAll('.addon-checkbox');
@@ -212,12 +243,89 @@
             const sumCatPrice = document.getElementById('sum-cat-price');
             const dynamicAddonsSummary = document.getElementById('dynamic-addons-summary');
             const sumTotalPrice = document.getElementById('sum-total-price');
+            
+            const paymentSection = document.getElementById('payment-section');
+            const orderSummarySection = document.getElementById('order-summary-section');
+            const offlineFallbackCategory = document.getElementById('offline-fallback-category');
+            const submitButtonText = document.getElementById('submit-button-text');
+            const defaultButtonText = {!! json_encode($settings['reg_button_text'] ?? 'Proceed to Pay') !!};
+
+            function updateModePrices() {
+                const selectedMode = document.querySelector('input[name="participation_mode"]:checked')?.value || 'online';
+                
+                if (selectedMode === 'offline') {
+                    if (paymentSection) paymentSection.style.display = 'none';
+                    if (orderSummarySection) orderSummarySection.style.display = 'none';
+                    if (offlineFallbackCategory) offlineFallbackCategory.disabled = false;
+                    if (submitButtonText) submitButtonText.innerText = 'Register Now (Pay at Venue)';
+                } else {
+                    if (paymentSection) paymentSection.style.display = 'block';
+                    if (orderSummarySection) orderSummarySection.style.display = 'block';
+                    if (offlineFallbackCategory) offlineFallbackCategory.disabled = true;
+                    if (submitButtonText) submitButtonText.innerText = defaultButtonText;
+                }
+                
+                // Style mode buttons
+                modeRadios.forEach(radio => {
+                    const label = radio.closest('.mode-option');
+                    if (radio.checked) {
+                        label.style.borderColor = 'var(--teal-accent)';
+                        label.style.background = '#f0fdfa';
+                    } else {
+                        label.style.borderColor = '#e2e8f0';
+                        label.style.background = '#fff';
+                    }
+                });
+
+                // Update category price radios
+                categoryRadios.forEach(radio => {
+                    const label = radio.closest('.category-option');
+                    const displayTag = label.querySelector('.cat-price-display');
+                    const offlineVal = parseInt(radio.getAttribute('data-offline')) || 0;
+                    const onlineValAttr = radio.getAttribute('data-online');
+                    const onlineVal = onlineValAttr ? parseInt(onlineValAttr) : null;
+
+                    if (selectedMode === 'online') {
+                        radio.style.display = 'inline-block';
+                        label.style.pointerEvents = 'auto';
+                        
+                        if (onlineVal !== null && !isNaN(onlineVal)) {
+                            radio.value = onlineVal;
+                            radio.disabled = false;
+                            label.style.opacity = '1';
+                            label.style.cursor = 'pointer';
+                            displayTag.innerText = onlineVal.toLocaleString() + ' INR';
+                        } else {
+                            radio.disabled = true;
+                            radio.checked = false;
+                            label.style.opacity = '0.5';
+                            label.style.cursor = 'not-allowed';
+                            displayTag.innerText = 'Offline Only';
+                        }
+                    } else {
+                        radio.style.display = 'none';
+                        radio.disabled = true;
+                        radio.checked = false;
+                        label.style.pointerEvents = 'none';
+                        label.style.borderColor = '#e2e8f0';
+                        label.style.background = '#fff';
+                        
+                        label.style.opacity = '1';
+                        label.style.cursor = 'default';
+                        displayTag.innerText = offlineVal.toLocaleString() + ' INR';
+                    }
+                });
+
+                calculateTotal();
+            }
 
             function updatePaymentStyle() {
                 // Reset all
                 document.querySelectorAll('.payment-option, .pay-method-option').forEach(el => {
-                    el.style.borderColor = '#e2e8f0';
-                    el.style.background = '#fff';
+                    if (el.style.opacity !== '0.5') {
+                        el.style.borderColor = '#e2e8f0';
+                        el.style.background = '#fff';
+                    }
                     
                     // Reset icon background for payment methods
                     const iconBg = el.querySelector('div[style*="rgba"]');
@@ -230,7 +338,7 @@
                 
                 // Style selected category
                 categoryRadios.forEach(radio => {
-                    if (radio.checked) {
+                    if (radio.checked && !radio.disabled) {
                         const label = radio.closest('.payment-option');
                         label.style.borderColor = 'var(--teal-accent)';
                         label.style.background = '#f0fdfa';
@@ -271,16 +379,19 @@
                 let catSelected = false;
                 
                 categoryRadios.forEach(radio => {
-                    if(radio.checked) {
+                    if(radio.checked && !radio.disabled) {
                         catPrice = parseInt(radio.value) || 0;
                         catName = radio.getAttribute('data-name');
                         catSelected = true;
                     }
                 });
 
+                const selectedMode = document.querySelector('input[name="participation_mode"]:checked')?.value || 'offline';
+                const modeLabel = selectedMode === 'online' ? ' (Online)' : ' (Offline)';
+
                 if (catSelected) {
-                    sumCatName.innerText = catName + ' Registration';
-                    sumCatPrice.innerText = catPrice + ' INR';
+                    sumCatName.innerText = catName + modeLabel + ' Registration';
+                    sumCatPrice.innerText = catPrice.toLocaleString() + ' INR';
                     total += catPrice;
                 } else {
                     sumCatName.innerText = 'Select a Category';
@@ -291,28 +402,30 @@
                 dynamicAddonsSummary.innerHTML = '';
                 addonCheckboxes.forEach(checkbox => {
                     if(checkbox.checked) {
-                        const price = parseInt(checkbox.value);
+                        const price = parseInt(checkbox.value) || 0;
                         const name = checkbox.getAttribute('data-name');
                         total += price;
                         
                         const div = document.createElement('div');
                         div.className = 'summary-line';
                         div.style.cssText = 'display: flex; justify-content: space-between; margin-bottom: 15px; color: #475569; font-size: 1.1rem;';
-                        div.innerHTML = `<span>${name}</span><span style="font-weight: 600; color: var(--navy-dark);">${price} INR</span>`;
+                        div.innerHTML = `<span>${name}</span><span style="font-weight: 600; color: var(--navy-dark);">${price.toLocaleString()} INR</span>`;
                         dynamicAddonsSummary.appendChild(div);
                     }
                 });
 
-                sumTotalPrice.innerText = total + ' INR';
+                sumTotalPrice.innerText = total.toLocaleString() + ' INR';
                 updatePaymentStyle();
             }
 
             // Add event listeners
+            modeRadios.forEach(m => m.addEventListener('change', updateModePrices));
             categoryRadios.forEach(r => r.addEventListener('change', calculateTotal));
             paymentMethodRadios.forEach(r => r.addEventListener('change', updatePaymentStyle));
             addonCheckboxes.forEach(r => r.addEventListener('change', calculateTotal));
             
             // Initial call
+            updateModePrices();
             calculateTotal();
 
             // Accordion Logic

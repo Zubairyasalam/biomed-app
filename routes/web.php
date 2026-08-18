@@ -42,6 +42,11 @@ Route::get('/invited-speakers', function () {
     return view('invited-speakers', compact('speakers'));
 })->name('invited-speakers');
 
+Route::get('/distinguished-speakers', function () {
+    $speakers = \App\Models\Speaker::where('type', 'distinguished')->orWhere('category', 'distinguished')->orderBy('sort_order')->get();
+    return view('distinguished-speakers', compact('speakers'));
+})->name('distinguished-speakers');
+
 Route::get('/committee', function () {
     $leadership = \App\Models\CommitteeMember::where('category', 'leadership')->orderBy('sort_order')->get()->groupBy('subcategory');
     $organizing = \App\Models\CommitteeMember::where('category', 'organizing_committee')->orderBy('sort_order')->get();
@@ -56,6 +61,10 @@ Route::get('/about-organizer', function () {
 Route::get('/topics', function () {
     return view('topics-page');
 })->name('topics');
+
+Route::get('/scientific-themes', function () {
+    return view('scientific-themes');
+})->name('scientific-themes');
 
 Route::get('/guidelines', function () {
     return view('guidelines');
@@ -78,6 +87,10 @@ Route::get('/venue', function () {
     $settings = \App\Models\SiteSetting::where('group', 'venue')->pluck('value', 'key');
     return view('venue', compact('settings'));
 })->name('venue');
+
+Route::get('/schedule', function () {
+    return view('schedule');
+})->name('schedule');
 Route::post('/api/submit-paper', [PaperSubmissionController::class, 'store'])->name('api.submit_paper');
 Route::post('/api/register', [RegistrationController::class, 'store']);
 

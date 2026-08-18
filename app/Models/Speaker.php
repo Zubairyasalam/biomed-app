@@ -15,5 +15,12 @@ class Speaker extends Model
         'title',
         'image_path',
         'sort_order',
+        'biography',
+        'field',
+        'current_role',
+        'education',
+        'honours',
+        'key_achievements',
+        'relevance',
     ];
 }

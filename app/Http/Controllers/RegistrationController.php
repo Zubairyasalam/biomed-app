@@ -13,7 +13,7 @@ class RegistrationController extends Controller
     {
         // 1. Validation
         $rules = [
-            'reg_category' => 'required|numeric',
+            'reg_category' => 'required',
             'payment_method' => 'required|string',
             'consent' => 'accepted',
             'fields' => 'required|array',
@@ -29,11 +29,11 @@ class RegistrationController extends Controller
         $request->validate($rules);
 
         // 2. Calculation
-        $totalAmount = (float) $request->reg_category;
+        $totalAmount = (float) str_replace(',', '', $request->reg_category);
         
         $addons = $request->input('addons', []);
         foreach ($addons as $addonPrice) {
-            $totalAmount += (float) $addonPrice;
+            $totalAmount += (float) str_replace(',', '', $addonPrice);
         }
 
         // 3. Storing

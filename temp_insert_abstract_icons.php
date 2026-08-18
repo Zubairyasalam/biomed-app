@@ -12,5 +12,7 @@ $fields = [
     ['key'=>'awards_oral_icon','value'=>'fa-solid fa-trophy','type'=>'text','group'=>'awards','label'=>'Oral Award Icon (FontAwesome Class)'],
     ['key'=>'awards_poster_icon','value'=>'fa-solid fa-medal','type'=>'text','group'=>'awards','label'=>'Poster Award Icon (FontAwesome Class)']
 ];
-\App\Models\SiteSetting::insert($fields);
+foreach ($fields as $field) {
+    \App\Models\SiteSetting::updateOrCreate(['key' => $field['key']], $field);
+}
 echo "Done";

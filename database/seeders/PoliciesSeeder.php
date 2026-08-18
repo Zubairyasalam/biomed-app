@@ -29,10 +29,10 @@ class PoliciesSeeder extends Seeder
             ],
             [
                 'title' => 'REGISTRATION CANCELLATION POLICY',
-                'content_html' => '<ul style="padding-left: 20px; margin-top: 0; margin-bottom: 0;">
-                            <li style="margin-bottom: 8px;">Cancellations made &ge;120 days prior to the event start date will receive a full refund, less a $150 administrative fee for processing and banking charges.</li>
-                            <li style="margin-bottom: 8px;">Cancellations made between 119 to 90 days prior to the event start date are eligible for a 50% refund of the registration fee.</li>
-                            <li style="margin-bottom: 8px;">Cancellations requested within 89 days or fewer from the event start date are non-refundable, including registration and accommodation-related charges.</li>
+                'content_html' => '<ul style="padding-left: 20px; margin-top: 0; margin-bottom: 0; color: #475569; line-height: 1.7;">
+                            <li style="margin-bottom: 10px;">Cancellations made &ge;120 days prior to the event start date will receive a full refund, less a $150 administrative fee for processing and banking charges.</li>
+                            <li style="margin-bottom: 10px;">Cancellations made between 119 to 90 days prior to the event start date are eligible for a 50% refund of the registration fee.</li>
+                            <li style="margin-bottom: 10px;">Cancellations requested within 89 days or fewer from the event start date are non-refundable, including registration and accommodation-related charges.</li>
                         </ul>',
                 'sort_order' => 2
             ]

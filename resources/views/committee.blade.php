@@ -12,207 +12,195 @@
     <!-- Page Banner -->
     <div class="page-banner" style="{{ $bannerImage ? "background-image: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.8)), url('" . asset($bannerImage) . "');" : '' }}">
         <div class="page-banner-content">
-            <h1>{{ $bannerTitle }}</h1>
+            <h1 style="text-transform: uppercase;">{{ $bannerTitle }}</h1>
         </div>
     </div>
 
-<!-- Content Section -->
-<!-- Content Section -->
 <style>
     .committee-page-wrap {
-        padding: 80px 5%;
-        background-color: var(--bg-white);
-    }
-    .cm-section-title {
-        text-align: center;
-        margin-bottom: 50px;
-    }
-    .cm-section-title h2 {
-        font-size: 2.5rem;
-        color: var(--navy-dark);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 15px;
-    }
-    .cm-section-title .cm-line {
-        height: 4px;
-        width: 80px;
-        background: linear-gradient(90deg, var(--teal-accent), var(--green-accent));
+        padding: 70px 20px;
+        max-width: 1200px;
         margin: 0 auto;
-        border-radius: 2px;
-    }
-    .cm-grid-main {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-        margin-bottom: 60px;
-        max-width: 1200px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .cm-grid-3 {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 25px;
-        margin-bottom: 60px;
-        max-width: 1200px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .cm-grid-4 {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        margin-bottom: 60px;
-        max-width: 1200px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .cm-card {
-        background: var(--bg-light);
-        border-radius: 16px;
-        padding: 35px 30px;
-        border: 1px solid var(--border-light);
-        box-shadow: var(--shadow-card);
-        transition: var(--transition);
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        z-index: 1;
-    }
-    .cm-card::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: var(--bg-white);
-        z-index: -1;
-        opacity: 0;
-        transition: var(--transition);
-    }
-    .cm-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 35px rgba(17, 35, 64, 0.1);
-        border-color: var(--teal-accent);
-    }
-    .cm-card:hover::before {
-        opacity: 1;
-    }
-    .cm-role-badge {
-        display: inline-block;
-        font-size: 0.85rem;
-        font-weight: 700;
-        color: var(--bg-white);
-        background: var(--navy-dark);
-        padding: 6px 16px;
-        border-radius: 20px;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 10px rgba(17, 35, 64, 0.2);
-    }
-    .cm-role-badge.teal { background: var(--teal-accent); box-shadow: 0 4px 10px rgba(0, 168, 150, 0.3); }
-    .cm-role-badge.green { background: var(--green-accent); box-shadow: 0 4px 10px rgba(164, 198, 57, 0.3); }
-    
-    .cm-name {
-        font-size: 1.4rem;
-        color: var(--navy-dark);
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
-    .cm-desc {
-        font-size: 1.05rem;
-        color: var(--text-body);
-        line-height: 1.5;
-    }
-    .cm-multi-person {
-        display: flex;
-        justify-content: space-between;
-        gap: 20px;
-        margin-top: 10px;
-    }
-    .cm-person {
-        flex: 1;
-    }
-    .cm-icon {
-        font-size: 2.5rem;
-        color: var(--teal-accent);
-        margin-bottom: 20px;
-        opacity: 0.8;
-    }
-    
-    .college-banner {
-        background: linear-gradient(135deg, var(--navy-dark) 0%, var(--teal-accent) 100%);
-        border-radius: 20px;
-        padding: 50px;
-        text-align: center;
-        color: var(--bg-white);
-        max-width: 900px;
-        margin: 0 auto;
-        box-shadow: 0 20px 40px rgba(0, 168, 150, 0.2);
-    }
-    .college-banner h3 {
-        color: var(--bg-white);
-        font-size: 2.2rem;
-        margin-bottom: 15px;
-    }
-    .college-banner p {
-        font-size: 1.2rem;
-        margin-bottom: 25px;
-        opacity: 0.9;
-    }
-    .college-banner a {
-        display: inline-block;
-        background: var(--bg-white);
-        color: var(--navy-dark);
-        padding: 12px 35px;
-        border-radius: 30px;
-        font-weight: 700;
-        text-decoration: none;
-        transition: var(--transition);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    .college-banner a:hover {
-        background: var(--green-accent);
-        color: var(--bg-white);
-        transform: translateY(-3px);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
     }
 
-    @media (max-width: 992px) {
-        .cm-grid-main, .cm-grid-3, .cm-grid-4 {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        .cm-multi-person {
-            flex-direction: column;
-            gap: 30px;
-        }
+    .cm-section-title {
+        text-align: center;
+        margin-bottom: 45px;
     }
-    @media (max-width: 768px) {
-        .cm-grid-main, .cm-grid-3, .cm-grid-4 {
-            grid-template-columns: 1fr;
-        }
-        .committee-page-wrap {
-            padding: 50px 5%;
-        }
+
+    .cm-section-title h2 {
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        font-weight: 800;
+        color: #0f172a;
+        margin: 0 0 12px 0;
+        text-transform: uppercase;
+        letter-spacing: -0.5px;
+    }
+
+    .cm-section-title .cm-line {
+        width: 70px;
+        height: 4px;
+        background: #84cc16;
+        margin: 0 auto 16px auto;
+        border-radius: 2px;
+    }
+
+    .cm-grid-main {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+        gap: 25px;
+        margin-bottom: 40px;
+    }
+
+    .cm-grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 25px;
+        margin-bottom: 50px;
+    }
+
+    .cm-grid-4 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 22px;
+        margin-bottom: 50px;
+    }
+
+    .cm-card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 30px 22px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.04);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .cm-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
+        border-color: #009688;
+    }
+
+    /* Professional UI Theme Pill Badge */
+    .cm-role-pill-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.82rem;
+        font-weight: 800;
+        color: #ffffff;
+        background: #0f172a;
+        padding: 6px 22px;
+        border-radius: 30px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+    }
+
+    .cm-role-pill-badge.teal {
+        background: #009688;
+        box-shadow: 0 4px 12px rgba(0, 150, 136, 0.25);
+    }
+
+    .cm-name {
+        font-size: 1.3rem;
+        color: #0f172a;
+        font-weight: 800;
+        margin: 0 0 6px 0;
+        line-height: 1.3;
+    }
+
+    .cm-desc {
+        font-size: 0.95rem;
+        color: #64748b;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    .cm-multi-group {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .cm-multi-person {
+        border-bottom: 1px dotted #cbd5e1;
+        padding-bottom: 15px;
+    }
+
+    .cm-multi-person:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .college-banner {
+        background: linear-gradient(135deg, #0f172a 0%, #009688 100%);
+        border-radius: 20px;
+        padding: 45px 30px;
+        text-align: center;
+        color: #ffffff;
+        max-width: 900px;
+        margin: 40px auto 0 auto;
+        box-shadow: 0 15px 35px rgba(0, 150, 136, 0.2);
+    }
+
+    .college-banner h3 {
+        color: #ffffff;
+        font-size: 2rem;
+        font-weight: 800;
+        margin: 0 0 12px 0;
+    }
+
+    .college-banner p {
+        font-size: 1.1rem;
+        margin: 0 0 22px 0;
+        opacity: 0.9;
+    }
+
+    .college-banner a {
+        display: inline-block;
+        background: #ffffff;
+        color: #0f172a;
+        padding: 10px 30px;
+        border-radius: 30px;
+        font-weight: 800;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        font-size: 0.88rem;
+    }
+
+    .college-banner a:hover {
+        background: #84cc16;
+        color: #ffffff;
+        transform: translateY(-2px);
     }
 </style>
 
 <div class="committee-page-wrap">
     
-    <!-- Core Leadership -->
-    @if(isset($leadership['chief_patron']) || isset($leadership['patrons']))
+    <!-- Leadership Header -->
     <div class="cm-section-title">
         <h2>Leadership</h2>
         <div class="cm-line"></div>
     </div>
     
+    <!-- Chief Patron & Patrons Grid -->
     <div class="cm-grid-main">
+        
+        <!-- Chief Patron Card -->
         @if(isset($leadership['chief_patron']))
-        <div class="cm-card" style="border-top: 4px solid var(--green-accent);">
-            <div><span class="cm-role-badge green">Chief - Patron</span></div>
+        <div class="cm-card">
+            <span class="cm-role-pill-badge teal">CHIEF PATRON</span>
             @foreach($leadership['chief_patron'] as $member)
                 <h4 class="cm-name">{{ $member->name }}</h4>
                 <p class="cm-desc">{!! nl2br(e($member->designation)) !!}</p>
@@ -220,52 +208,76 @@
         </div>
         @endif
         
+        <!-- Patrons Card -->
         @if(isset($leadership['patrons']))
-        <div class="cm-card" style="border-top: 4px solid var(--teal-accent);">
-            <div><span class="cm-role-badge teal">Patrons</span></div>
-            <div class="cm-multi-person">
+        <div class="cm-card">
+            <span class="cm-role-pill-badge teal">PATRONS</span>
+            <div class="cm-multi-group">
                 @foreach($leadership['patrons'] as $member)
-                <div class="cm-person">
+                <div class="cm-multi-person">
                     <h4 class="cm-name" style="font-size: 1.2rem;">{{ $member->name }}</h4>
-                    <p class="cm-desc" style="font-size: 0.95rem;">{!! nl2br(e($member->designation)) !!}</p>
+                    <p class="cm-desc" style="font-size: 0.9rem;">{!! nl2br(e($member->designation)) !!}</p>
                 </div>
                 @endforeach
             </div>
         </div>
         @endif
-    </div>
-    @endif
 
-    <!-- Organizing Leadership -->
-    @if(isset($leadership['convenor']) || isset($leadership['organizing_secretaries']))
+    </div>
+
+    <!-- Convenors & Co-Convenors Grid -->
     <div class="cm-grid-main">
-        @if(isset($leadership['convenor']))
-        <div class="cm-card" style="border-top: 4px solid var(--navy-dark);">
-            <div><span class="cm-role-badge">Convenor</span></div>
-            @foreach($leadership['convenor'] as $member)
-            <h4 class="cm-name">{{ $member->name }}</h4>
-            <p class="cm-desc">{!! nl2br(e($member->designation)) !!}</p>
-            @endforeach
-        </div>
-        @endif
         
-        @if(isset($leadership['organizing_secretaries']))
-        <div class="cm-card" style="border-top: 4px solid var(--navy-dark);">
-            <div><span class="cm-role-badge">Organizing Secretaries</span></div>
-            <div class="cm-multi-person">
-                @foreach($leadership['organizing_secretaries'] as $member)
-                <div class="cm-person">
+        <!-- Convenors Card -->
+        @if(isset($leadership['convenor']))
+        <div class="cm-card">
+            <span class="cm-role-pill-badge">CONVENORS</span>
+            <div class="cm-multi-group">
+                @foreach($leadership['convenor'] as $member)
+                <div class="cm-multi-person">
                     <h4 class="cm-name" style="font-size: 1.2rem;">{{ $member->name }}</h4>
-                    <p class="cm-desc" style="font-size: 0.95rem;">{!! nl2br(e($member->designation)) !!}</p>
+                    <p class="cm-desc" style="font-size: 0.9rem;">{!! nl2br(e($member->designation)) !!}</p>
                 </div>
                 @endforeach
             </div>
         </div>
         @endif
+
+        <!-- Co-Convenors Card -->
+        @if(isset($leadership['co_convenors']))
+        <div class="cm-card">
+            <span class="cm-role-pill-badge">CO-CONVENORS</span>
+            <div class="cm-multi-group">
+                @foreach($leadership['co_convenors'] as $member)
+                <div class="cm-multi-person">
+                    <h4 class="cm-name" style="font-size: 1.15rem;">{{ $member->name }}</h4>
+                    <p class="cm-desc" style="font-size: 0.88rem;">{!! nl2br(e($member->designation)) !!}</p>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
+
+    </div>
+
+    <!-- Organizing Secretaries Grid -->
+    @if(isset($leadership['organizing_secretaries']))
+    <div style="max-width: 650px; margin: 0 auto 50px auto;">
+        <div class="cm-card">
+            <span class="cm-role-pill-badge teal">ORGANIZING SECRETARIES</span>
+            <div class="cm-multi-group">
+                @foreach($leadership['organizing_secretaries'] as $member)
+                <div class="cm-multi-person">
+                    <h4 class="cm-name" style="font-size: 1.2rem;">{{ $member->name }}</h4>
+                    <p class="cm-desc" style="font-size: 0.9rem;">{!! nl2br(e($member->designation)) !!}</p>
+                </div>
+                @endforeach
+            </div>
+        </div>
     </div>
     @endif
 
-    <!-- Organizing Committee -->
+    <!-- Organizing Committee Section Grid -->
     @if(count($organizing) > 0)
     <div class="cm-section-title">
         <h2>Organizing Committee</h2>
@@ -275,38 +287,45 @@
     <div class="cm-grid-4">
         @foreach($organizing as $member)
         <div class="cm-card">
-            <h4 class="cm-name" style="font-size: 1.2rem;">{{ $member->name }}</h4>
-            <p class="cm-desc" style="font-size: 0.9rem;">{!! nl2br(e($member->designation)) !!}</p>
+            <span class="cm-role-pill-badge teal" style="font-size: 0.72rem; padding: 4px 14px; margin-bottom: 14px;">COMMITTEE</span>
+            <h4 class="cm-name" style="font-size: 1.18rem;">{{ $member->name }}</h4>
+            <p class="cm-desc" style="font-size: 0.88rem;">{!! nl2br(e($member->designation)) !!}</p>
         </div>
         @endforeach
     </div>
     @endif
 
-    <!-- Advisory Committee -->
-    @if(count($advisory) > 0)
+    <!-- Advisory Board Section -->
     <div class="cm-section-title">
-        <h2>Advisory Committee</h2>
+        <h2>Advisory Board</h2>
         <div class="cm-line"></div>
+        <p style="max-width: 800px; margin: 18px auto 0 auto; color: #64748b; font-size: 1.05rem; line-height: 1.6;">
+            The conference will be supported by an esteemed Advisory Board comprising experts from academia, research institutions, healthcare, industry and allied fields.
+        </p>
     </div>
     
+    @if(count($advisory) > 0)
     <div class="cm-grid-3">
         @foreach($advisory as $member)
         <div class="cm-card">
-            @if($member->icon)
-            <div class="cm-icon"><i class="{{ $member->icon }}"></i></div>
-            @endif
+            <span class="cm-role-pill-badge" style="font-size: 0.75rem; padding: 4px 16px; margin-bottom: 14px;">ADVISORY BOARD</span>
             <h4 class="cm-name">{{ $member->name }}</h4>
             <p class="cm-desc">{!! nl2br(e($member->designation)) !!}</p>
         </div>
         @endforeach
     </div>
+    @else
+    <div style="text-align: center; background: #f8fafc; border: 1px dashed #cbd5e1; padding: 40px; border-radius: 16px; max-width: 800px; margin: 0 auto 60px auto;">
+        <h4 style="margin: 0 0 8px 0; color: #0f172a; font-weight: 700; font-size: 1.2rem;">Advisory Board Members</h4>
+        <p style="margin: 0; color: #64748b; font-size: 0.95rem;">(Names and details to be announced soon.)</p>
+    </div>
     @endif
 
     <!-- Venue / College Info -->
-    <div class="college-banner mt-60">
+    <div class="college-banner">
         <h3>Madras Christian College</h3>
-        <p><i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i> Tambaram East, Chennai 600 059</p>
-        <a href="https://mcc.edu.in" target="_blank">Visit Website <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></a>
+        <p>Tambaram East, Chennai 600 059, Tamil Nadu, India</p>
+        <a href="https://mcc.edu.in" target="_blank">Visit Website</a>
     </div>
 
 </div>

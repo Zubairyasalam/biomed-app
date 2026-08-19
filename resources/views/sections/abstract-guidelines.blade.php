@@ -322,9 +322,6 @@
                 
                 <!-- Publication 1 -->
                 <div class="ag-pub-card">
-                    <div class="ag-pub-icon" style="background: rgba(0, 150, 136, 0.1); color: #009688;">
-                        <i class="fa-solid fa-square-poll-vertical"></i>
-                    </div>
                     <div>
                         <h4 style="font-size: 1.25rem; font-weight: 800; color: var(--ag-dark); margin: 0 0 10px 0;">Scopus-Indexed Journals</h4>
                         <p style="margin: 0; font-size: 1rem; color: var(--ag-text); line-height: 1.6;">Manuscripts meeting high academic standards will be recommended for fast-track publication in recognized Scopus-indexed journals.</p>
@@ -333,9 +330,6 @@
 
                 <!-- Publication 2 -->
                 <div class="ag-pub-card">
-                    <div class="ag-pub-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
-                        <i class="fa-solid fa-barcode"></i>
-                    </div>
                     <div>
                         <h4 style="font-size: 1.25rem; font-weight: 800; color: var(--ag-dark); margin: 0 0 10px 0;">ISBN Proceedings</h4>
                         <p style="margin: 0; font-size: 1rem; color: var(--ag-text); line-height: 1.6;">Accepted abstracts and short papers will be compiled and published in official edited conference proceedings with a registered ISBN.</p>
@@ -344,9 +338,6 @@
 
                 <!-- Publication 3 -->
                 <div class="ag-pub-card">
-                    <div class="ag-pub-icon" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">
-                        <i class="fa-solid fa-journal-whills"></i>
-                    </div>
                     <div>
                         <h4 style="font-size: 1.25rem; font-weight: 800; color: var(--ag-dark); margin: 0 0 10px 0;">Special Issues</h4>
                         <p style="margin: 0; font-size: 1rem; color: var(--ag-text); line-height: 1.6;">Exceptional papers may be selected for special thematic issues with partnering international journals, subject to standard peer-review.</p>

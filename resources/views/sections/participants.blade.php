@@ -559,9 +559,6 @@
                     <div class="jz-panel">
                         <div class="jz-panel-inner">
                             <div class="jz-panel-icon-row">
-                                <div class="jz-panel-icon-wrap">
-                                    <i class="{{ $step['icon'] }} jz-panel-icon-fa"></i>
-                                </div>
                                 <span class="jz-panel-num-label">STEP {{ $step['num'] }}</span>
                             </div>
                             <h4 class="jz-panel-title">{{ $step['title'] }}</h4>

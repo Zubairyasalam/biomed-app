@@ -16,15 +16,12 @@
             <div class="nav-dropdown-content">
                 <a href="{{ route('keynote-speakers') }}">Keynote Speakers</a>
                 <a href="{{ route('distinguished-speakers') }}">Distinguished Speakers</a>
-                <a href="{{ route('schedule') }}">Program / Schedule</a>
             </div>
         </div>
         <div class="nav-dropdown">
             <a href="#">Abstract</a>
             <div class="nav-dropdown-content">
                 <a href="{{ route('submit-paper') }}">Submit A Paper</a>
-                <a href="{{ route('topics') }}">Topics</a>
-                <a href="{{ route('guidelines') }}">Guidelines</a>
             </div>
         </div>
         <a href="{{ route('scientific-themes') }}">Themes</a>

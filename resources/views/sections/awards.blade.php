@@ -41,7 +41,7 @@
                 
                 @if($prize)
                 <div style="margin-bottom: 16px; background: #0f172a; color: #ffffff; padding: 5px 16px; border-radius: 20px; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px;">
-                    <i class="fa-solid fa-trophy" style="color: #009688;"></i> Cash Prize: {{ $prize }}
+                    Cash Prize: {{ $prize }}
                 </div>
                 @endif
 

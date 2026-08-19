@@ -177,7 +177,7 @@
             </h3>
             @if($prize)
             <div class="prize-badge">
-                <i class="fa-solid fa-trophy" style="color: #009688;"></i> Cash Prize: {{ $prize }}
+                Cash Prize: {{ $prize }}
             </div>
             @endif
         </div>

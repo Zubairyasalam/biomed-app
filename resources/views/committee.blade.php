@@ -26,7 +26,7 @@
 
     .cm-section-title {
         text-align: center;
-        margin-bottom: 45px;
+        margin-bottom: 25px;
     }
 
     .cm-section-title h2 {
@@ -286,86 +286,78 @@
         <div class="cm-line"></div>
     </div>
     
-    <!-- Chief Patron & Patrons Grid -->
-    <div class="cm-grid-main">
-        
-        <!-- Chief Patron Card -->
-        @if(isset($leadership['chief_patron']))
-        <div class="cm-card">
-            <span class="cm-role-pill-badge teal">CHIEF PATRON</span>
-            @foreach($leadership['chief_patron'] as $member)
-                <h4 class="cm-name">{{ $member->name }}</h4>
-                <p class="cm-desc">{!! nl2br(e($member->designation)) !!}</p>
-            @endforeach
-        </div>
-        @endif
-        
-        <!-- Patrons Card -->
-        @if(isset($leadership['patrons']))
-        <div class="cm-card">
-            <span class="cm-role-pill-badge teal">PATRONS</span>
-            <div class="cm-multi-group">
-                @foreach($leadership['patrons'] as $member)
-                <div class="cm-multi-person">
-                    <h4 class="cm-name" style="font-size: 1.2rem;">{{ $member->name }}</h4>
-                    <p class="cm-desc" style="font-size: 0.9rem;">{!! nl2br(e($member->designation)) !!}</p>
-                </div>
-                @endforeach
-            </div>
-        </div>
-        @endif
-
+    <!-- Chief Patron Grid -->
+    @if(isset($leadership['chief_patron']))
+    <div style="text-align: center; margin: 0 0 15px 0;">
+        <span class="cm-role-pill-badge teal" style="margin-bottom: 0;">CHIEF PATRON</span>
     </div>
-
-    <!-- Convenors & Co-Convenors Grid -->
-    <div class="cm-grid-main">
-        
-        <!-- Convenors Card -->
-        @if(isset($leadership['convenor']))
-        <div class="cm-card">
-            <span class="cm-role-pill-badge">CONVENORS</span>
-            <div class="cm-multi-group">
-                @foreach($leadership['convenor'] as $member)
-                <div class="cm-multi-person">
-                    <h4 class="cm-name" style="font-size: 1.2rem;">{{ $member->name }}</h4>
-                    <p class="cm-desc" style="font-size: 0.9rem;">{!! nl2br(e($member->designation)) !!}</p>
-                </div>
-                @endforeach
-            </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-bottom: 35px;">
+        @foreach($leadership['chief_patron'] as $member)
+        <div class="cm-person-card" style="width: 100%; max-width: 320px;">
+            <h4 class="cm-name">{{ $member->name }}</h4>
+            <p class="cm-desc">{!! nl2br(e($member->designation)) !!}</p>
         </div>
-        @endif
-
-        <!-- Co-Convenors Card -->
-        @if(isset($leadership['co_convenors']))
-        <div class="cm-card">
-            <span class="cm-role-pill-badge">CO-CONVENORS</span>
-            <div class="cm-multi-group">
-                @foreach($leadership['co_convenors'] as $member)
-                <div class="cm-multi-person">
-                    <h4 class="cm-name" style="font-size: 1.15rem;">{{ $member->name }}</h4>
-                    <p class="cm-desc" style="font-size: 0.88rem;">{!! nl2br(e($member->designation)) !!}</p>
-                </div>
-                @endforeach
-            </div>
-        </div>
-        @endif
-
+        @endforeach
     </div>
+    @endif
+    
+    <!-- Patrons Grid -->
+    @if(isset($leadership['patrons']))
+    <div style="text-align: center; margin: 0 0 15px 0;">
+        <span class="cm-role-pill-badge teal" style="margin-bottom: 0;">PATRONS</span>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-bottom: 35px;">
+        @foreach($leadership['patrons'] as $member)
+        <div class="cm-person-card" style="width: 100%; max-width: 320px;">
+            <h4 class="cm-name" style="font-size: 1.15rem;">{{ $member->name }}</h4>
+            <p class="cm-desc" style="font-size: 0.9rem;">{!! nl2br(e($member->designation)) !!}</p>
+        </div>
+        @endforeach
+    </div>
+    @endif
+
+    <!-- Convenors Grid -->
+    @if(isset($leadership['convenor']))
+    <div style="text-align: center; margin: 0 0 15px 0;">
+        <span class="cm-role-pill-badge" style="margin-bottom: 0;">CONVENORS</span>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-bottom: 35px;">
+        @foreach($leadership['convenor'] as $member)
+        <div class="cm-person-card" style="width: 100%; max-width: 320px;">
+            <h4 class="cm-name" style="font-size: 1.15rem;">{{ $member->name }}</h4>
+            <p class="cm-desc" style="font-size: 0.9rem;">{!! nl2br(e($member->designation)) !!}</p>
+        </div>
+        @endforeach
+    </div>
+    @endif
+
+    <!-- Co-Convenors Grid -->
+    @if(isset($leadership['co_convenors']))
+    <div style="text-align: center; margin: 0 0 15px 0;">
+        <span class="cm-role-pill-badge" style="margin-bottom: 0;">CO-CONVENORS</span>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-bottom: 35px;">
+        @foreach($leadership['co_convenors'] as $member)
+        <div class="cm-person-card" style="width: 100%; max-width: 320px;">
+            <h4 class="cm-name" style="font-size: 1.15rem;">{{ $member->name }}</h4>
+            <p class="cm-desc" style="font-size: 0.9rem;">{!! nl2br(e($member->designation)) !!}</p>
+        </div>
+        @endforeach
+    </div>
+    @endif
 
     <!-- Organizing Secretaries Grid -->
     @if(isset($leadership['organizing_secretaries']))
-    <div style="max-width: 650px; margin: 0 auto 50px auto;">
-        <div class="cm-card">
-            <span class="cm-role-pill-badge teal">ORGANIZING SECRETARIES</span>
-            <div class="cm-multi-group">
-                @foreach($leadership['organizing_secretaries'] as $member)
-                <div class="cm-multi-person">
-                    <h4 class="cm-name" style="font-size: 1.2rem;">{{ $member->name }}</h4>
-                    <p class="cm-desc" style="font-size: 0.9rem;">{!! nl2br(e($member->designation)) !!}</p>
-                </div>
-                @endforeach
-            </div>
+    <div style="text-align: center; margin: 0 0 15px 0;">
+        <span class="cm-role-pill-badge teal" style="margin-bottom: 0;">ORGANIZING SECRETARIES</span>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-bottom: 45px;">
+        @foreach($leadership['organizing_secretaries'] as $member)
+        <div class="cm-person-card" style="width: 100%; max-width: 320px;">
+            <h4 class="cm-name" style="font-size: 1.15rem;">{{ $member->name }}</h4>
+            <p class="cm-desc" style="font-size: 0.9rem;">{!! nl2br(e($member->designation)) !!}</p>
         </div>
+        @endforeach
     </div>
     @endif
 

@@ -96,71 +96,60 @@
         <style>
             .thrust-grid-alt {
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
                 gap: 30px;
+                align-items: start; /* Prevents cards from stretching vertically */
             }
             .premium-topic-card {
-                background: linear-gradient(145deg, #ffffff, #f8fafc);
-                padding: 35px;
+                background: #ffffff;
+                padding: 35px 30px;
                 border-radius: 20px;
-                box-shadow: 0 10px 40px rgba(0, 150, 136, 0.08);
-                border: 1px solid rgba(0, 150, 136, 0.15);
+                box-shadow: 0 10px 40px rgba(15, 23, 42, 0.04);
+                border: 1px solid rgba(0, 150, 136, 0.1);
                 position: relative;
                 overflow: hidden;
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                display: flex;
-                flex-direction: column;
-                height: 100%;
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             }
             .premium-topic-card:hover {
                 transform: translateY(-5px);
-                box-shadow: 0 15px 50px rgba(0, 150, 136, 0.12);
+                box-shadow: 0 20px 50px rgba(0, 150, 136, 0.12);
+                border-color: rgba(0, 150, 136, 0.3);
             }
             .premium-topic-card::before {
                 content: '';
                 position: absolute;
                 top: 0;
-                right: 0;
-                width: 150px;
-                height: 150px;
-                background: radial-gradient(circle, rgba(0,150,136,0.06) 0%, rgba(0,150,136,0) 70%);
-                border-radius: 0 20px 0 150px;
-                z-index: 0;
+                left: 0;
+                width: 100%;
+                height: 5px;
+                background: linear-gradient(90deg, #009688, #84cc16);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            .premium-topic-card:hover::before {
+                opacity: 1;
             }
             .premium-topic-title {
                 margin-top: 0;
-                margin-bottom: 25px;
+                margin-bottom: 20px;
                 font-size: 1.25rem;
                 color: #0f172a;
                 font-weight: 800;
                 line-height: 1.4;
                 position: relative;
-                z-index: 1;
                 display: flex;
+                flex-direction: column;
                 align-items: flex-start;
-                gap: 15px;
+                gap: 16px;
             }
-            .premium-topic-icon {
-                background: rgba(0, 150, 136, 0.1);
-                color: #009688;
-                width: 48px;
-                height: 48px;
-                border-radius: 12px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-shrink: 0;
-                font-size: 1.4rem;
-            }
+
             .premium-topic-list {
                 list-style: none;
                 padding: 0;
                 margin: 0;
                 display: flex;
                 flex-direction: column;
-                gap: 16px;
-                position: relative;
-                z-index: 1;
+                gap: 0;
             }
             .premium-topic-list li {
                 display: flex;
@@ -170,23 +159,23 @@
                 line-height: 1.5;
                 align-items: flex-start;
                 font-weight: 500;
+                padding: 12px 0;
+                border-bottom: 1px dashed rgba(0,0,0,0.06);
+            }
+            .premium-topic-list li:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
             }
             .premium-topic-list li i {
-                color: #009688;
-                margin-top: 5px;
-                font-size: 1rem;
-            }
-            @media (max-width: 991px) {
-                .thrust-grid-alt {
-                    grid-template-columns: 1fr;
-                }
+                color: #84cc16; /* Vibrant lime green for the checks */
+                margin-top: 4px;
+                font-size: 0.95rem;
             }
         </style>
         <div class="thrust-grid-alt">
             
             <div class="premium-topic-card">
                 <h3 class="premium-topic-title">
-                    <div class="premium-topic-icon"><i class="fa-solid fa-virus"></i></div>
                     <div>Track I: Emerging Infectious Diseases, Pandemic Preparedness and Molecular therapeutics</div>
                 </h3>
                 <ul class="premium-topic-list">
@@ -205,7 +194,6 @@
 
             <div class="premium-topic-card">
                 <h3 class="premium-topic-title">
-                    <div class="premium-topic-icon"><i class="fa-solid fa-earth-americas"></i></div>
                     <div>Track II: Ecosystem Health, Environmental Sustainability and Climate Health</div>
                 </h3>
                 <ul class="premium-topic-list">
@@ -222,7 +210,6 @@
 
             <div class="premium-topic-card">
                 <h3 class="premium-topic-title">
-                    <div class="premium-topic-icon"><i class="fa-solid fa-scale-balanced"></i></div>
                     <div>Track III: Policy, Governance and Community Engagement</div>
                 </h3>
                 <ul class="premium-topic-list">
@@ -236,7 +223,6 @@
 
             <div class="premium-topic-card">
                 <h3 class="premium-topic-title">
-                    <div class="premium-topic-icon"><i class="fa-solid fa-flask"></i></div>
                     <div>Track IV: Sustainable Chemistry and Future Technologies</div>
                 </h3>
                 <ul class="premium-topic-list">
@@ -250,7 +236,6 @@
 
             <div class="premium-topic-card">
                 <h3 class="premium-topic-title">
-                    <div class="premium-topic-icon"><i class="fa-solid fa-book-medical"></i></div>
                     <div>Track V: Indian Knowledge Systems (IKS) and One Health</div>
                 </h3>
                 <ul class="premium-topic-list">
@@ -271,7 +256,6 @@
 
             <div class="premium-topic-card">
                 <h3 class="premium-topic-title">
-                    <div class="premium-topic-icon"><i class="fa-solid fa-dna"></i></div>
                     <div>Track VI: Regenerative and Precision Medicine</div>
                 </h3>
                 <ul class="premium-topic-list">
@@ -289,37 +273,5 @@
         </div>
     </div>
     
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function equalizeCardHeights() {
-                var cards = document.querySelectorAll('.premium-topic-card');
-                var maxHeight = 0;
-                
-                // Reset heights for recalculation
-                cards.forEach(function(card) {
-                    card.style.minHeight = '0px';
-                });
-                
-                // Only enforce equal heights on desktop
-                if (window.innerWidth > 991) {
-                    cards.forEach(function(card) {
-                        if (card.offsetHeight > maxHeight) {
-                            maxHeight = card.offsetHeight;
-                        }
-                    });
-                    
-                    cards.forEach(function(card) {
-                        card.style.minHeight = maxHeight + 'px';
-                    });
-                }
-            }
-            
-            equalizeCardHeights();
-            window.addEventListener('resize', equalizeCardHeights);
-            
-            if (document.fonts) {
-                document.fonts.ready.then(equalizeCardHeights);
-            }
-        });
-    </script>
+
 </section>

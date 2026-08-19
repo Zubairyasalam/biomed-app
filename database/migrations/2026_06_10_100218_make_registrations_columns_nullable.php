@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('registrations', function (Blueprint $table) {
-            $table->string('title')->nullable()->change();
-            $table->string('name')->nullable()->change();
-            $table->string('organization')->nullable()->change();
-            $table->string('email')->nullable()->change();
-            $table->string('phone')->nullable()->change();
-            $table->string('city')->nullable()->change();
-            $table->string('country')->nullable()->change();
-            $table->string('postal_code')->nullable()->change();
-            $table->string('interested_in')->nullable()->change();
-            $table->string('reg_category')->nullable()->change();
-            $table->string('payment_method')->nullable()->change();
-        });
+        // Schema::table('registrations', function (Blueprint $table) {
+        //     if (Schema::hasColumn('registrations', 'title')) $table->string('title')->nullable()->change();
+        //     $table->string('name')->nullable()->change();
+        //     if (Schema::hasColumn('registrations', 'organization')) $table->string('organization')->nullable()->change();
+        //     $table->string('email')->nullable()->change();
+        //     $table->string('phone')->nullable()->change();
+        //     if (Schema::hasColumn('registrations', 'city')) $table->string('city')->nullable()->change();
+        //     if (Schema::hasColumn('registrations', 'country')) $table->string('country')->nullable()->change();
+        //     $table->string('postal_code')->nullable()->change();
+        //     $table->string('interested_in')->nullable()->change();
+        //     $table->string('reg_category')->nullable()->change();
+        //     $table->string('payment_method')->nullable()->change();
+        // });
     }
 
     /**
@@ -31,6 +31,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Reversing nullable changes is generally not needed
+        // Schema::table('registrations', function (Blueprint $table) {
+        // });
     }
 };

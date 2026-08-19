@@ -23,8 +23,20 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
+            AdminUserSeeder::class,
+            SiteSettingSeeder::class,
             RegistrationFieldSeeder::class,
             SpeakerSeeder::class,
+            AwardSeeder::class,
+            CommitteeSeeder::class,
+            DeadlineSeeder::class,
+            InterestOptionSeeder::class,
+            PoliciesSeeder::class,
+            RegistrationAddonsSeeder::class,
+            RegistrationFeeSeeder::class,
+            SponsorSeeder::class,
+            SubmitPaperFieldSeeder::class,
+            TopicSeeder::class,
         ]);
     }
 }

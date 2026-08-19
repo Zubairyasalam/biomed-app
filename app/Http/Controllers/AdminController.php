@@ -18,17 +18,13 @@ class AdminController extends Controller
         $registrationCount = Registration::count();
         $submissionCount = PaperSubmission::count();
         
-        // Calculate Revenue (Assuming reg_category holds the base amount, and workshop is a boolean for +500)
-        $totalRevenue = Registration::all()->sum(function($reg) {
-            $base = (int)$reg->reg_category;
-            $workshop = $reg->workshop ? 500 : 0;
-            return $base + $workshop;
-        });
+        // Calculate Revenue
+        $totalRevenue = Registration::sum('total_amount');
 
         // Chart Data: Registrations by category
-        $regByCategory = Registration::select('reg_category', \DB::raw('count(*) as total'))
-                            ->groupBy('reg_category')
-                            ->pluck('total', 'reg_category')
+        $regByCategory = Registration::select('category_name', \DB::raw('count(*) as total'))
+                            ->groupBy('category_name')
+                            ->pluck('total', 'category_name')
                             ->toArray();
 
         // Recent Activity
@@ -299,7 +295,7 @@ class AdminController extends Controller
     public function deadlines()
     {
         $deadlines = Deadline::orderBy('sort_order')->get();
-        $settings = SiteSetting::where('group', 'deadlines')->get()->groupBy('group');
+        $settings = ['deadlines' => SiteSetting::where('group', 'deadlines')->get()];
         return view('admin.deadlines.index', compact('deadlines', 'settings'));
     }
 

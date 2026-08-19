@@ -9,6 +9,27 @@ use App\Http\Controllers\RegistrationController;
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 
+Route::get('/setup-db', function () {
+    try {
+        // Force Laravel to clear the cache and read the new .env file
+        \Illuminate\Support\Facades\Artisan::call('config:clear');
+        \Illuminate\Support\Facades\Artisan::call('cache:clear');
+        
+        $pdo = new PDO("mysql:host=127.0.0.1;port=3306", "root", "");
+        $pdo->exec("CREATE DATABASE IF NOT EXISTS biomed_app");
+        
+        \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--seed' => true]);
+        
+        // Optionally delete the sqlite file so it doesn't cause confusion
+        if (file_exists(database_path('database.sqlite'))) {
+            @unlink(database_path('database.sqlite'));
+        }
+        
+        return "Cache cleared, MySQL database created, and migrations run successfully!<br><br>Output:<br>" . nl2br(\Illuminate\Support\Facades\Artisan::output());
+    } catch (\Exception $e) {
+        return "Error: " . $e->getMessage();
+    }
+});
 Route::get('/submit-paper', function () {
     return view('submit-paper');
 })->name('submit-paper');

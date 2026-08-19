@@ -49,22 +49,22 @@ Route::get('/speakers', function () {
 })->name('speakers');
 
 Route::get('/plenary-speakers', function () {
-    $speakers = \App\Models\Speaker::where('category', 'plenary')->orderBy('sort_order')->get();
+    $speakers = \App\Models\Speaker::where('type', 'plenary')->orderBy('sort_order')->get();
     return view('plenary-speakers', compact('speakers'));
 })->name('plenary-speakers');
 
 Route::get('/keynote-speakers', function () {
-    $speakers = \App\Models\Speaker::where('category', 'keynote')->orderBy('sort_order')->get();
+    $speakers = \App\Models\Speaker::where('type', 'keynote')->orderBy('sort_order')->get();
     return view('keynote-speakers', compact('speakers'));
 })->name('keynote-speakers');
 
 Route::get('/invited-speakers', function () {
-    $speakers = \App\Models\Speaker::where('category', 'invited')->orderBy('sort_order')->get();
+    $speakers = \App\Models\Speaker::where('type', 'invited')->orderBy('sort_order')->get();
     return view('invited-speakers', compact('speakers'));
 })->name('invited-speakers');
 
 Route::get('/distinguished-speakers', function () {
-    $speakers = \App\Models\Speaker::where('type', 'distinguished')->orWhere('category', 'distinguished')->orderBy('sort_order')->get();
+    $speakers = \App\Models\Speaker::where('type', 'distinguished')->orderBy('sort_order')->get();
     return view('distinguished-speakers', compact('speakers'));
 })->name('distinguished-speakers');
 

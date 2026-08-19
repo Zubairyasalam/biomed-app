@@ -17,7 +17,7 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 30px; justify-content: center;">
             
             @php
-                $distinguishedSpeakers = \App\Models\Speaker::where('type', 'distinguished')->orWhere('category', 'distinguished')->orderBy('sort_order')->get();
+                $distinguishedSpeakers = \App\Models\Speaker::where('type', 'distinguished')->orderBy('sort_order')->get();
             @endphp
 
             @foreach($distinguishedSpeakers as $speaker)

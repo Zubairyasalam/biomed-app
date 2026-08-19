@@ -209,7 +209,7 @@
     <div class="keynote-speaker-grid">
 
         @php
-            $keynoteSpeakers = \App\Models\Speaker::where('type', 'keynote')->orWhere('category', 'keynote')->orderBy('sort_order')->get();
+            $keynoteSpeakers = \App\Models\Speaker::where('type', 'keynote')->orderBy('sort_order')->get();
         @endphp
 
         @forelse($keynoteSpeakers as $speaker)

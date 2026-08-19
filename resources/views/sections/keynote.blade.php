@@ -17,7 +17,7 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 30px; justify-content: center;">
             
             @php
-                $keynoteSpeakers = \App\Models\Speaker::where('type', 'keynote')->orWhere('category', 'keynote')->orderBy('sort_order')->get();
+                $keynoteSpeakers = \App\Models\Speaker::where('type', 'keynote')->orderBy('sort_order')->get();
             @endphp
 
             @foreach($keynoteSpeakers as $speaker)

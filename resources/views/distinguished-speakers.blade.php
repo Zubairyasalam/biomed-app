@@ -209,7 +209,7 @@
     <div class="distinguished-speaker-grid">
 
         @php
-            $distinguishedSpeakers = \App\Models\Speaker::where('type', 'distinguished')->orWhere('category', 'distinguished')->orderBy('sort_order')->get();
+            $distinguishedSpeakers = \App\Models\Speaker::where('type', 'distinguished')->orderBy('sort_order')->get();
         @endphp
 
         @forelse($distinguishedSpeakers as $speaker)

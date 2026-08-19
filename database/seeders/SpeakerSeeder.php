@@ -20,6 +20,7 @@ class SpeakerSeeder extends Seeder
                 'country' => 'Germany',
                 'title' => 'Laser printing of cells',
                 'image_path' => 'images/speakers/speaker1.png',
+                'type' => 'keynote',
                 'sort_order' => 1
             ],
             [
@@ -29,6 +30,7 @@ class SpeakerSeeder extends Seeder
                 'country' => 'United States',
                 'title' => 'TBA',
                 'image_path' => 'images/speakers/speaker2.png',
+                'type' => 'keynote',
                 'sort_order' => 2
             ],
             [
@@ -38,6 +40,7 @@ class SpeakerSeeder extends Seeder
                 'country' => 'Australia',
                 'title' => 'Emerging Food Cultivation and Printing Technologies for Food Security and Personalization',
                 'image_path' => 'images/speakers/speaker3.png',
+                'type' => 'plenary',
                 'sort_order' => 3
             ],
             [
@@ -47,6 +50,7 @@ class SpeakerSeeder extends Seeder
                 'country' => 'United States',
                 'title' => 'Emerging Nanofiber Materials for Biomedical Applications',
                 'image_path' => 'images/speakers/speaker4.png',
+                'type' => 'plenary',
                 'sort_order' => 4
             ],
             [
@@ -56,6 +60,7 @@ class SpeakerSeeder extends Seeder
                 'country' => 'China',
                 'title' => 'Ensuring Implant Success in Humans Using Nanomedicine: Over 45,000 Patients and Still Counting',
                 'image_path' => 'images/speakers/speaker5.png',
+                'type' => 'distinguished',
                 'sort_order' => 5
             ],
             [
@@ -65,6 +70,7 @@ class SpeakerSeeder extends Seeder
                 'country' => 'United States',
                 'title' => 'TBA',
                 'image_path' => 'images/speakers/speaker6.png',
+                'type' => 'invited',
                 'sort_order' => 6
             ]
         ];

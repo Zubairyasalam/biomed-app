@@ -23,9 +23,7 @@
                 {!! nl2br(e($spSettings['submit_paper_desc'] ?? 'Submit your abstract through our official website. Accepted abstracts and presentations will be showcased in the summit program and included in the abstract book.')) !!}
             </p>
             
-            <div class="download-link-wrap">
-                <a href="{{ !empty($spSettings['submit_paper_sample_doc']) ? asset($spSettings['submit_paper_sample_doc']) : asset('sample-abstract.docx') }}" class="download-link" download>Download Sample Abstract Doc</a>
-            </div>
+
 
             <form class="submit-form" action="{{ route('api.submit_paper') }}" method="POST" enctype="multipart/form-data" id="abstract-form">
                 @csrf

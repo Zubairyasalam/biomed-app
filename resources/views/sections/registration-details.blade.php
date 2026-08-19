@@ -8,7 +8,6 @@
         
         <!-- Centered Header -->
         <div class="section-header-center" style="text-align: center; margin-bottom: 30px;">
-            <div class="section-subtitle" style="margin-bottom: 8px; font-weight: bold; color: #4fd1c5; text-transform: uppercase; letter-spacing: 2px; font-size: 1rem;">Secure Your Spot</div>
             <h2 class="section-title" style="margin-top: 0; margin-bottom: 12px; color: #ffffff; font-weight: 800; line-height: 1.2; white-space: nowrap;">Registration <span style="color: #4fd1c5;">Plans</span></h2>
             <div class="header-line" style="width: 60px; height: 4px; background-color: #4fd1c5; margin: 0 auto 15px auto;"></div>
             <p class="participants-desc" style="max-width: 700px; margin: 0 auto; color: #94a3b8 !important;">

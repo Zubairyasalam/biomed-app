@@ -3,7 +3,6 @@
     <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
         
         <div class="section-header-center" style="text-align: center; margin-bottom: 40px;">
-            <div class="section-subtitle" style="margin-bottom: 8px; font-weight: bold; color: #009688; text-transform: uppercase; letter-spacing: 2px; font-size: 1rem;">Secure Your Spot</div>
             <h2 class="section-title" style="margin-top: 0; margin-bottom: 12px; color: #ffffff; font-weight: 800; line-height: 1.2; white-space: nowrap;">Registration <span style="color: #009688;">Plans</span></h2>
             <div class="header-line" style="width: 60px; height: 4px; background-color: #009688; margin: 0 auto 15px auto;"></div>
             <p class="participants-desc" style="max-width: 800px; margin: 0 auto; color: #94a3b8 !important;">

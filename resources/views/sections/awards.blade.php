@@ -2,11 +2,8 @@
 <section class="awards-section" style="background-color: #ffffff; padding: 70px 0 50px 0; font-family: 'Inter', system-ui, -apple-system, sans-serif;">
     <div class="container" style="max-width: 1140px; margin: 0 auto; padding: 0 20px;">
         
-        <!-- Centered Header -->
+            <!-- Centered Header -->
         <div class="section-header-center" style="text-align: center; margin-bottom: 50px;">
-            <div class="section-subtitle" style="margin-bottom: 8px; font-weight: 700; color: #009688; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;">
-                Honoring Research & Innovation
-            </div>
             <h2 class="section-title" style="margin-top: 0; margin-bottom: 14px; color: #0f172a; font-weight: 800; font-size: 2.2rem; text-transform: uppercase; tracking: -0.5px;">
                 Conference Awards
             </h2>

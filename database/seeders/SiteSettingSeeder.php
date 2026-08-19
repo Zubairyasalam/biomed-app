@@ -13,7 +13,7 @@ class SiteSettingSeeder extends Seeder
     {
         $settings = [
             // Contact Info
-            ['key' => 'contact_email', 'value' => 'info@biomedsummit2027.com', 'group' => 'contact', 'type' => 'text', 'label' => 'Contact Email'],
+            ['key' => 'contact_email', 'value' => 'gohc2026@gmail.com', 'group' => 'contact', 'type' => 'text', 'label' => 'Contact Email'],
             ['key' => 'contact_phone', 'value' => '+91 9876543210', 'group' => 'contact', 'type' => 'text', 'label' => 'Contact Phone'],
             ['key' => 'contact_address', 'value' => 'Madras Christian College, Tambaram, Chennai', 'group' => 'contact', 'type' => 'text', 'label' => 'Address'],
             ['key' => 'topbar_format', 'value' => 'Online | In-person', 'group' => 'contact', 'type' => 'text', 'label' => 'Event Format (Topbar)'],

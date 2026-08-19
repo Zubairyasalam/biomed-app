@@ -3,21 +3,20 @@
     <div class="container" style="max-width: 95%; margin: 0 auto; padding: 0 20px;">
         
         <!-- Preamble & Countdown Grid -->
-        <div class="about-container" style="display: flex; gap: 40px; flex-wrap: wrap; align-items: stretch; margin-bottom: 60px;">
+        <div class="about-container" style="display: flex; gap: 40px; flex-wrap: wrap; align-items: flex-start; margin-bottom: 60px;">
             
             <!-- Left Side: Preamble -->
-            <div class="about-content" style="flex: 1; min-width: 320px; display: flex; flex-direction: column; justify-content: center;">
-                <div class="section-subtitle" style="font-size: 1rem; font-weight: bold; color: #009688; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">Preamble</div>
-                <h2 class="section-title" style="font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 800; color: #112340; margin-bottom: 25px; line-height: 1.2;">
+            <div class="about-content" style="flex: 1; min-width: 320px; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 10px;">
+                <h2 class="section-title" style="font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 800; color: #112340; margin: 0 0 20px 0; line-height: 1.2;">
                     About The <span style="color: #009688;">Confluence</span>
                 </h2>
-                <div class="about-text" style="text-align: justify; font-size: 1.08rem; color: #475569; line-height: 1.8; display: flex; flex-direction: column; gap: 20px;">
+                <div class="about-text" style="text-align: justify; font-size: 0.95rem; color: #475569; line-height: 1.65; display: flex; flex-direction: column; gap: 15px;">
                     {!! nl2br(e($settings['about_conference'] ?? 'The Global One Health Confluence 2026 is envisioned as a flagship international interdisciplinary forum...')) !!}
                 </div>
             </div>
             
             <!-- Right Side: Countdown and Core Aims -->
-            <div class="about-countdown" style="flex: 1; min-width: 320px; background: #ffffff; padding: 40px; border-radius: 20px; box-shadow: 0 15px 40px rgba(17, 35, 64, 0.05); border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="about-countdown" style="flex: 1; min-width: 320px; background: #ffffff; padding: 40px; border-radius: 20px; box-shadow: 0 15px 40px rgba(17, 35, 64, 0.05); border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: flex-start; gap: 40px;">
                 <div>
                     <div class="countdown-header" style="font-size: 1.4rem; font-weight: 700; text-align: center; margin-bottom: 25px; color: #112340;">
                         Conference <span style="color: #009688;">Starts In</span>

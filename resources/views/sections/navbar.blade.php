@@ -10,22 +10,15 @@
     
     <div class="nav-links" id="navLinks">
         <a href="/">Home</a>
-        <div class="nav-dropdown">
-            <a href="#">About</a>
-            <div class="nav-dropdown-content">
-                <a href="{{ route('committee') }}">Committee</a>
-            </div>
-        </div>
+        <a href="{{ route('committee') }}">Committee</a>
         <div class="nav-dropdown">
             <a href="#">Experts</a>
-
             <div class="nav-dropdown-content">
                 <a href="{{ route('keynote-speakers') }}">Keynote Speakers</a>
                 <a href="{{ route('distinguished-speakers') }}">Distinguished Speakers</a>
                 <a href="{{ route('schedule') }}">Program / Schedule</a>
             </div>
         </div>
-        <a href="{{ route('scientific-themes') }}">Themes</a>
         <div class="nav-dropdown">
             <a href="#">Abstract</a>
             <div class="nav-dropdown-content">
@@ -34,8 +27,9 @@
                 <a href="{{ route('guidelines') }}">Guidelines</a>
             </div>
         </div>
-        <a href="{{ route('awards') }}">Awards</a>
+        <a href="{{ route('scientific-themes') }}">Themes</a>
         <a href="{{ route('schedule') }}">Schedule</a>
+        <a href="{{ route('awards') }}">Awards</a>
         <a href="{{ route('venue') }}">Venue</a>
     </div>
     

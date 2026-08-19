@@ -17,7 +17,7 @@
                 </div>
                 <div class="fc-text">
                     <strong>Email Us</strong>
-                    <p>{{ $settings['contact_email'] ?? 'contact@biomedsummit.org' }}</p>
+                    <p>gohc2026@gmail.com</p>
                 </div>
             </div>
             <div class="fc-item">

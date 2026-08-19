@@ -121,7 +121,7 @@
             </div>
 
             <p style="font-size:14px;color:#64748b;text-align:center;">
-                For queries, contact us at <a href="mailto:info@biomedsummit2027.com" style="color:#00A896;">info@biomedsummit2027.com</a>
+                <p>Need help? Contact us at <a href="mailto:gohc2026@gmail.com" style="color: #009688; text-decoration: none;">gohc2026@gmail.com</a></p>
             </p>
         </div>
 

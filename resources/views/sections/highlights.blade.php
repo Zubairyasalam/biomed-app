@@ -33,14 +33,11 @@
 @endphp
 
 <!-- Key Highlights Section -->
-<section class="highlights-section" style="background-color: #ffffff; padding: 70px 0 80px 0;">
+<section class="highlights-section" style="background-color: #ffffff; padding: 70px 0 20px 0;">
     <div style="max-width: 90%; margin: 0 auto; padding: 0 20px;">
 
         <!-- Header -->
         <div style="text-align: center; margin-bottom: 50px;">
-            <div style="font-size: 0.82rem; font-weight: 800; color: #009688; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 8px;">
-                EVENT PROGRAM
-            </div>
             <h2 style="font-size: clamp(2.2rem, 4.5vw, 3rem); font-weight: 900; color: #112340; margin: 0 0 12px 0; letter-spacing: -0.6px;">
                 Conference <span style="color: #009688;">Highlights</span>
             </h2>

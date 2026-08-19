@@ -1,12 +1,9 @@
 <!-- Programme Schedule Section -->
-<section id="schedule" class="schedule-section" style="background: #ffffff; padding: 70px 0; font-family: 'Inter', system-ui, -apple-system, sans-serif;">
+<section id="schedule" class="schedule-section" style="background: #ffffff; padding: 20px 0 70px; font-family: 'Inter', system-ui, -apple-system, sans-serif;">
     <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
         
         <!-- Section Header -->
         <div style="text-align: center; margin-bottom: 45px;">
-            <div style="font-weight: 700; color: #009688; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 8px;">
-                Conference Agenda
-            </div>
             <h2 style="margin: 0 0 14px 0; color: #0f172a; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; text-transform: uppercase;">
                 Programme Schedule
             </h2>

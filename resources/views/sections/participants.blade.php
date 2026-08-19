@@ -1,5 +1,5 @@
 {{-- Objectives + Participants + Strategic Framework — Stacked Header & Full-Width Cards Layout --}}
-<section style="background: #ffffff; padding: 70px 0 80px;">
+<section style="background: #ffffff; padding: 70px 0 20px;">
     <div style="max-width: 90%; margin: 0 auto; padding: 0 20px;">
 
 
@@ -76,7 +76,6 @@
 
             {{-- Section Header --}}
             <div style="text-align: center; max-width: 780px; margin: 0 auto 58px; position: relative; z-index: 2;">
-                <div class="pillars-eyebrow">Strategic Framework</div>
                 <h3 class="pillars-heading">
                     Five Pillars Driving <span class="pillars-heading-accent">Our Mission</span>
                 </h3>
@@ -372,21 +371,19 @@
 
 
         {{-- ── EXPECTED OUTCOMES ── --}}
-        <div class="outcomes-v2-wrap" style="margin-bottom: 80px; position: relative; padding: 0;">
-
+        <div class="outcomes-neo-wrap" style="margin-bottom: 90px; position: relative;">
+            
             {{-- Section Header --}}
-            <div style="text-align: center; max-width: 750px; margin: 0 auto 52px;">
-                <div class="ov2-eyebrow">Deliverables</div>
-                <h3 class="ov2-heading">
-                    Key Expected <span class="ov2-heading-accent">Outcomes</span>
+            <div style="text-align: center; max-width: 800px; margin: 0 auto 60px;">
+                <h3 style="font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 900; color: #0f172a; margin: 0 0 16px; letter-spacing: -0.5px; line-height: 1.2;">
+                    Key Expected <span style="color: #009688;">Outcomes</span>
                 </h3>
-                <div class="ov2-heading-bar"></div>
-                <p class="ov2-subtext">
-                    Tangible impacts and key deliverables driving the Global One Health vision forward.
+                <div style="width: 60px; height: 4px; background: linear-gradient(90deg, #009688, #1de9b6); border-radius: 2px; margin: 0 auto 20px;"></div>
+                <p style="font-size: 1.1rem; color: #64748b; line-height: 1.7; margin: 0;">
+                    Tangible impacts and key deliverables driving the Global One Health vision forward through innovation, policy, and education.
                 </p>
             </div>
 
-            {{-- Horizontal Numbered Rows --}}
             @php
             $outcomes = [
                 ['icon' => 'fa-solid fa-users-gear',     'num' => '01', 'label' => 'Strengthened interdisciplinary collaborations',                         'tag' => 'Collaboration'],
@@ -394,176 +391,129 @@
                 ['icon' => 'fa-solid fa-book-bookmark',  'num' => '03', 'label' => 'High-quality scientific publications',                                   'tag' => 'Research'],
                 ['icon' => 'fa-solid fa-lightbulb',      'num' => '04', 'label' => 'Translation of research into innovation',                                'tag' => 'Innovation'],
                 ['icon' => 'fa-solid fa-landmark',       'num' => '05', 'label' => 'Policy recommendations for One Health',                                  'tag' => 'Policy'],
-                ['icon' => 'fa-solid fa-graduation-cap', 'num' => '06', 'label' => 'Capacity building for early-career researchers and students',             'tag' => 'Education'],
+                ['icon' => 'fa-solid fa-graduation-cap', 'num' => '06', 'label' => 'Capacity building for early-career researchers',             'tag' => 'Education'],
             ];
             @endphp
 
-            <div class="ov2-list">
+            <div class="outcomes-grid">
                 @foreach($outcomes as $i => $o)
-                <div class="ov2-row ov2-row-delay-{{ $i }}">
-                    {{-- Large ghost number --}}
-                    <div class="ov2-big-num">{{ $o['num'] }}</div>
-
-                    {{-- Icon circle --}}
-                    <div class="ov2-icon-circle">
-                        <i class="{{ $o['icon'] }} ov2-icon-fa"></i>
+                <div class="outcome-card">
+                    <div class="outcome-icon-wrapper">
+                        <i class="{{ $o['icon'] }}"></i>
                     </div>
-
-                    {{-- Main content --}}
-                    <div class="ov2-row-content">
-                        <span class="ov2-tag">{{ $o['tag'] }}</span>
-                        <h4 class="ov2-row-label">{{ $o['label'] }}</h4>
+                    <div class="outcome-content">
+                        <div class="outcome-tag">{{ $o['tag'] }}</div>
+                        <h4 class="outcome-title">{{ $o['label'] }}</h4>
                     </div>
-
-                    {{-- Right arrow indicator --}}
-                    <div class="ov2-arrow">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </div>
+                    <div class="outcome-num">{{ $o['num'] }}</div>
+                    <div class="outcome-hover-line"></div>
                 </div>
                 @endforeach
             </div>
         </div>
 
         <style>
-            /* ── Outcomes V2 Wrap ── */
-            .outcomes-v2-wrap { }
-
-            /* ── Header ── */
-            .ov2-eyebrow {
-                display: inline-block;
-                font-size: 0.73rem; font-weight: 800;
-                color: #009688;
-                text-transform: uppercase; letter-spacing: 3px;
-                background: rgba(0,150,136,0.08);
-                border: 1px solid rgba(0,150,136,0.2);
-                padding: 5px 16px; border-radius: 50px;
-                margin-bottom: 16px;
+            .outcomes-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 30px;
+                max-width: 1100px;
+                margin: 0 auto;
             }
-            .ov2-heading {
-                font-size: clamp(2rem, 4vw, 2.8rem);
-                font-weight: 900; color: #112340;
-                margin: 0 0 14px; letter-spacing: -0.5px; line-height: 1.2;
+            .outcome-card {
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 20px;
+                padding: 40px 30px;
+                position: relative;
+                overflow: hidden;
+                transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                z-index: 1;
             }
-            .ov2-heading-accent {
-                background: linear-gradient(135deg, #009688, #00bcd4);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
+            .outcome-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+                border-color: rgba(0, 150, 136, 0.3);
             }
-            .ov2-heading-bar {
-                width: 52px; height: 4px;
+            .outcome-hover-line {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 4px;
                 background: linear-gradient(90deg, #009688, #1de9b6);
-                border-radius: 2px; margin: 0 auto 16px;
+                transition: width 0.4s ease;
             }
-            .ov2-subtext {
-                font-size: 1rem; color: #64748b; line-height: 1.7; margin: 0;
+            .outcome-card:hover .outcome-hover-line {
+                width: 100%;
             }
-
-            /* ── Row List ── */
-            .ov2-list {
-                display: flex; flex-direction: column; gap: 0;
-                border-radius: 20px; overflow: hidden;
-                border: 1px solid #e8f4f3;
-            }
-
-            /* ── Each Row ── */
-            .ov2-row {
+            .outcome-icon-wrapper {
+                width: 65px;
+                height: 65px;
+                border-radius: 16px;
+                background: rgba(0, 150, 136, 0.08);
                 display: flex;
                 align-items: center;
-                gap: 24px;
-                padding: 22px 32px;
-                background: #ffffff;
-                border-bottom: 1px solid #eef6f5;
-                position: relative;
-                transition: background 0.25s ease, padding-left 0.3s ease;
-                animation: ov2RowIn 0.5s ease both;
-                cursor: default;
-                overflow: hidden;
+                justify-content: center;
+                margin-bottom: 25px;
+                transition: all 0.4s ease;
+                border: 1px solid rgba(0, 150, 136, 0.15);
             }
-            .ov2-row:last-child { border-bottom: none; }
-            .ov2-row-delay-0 { animation-delay: 0.04s; }
-            .ov2-row-delay-1 { animation-delay: 0.10s; }
-            .ov2-row-delay-2 { animation-delay: 0.16s; }
-            .ov2-row-delay-3 { animation-delay: 0.22s; }
-            .ov2-row-delay-4 { animation-delay: 0.28s; }
-            .ov2-row-delay-5 { animation-delay: 0.34s; }
-            @keyframes ov2RowIn {
-                from { opacity: 0; transform: translateX(-16px); }
-                to   { opacity: 1; transform: translateX(0); }
+            .outcome-card:hover .outcome-icon-wrapper {
+                background: #009688;
+                transform: scale(1.05) rotate(-5deg);
+                box-shadow: 0 10px 20px rgba(0, 150, 136, 0.2);
             }
-            .ov2-row:nth-child(even) { background: #f8fffe; }
-
-            /* Left accent stripe on hover */
-            .ov2-row::before {
-                content: '';
-                position: absolute;
-                left: 0; top: 0; bottom: 0;
-                width: 3px;
-                background: linear-gradient(180deg, #009688, #1de9b6);
-                transform: scaleY(0);
-                transition: transform 0.3s ease;
-                border-radius: 0 2px 2px 0;
+            .outcome-icon-wrapper i {
+                font-size: 1.8rem;
+                color: #009688;
+                transition: color 0.4s ease;
             }
-            .ov2-row:hover::before { transform: scaleY(1); }
-            .ov2-row:hover {
-                background: #edfaf8 !important;
-                padding-left: 38px;
+            .outcome-card:hover .outcome-icon-wrapper i {
+                color: #ffffff;
             }
-            .ov2-row:hover .ov2-icon-circle {
-                background: linear-gradient(135deg, #009688, #1de9b6);
-                border-color: transparent;
-                transform: rotate(-8deg) scale(1.1);
+            .outcome-tag {
+                font-size: 0.75rem;
+                font-weight: 800;
+                color: #009688;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                margin-bottom: 10px;
             }
-            .ov2-row:hover .ov2-icon-fa { color: #ffffff; }
-            .ov2-row:hover .ov2-big-num { color: rgba(0,150,136,0.18); }
-            .ov2-row:hover .ov2-arrow { color: #009688; transform: translateX(6px); }
-
-            /* ── Ghost Number ── */
-            .ov2-big-num {
-                font-size: 2.8rem; font-weight: 900;
-                color: rgba(0,150,136,0.07);
-                line-height: 1; letter-spacing: -3px;
-                min-width: 60px; text-align: center;
-                user-select: none;
+            .outcome-title {
+                font-size: 1.25rem;
+                font-weight: 800;
+                color: #0f172a;
+                line-height: 1.4;
+                margin: 0;
                 transition: color 0.3s ease;
-                flex-shrink: 0;
             }
-
-            /* ── Icon ── */
-            .ov2-icon-circle {
-                width: 48px; height: 48px;
-                border-radius: 50%;
-                background: rgba(0,150,136,0.09);
-                border: 1.5px solid rgba(0,150,136,0.18);
-                display: flex; align-items: center; justify-content: center;
-                flex-shrink: 0;
-                transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+            .outcome-card:hover .outcome-title {
+                color: #009688;
             }
-            .ov2-icon-fa { font-size: 1.15rem; color: #009688; transition: color 0.3s ease; }
-
-            /* ── Content ── */
-            .ov2-row-content { flex: 1; min-width: 0; }
-            .ov2-tag {
-                display: inline-block;
-                font-size: 0.65rem; font-weight: 800;
-                color: #009688; text-transform: uppercase; letter-spacing: 2px;
-                margin-bottom: 4px;
+            .outcome-num {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                font-size: 4rem;
+                font-weight: 900;
+                color: rgba(15, 23, 42, 0.03);
+                line-height: 1;
+                pointer-events: none;
+                transition: color 0.4s ease, transform 0.4s ease;
             }
-            .ov2-row-label {
-                font-size: 1.02rem; font-weight: 700;
-                color: #112340; margin: 0; line-height: 1.35;
+            .outcome-card:hover .outcome-num {
+                color: rgba(0, 150, 136, 0.08);
+                transform: scale(1.1) translate(-5px, 5px);
             }
-
-            /* ── Arrow ── */
-            .ov2-arrow {
-                font-size: 1rem; color: #cbd5e1;
-                transition: color 0.3s ease, transform 0.3s ease;
-                flex-shrink: 0;
-            }
-
-            @media (max-width: 600px) {
-                .ov2-row { padding: 18px 20px; gap: 14px; }
-                .ov2-big-num { font-size: 2rem; min-width: 40px; }
+            @media (max-width: 768px) {
+                .outcome-card {
+                    padding: 30px 20px;
+                }
             }
         </style>
 
@@ -577,8 +527,7 @@
             <div class="jz-orb jz-orb-r"></div>
 
             {{-- Header --}}
-            <div style="text-align: center; max-width: 680px; margin: 0 auto 72px; position: relative; z-index: 2;">
-                <div class="jz-eyebrow">4-Step Pathway</div>
+            <div style="text-align: center; max-width: 680px; margin: 0 auto 35px; position: relative; z-index: 2;">
                 <h3 class="jz-heading">Our Journey to <span class="jz-accent">Impact</span></h3>
                 <div class="jz-bar"></div>
                 <p class="jz-subtext">A strategic 4-step pathway driving global collaboration into sustainable transformation.</p>

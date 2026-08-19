@@ -69,22 +69,32 @@
 
     .cm-card {
         background: #ffffff;
-        border-radius: 16px;
-        padding: 30px 22px;
-        border: 1px solid #e2e8f0;
-        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.04);
-        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        border-radius: 20px;
+        padding: 35px 25px;
+        border: 1px solid rgba(0, 150, 136, 0.1);
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03), inset 0 2px 0 0 #009688;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cm-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: radial-gradient(circle at top right, rgba(0,150,136,0.05) 0%, transparent 50%);
+        pointer-events: none;
     }
 
     .cm-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
-        border-color: #009688;
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08), inset 0 3px 0 0 #1de9b6;
+        border-color: rgba(0, 150, 136, 0.3);
     }
 
     /* Professional UI Theme Pill Badge */
@@ -92,53 +102,135 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        font-size: 0.82rem;
+        font-size: 0.75rem;
         font-weight: 800;
-        color: #ffffff;
-        background: #0f172a;
-        padding: 6px 22px;
+        color: #009688;
+        background: rgba(0, 150, 136, 0.08);
+        padding: 6px 20px;
         border-radius: 30px;
         text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 16px;
-        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+        letter-spacing: 2px;
+        margin-bottom: 24px;
+        border: 1px solid rgba(0, 150, 136, 0.15);
+        transition: all 0.3s ease;
+    }
+
+    .cm-card:hover .cm-role-pill-badge {
+        background: #009688;
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(0, 150, 136, 0.25);
     }
 
     .cm-role-pill-badge.teal {
         background: #009688;
+        color: #ffffff;
         box-shadow: 0 4px 12px rgba(0, 150, 136, 0.25);
     }
 
     .cm-name {
-        font-size: 1.3rem;
+        font-size: 1.35rem;
         color: #0f172a;
-        font-weight: 800;
+        font-weight: 900;
         margin: 0 0 6px 0;
         line-height: 1.3;
+        letter-spacing: -0.3px;
+        transition: color 0.3s ease;
+    }
+
+    .cm-card:hover .cm-name {
+        color: #009688;
     }
 
     .cm-desc {
         font-size: 0.95rem;
         color: #64748b;
-        line-height: 1.5;
+        line-height: 1.6;
         margin: 0;
+        font-weight: 500;
     }
 
     .cm-multi-group {
         display: flex;
         flex-direction: column;
-        gap: 20px;
         width: 100%;
+        position: relative;
     }
 
     .cm-multi-person {
-        border-bottom: 1px dotted #cbd5e1;
-        padding-bottom: 15px;
+        padding: 20px 0;
+        position: relative;
+    }
+
+    .cm-multi-person::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 10%;
+        width: 80%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(0,150,136,0.2), transparent);
+    }
+
+    .cm-multi-person:first-child {
+        padding-top: 0;
     }
 
     .cm-multi-person:last-child {
-        border-bottom: none;
         padding-bottom: 0;
+    }
+
+    .cm-multi-person:last-child::after {
+        display: none;
+    }
+
+    /* Single Person Card for Grids */
+    .cm-person-card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 25px 20px;
+        border: 1px solid rgba(0, 150, 136, 0.1);
+        box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03), inset 0 2px 0 0 transparent;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .cm-person-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: radial-gradient(circle at top right, rgba(0,150,136,0.05) 0%, transparent 50%);
+        pointer-events: none;
+    }
+
+    .cm-person-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08), inset 0 3px 0 0 #1de9b6;
+        border-color: rgba(0, 150, 136, 0.2);
+    }
+
+    .cm-person-card .cm-name {
+        font-size: 1.15rem;
+        color: #0f172a;
+        font-weight: 800;
+        margin: 0 0 4px 0;
+        line-height: 1.3;
+        transition: color 0.3s ease;
+    }
+
+    .cm-person-card:hover .cm-name {
+        color: #009688;
+    }
+
+    .cm-person-card .cm-desc {
+        font-size: 0.9rem;
+        color: #64748b;
+        line-height: 1.5;
+        margin: 0;
     }
 
     .college-banner {
@@ -286,10 +378,9 @@
     
     <div class="cm-grid-4">
         @foreach($organizing as $member)
-        <div class="cm-card">
-            <span class="cm-role-pill-badge teal" style="font-size: 0.72rem; padding: 4px 14px; margin-bottom: 14px;">COMMITTEE</span>
-            <h4 class="cm-name" style="font-size: 1.18rem;">{{ $member->name }}</h4>
-            <p class="cm-desc" style="font-size: 0.88rem;">{!! nl2br(e($member->designation)) !!}</p>
+        <div class="cm-person-card">
+            <h4 class="cm-name">{{ $member->name }}</h4>
+            <p class="cm-desc">{!! nl2br(e($member->designation)) !!}</p>
         </div>
         @endforeach
     </div>
@@ -307,8 +398,7 @@
     @if(count($advisory) > 0)
     <div class="cm-grid-3">
         @foreach($advisory as $member)
-        <div class="cm-card">
-            <span class="cm-role-pill-badge" style="font-size: 0.75rem; padding: 4px 16px; margin-bottom: 14px;">ADVISORY BOARD</span>
+        <div class="cm-person-card">
             <h4 class="cm-name">{{ $member->name }}</h4>
             <p class="cm-desc">{!! nl2br(e($member->designation)) !!}</p>
         </div>
